@@ -1,0 +1,43 @@
+# BANGU PRESCHOOL - DATA BACKUP INSTRUCTIONS
+# ==========================================
+# This file contains instructions for backing up the registration data
+
+# BACKUP SCHEDULE
+# ===============
+# Daily: Copy data files to backup folder
+# Weekly: Create compressed archive
+# Monthly: Export to external storage
+
+# BACKUP COMMANDS (Windows)
+# =========================
+# Create backup directory:
+# mkdir "backup\%date:~-4,4%-%date:~-10,2%-%date:~-7,2%"
+
+# Copy all data files:
+# copy "data\*.txt" "backup\%date:~-4,4%-%date:~-10,2%-%date:~-7,2%\"
+
+# Create ZIP archive:
+# powershell Compress-Archive -Path "data\*" -DestinationPath "backup\bangu_backup_%date:~-4,4%_%date:~-10,2%_%date:~-7,2%.zip"
+
+# RESTORE INSTRUCTIONS
+# ====================
+# 1. Stop the registration system
+# 2. Copy backup files to data folder
+# 3. Verify file integrity
+# 4. Restart system
+# 5. Test with sample registration
+
+# FILE LOCATIONS
+# ==============
+# Active Data: ./data/
+# Backups: ./backup/
+# Archives: ./backup/archives/
+
+# MAINTENANCE NOTES
+# =================
+# - Check file sizes regularly
+# - Remove old backups (keep 30 days)
+# - Verify backup integrity monthly
+# - Update this script as needed
+
+# Last Updated: November 1, 2025

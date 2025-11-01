@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ******* CSS ******* -->
+    <link rel="stylesheet" href="dashboard.css" />
+    <!-- ******* ICONS ******* -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+    <title>Super Admin Dashboard - Bangu Preschool</title>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- ******* SIDEBAR ******* -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <i class='bx bxs-crown'></i>
+            <span>Super Admin</span>
+          </div>
+          <div class="admin-info">
+            <h4>System Administrator</h4>
+            <p>Global Control Panel</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <ul>
+            <li><a href="#overview" class="nav-link active"><i class='bx bxs-dashboard'></i> Overview</a></li>
+            <li><a href="#system" class="nav-link"><i class='bx bxs-cog'></i> System Settings</a></li>
+            <li><a href="#users" class="nav-link"><i class='bx bxs-user-account'></i> User Management</a></li>
+            <li><a href="#schools" class="nav-link"><i class='bx bxs-school'></i> School Management</a></li>
+            <li><a href="#analytics" class="nav-link"><i class='bx bxs-bar-chart-alt-2'></i> Global Analytics</a></li>
+            <li><a href="#security" class="nav-link"><i class='bx bxs-shield'></i> Security Center</a></li>
+            <li><a href="#backup" class="nav-link"><i class='bx bxs-data'></i> Backup & Recovery</a></li>
+            <li><a href="#logs" class="nav-link"><i class='bx bxs-file-doc'></i> System Logs</a></li>
+            <li><a href="../index.html" class="nav-link logout"><i class='bx bx-log-out'></i> Back to Portal</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- ******* MAIN CONTENT ******* -->
+      <div class="main-content">
+        <!-- ******* HEADER ******* -->
+        <div class="dashboard-header">
+          <div class="header-left">
+            <h1>Super Admin Dashboard</h1>
+            <p>Global System Management & Control</p>
+          </div>
+          <div class="header-right">
+            <div class="notifications">
+              <i class='bx bxs-bell'></i>
+              <span class="badge">12</span>
+            </div>
+            <div class="admin-profile">
+              <img src="https://via.placeholder.com/40" alt="Super Admin">
+              <span>Super Admin</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* ALERT SECTION ******* -->
+        <div class="alert-section">
+          <div class="critical-alert">
+            <i class='bx bxs-error-circle'></i>
+            <div>
+              <h4>System Health: Optimal</h4>
+              <p>All systems operational. Last backup: 2 hours ago</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* STATS OVERVIEW ******* -->
+        <div class="stats-grid">
+          <div class="stat-card critical">
+            <div class="stat-icon">
+              <i class='bx bxs-server'></i>
+            </div>
+            <div class="stat-content">
+              <h3>System Status</h3>
+              <p class="stat-number">99.9%</p>
+              <small>Uptime</small>
+            </div>
+          </div>
+
+          <div class="stat-card success">
+            <div class="stat-icon">
+              <i class='bx bxs-school'></i>
+            </div>
+            <div class="stat-content">
+              <h3>Active Schools</h3>
+              <p class="stat-number">1</p>
+              <small>Bangu Preschool</small>
+            </div>
+          </div>
+
+          <div class="stat-card warning">
+            <div class="stat-icon">
+              <i class='bx bxs-user-account'></i>
+            </div>
+            <div class="stat-content">
+              <h3>Total Users</h3>
+              <p class="stat-number">156</p>
+              <small>Active Accounts</small>
+            </div>
+          </div>
+
+          <div class="stat-card info">
+            <div class="stat-icon">
+              <i class='bx bxs-data'></i>
+            </div>
+            <div class="stat-content">
+              <h3>Database Size</h3>
+              <p class="stat-number">2.4GB</p>
+              <small>Storage Used</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* SYSTEM CONTROLS ******* -->
+        <div class="control-panels">
+          <div class="control-section">
+            <h3>System Administration</h3>
+            <div class="control-grid">
+              <div class="control-card">
+                <i class='bx bxs-cog'></i>
+                <h4>Global Settings</h4>
+                <p>Configure system-wide preferences and policies</p>
+                <button class="control-btn">Access Settings</button>
+              </div>
+
+              <div class="control-card">
+                <i class='bx bxs-user-plus'></i>
+                <h4>User Creation</h4>
+                <p>Create and manage super admin accounts</p>
+                <button class="control-btn">Manage Users</button>
+              </div>
+
+              <div class="control-card">
+                <i class='bx bxs-shield-check'></i>
+                <h4>Security Audit</h4>
+                <p>Review security logs and access attempts</p>
+                <button class="control-btn">View Audit</button>
+              </div>
+
+              <div class="control-card">
+                <i class='bx bxs-backup'></i>
+                <h4>System Backup</h4>
+                <p>Create and restore system backups</p>
+                <button class="control-btn">Backup Now</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-section">
+            <h3>School Management</h3>
+            <div class="school-overview">
+              <div class="school-card">
+                <div class="school-header">
+                  <h4>Bangu Preschool</h4>
+                  <span class="status active">Active</span>
+                </div>
+                <div class="school-stats">
+                  <div class="stat-item">
+                    <strong>125</strong>
+                    <span>Students</span>
+                  </div>
+                  <div class="stat-item">
+                    <strong>15</strong>
+                    <span>Teachers</span>
+                  </div>
+                  <div class="stat-item">
+                    <strong>16</strong>
+                    <span>Staff</span>
+                  </div>
+                </div>
+                <div class="school-actions">
+                  <button class="btn-primary">Manage School</button>
+                  <button class="btn-secondary">View Reports</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* REGISTRATION SECTION ******* -->
+        <div class="registration-section">
+          <h3>User Registration Center</h3>
+          <div class="registration-tabs">
+            <button class="tab-btn active" data-tab="student">Register Student</button>
+            <button class="tab-btn" data-tab="staff">Register Staff</button>
+            <button class="tab-btn" data-tab="admin">Register Admin</button>
+          </div>
+
+          <!-- Student Registration Form -->
+          <div class="tab-content active" id="student-tab">
+            <div class="registration-form">
+              <h4>Student Registration</h4>
+              <form id="studentForm" class="form-grid">
+                <div class="form-group">
+                  <label for="studentFirstName">First Name *</label>
+                  <input type="text" id="studentFirstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                  <label for="studentLastName">Last Name *</label>
+                  <input type="text" id="studentLastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                  <label for="studentDOB">Date of Birth *</label>
+                  <input type="date" id="studentDOB" name="dateOfBirth" required>
+                </div>
+                <div class="form-group">
+                  <label for="studentGender">Gender *</label>
+                  <select id="studentGender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="studentClass">Class/Age Group *</label>
+                  <select id="studentClass" name="class" required>
+                    <option value="">Select Class</option>
+                    <option value="toddlers">Toddlers (2-3 years)</option>
+                    <option value="preschool">Pre-School (3-4 years)</option>
+                    <option value="prekindergarten">Pre-Kindergarten (4-5 years)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="studentID">Student ID *</label>
+                  <input type="text" id="studentID" name="studentId" placeholder="Auto-generated" readonly>
+                </div>
+                <div class="form-group full-width">
+                  <label for="parentName">Parent/Guardian Name *</label>
+                  <input type="text" id="parentName" name="parentName" required>
+                </div>
+                <div class="form-group">
+                  <label for="parentEmail">Parent Email *</label>
+                  <input type="email" id="parentEmail" name="parentEmail" required>
+                </div>
+                <div class="form-group">
+                  <label for="parentPhone">Parent Phone *</label>
+                  <input type="tel" id="parentPhone" name="parentPhone" required>
+                </div>
+                <div class="form-group full-width">
+                  <label for="studentAddress">Address *</label>
+                  <textarea id="studentAddress" name="address" rows="3" required></textarea>
+                </div>
+                <div class="form-group full-width">
+                  <label for="medicalInfo">Medical Information</label>
+                  <textarea id="medicalInfo" name="medicalInfo" rows="3" placeholder="Allergies, medications, special needs..."></textarea>
+                </div>
+                <div class="form-actions full-width">
+                  <button type="button" class="btn-secondary" onclick="clearForm('studentForm')">Clear Form</button>
+                  <button type="submit" class="btn-primary">Register Student</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Staff Registration Form -->
+          <div class="tab-content" id="staff-tab">
+            <div class="registration-form">
+              <h4>Staff Registration</h4>
+              <form id="staffForm" class="form-grid">
+                <div class="form-group">
+                  <label for="staffFirstName">First Name *</label>
+                  <input type="text" id="staffFirstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                  <label for="staffLastName">Last Name *</label>
+                  <input type="text" id="staffLastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                  <label for="staffEmail">Email Address *</label>
+                  <input type="email" id="staffEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="staffPhone">Phone Number *</label>
+                  <input type="tel" id="staffPhone" name="phone" required>
+                </div>
+                <div class="form-group">
+                  <label for="staffPosition">Position *</label>
+                  <select id="staffPosition" name="position" required>
+                    <option value="">Select Position</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="assistant-teacher">Assistant Teacher</option>
+                    <option value="nurse">School Nurse</option>
+                    <option value="counselor">Counselor</option>
+                    <option value="receptionist">Receptionist</option>
+                    <option value="maintenance">Maintenance Staff</option>
+                    <option value="kitchen">Kitchen Staff</option>
+                    <option value="security">Security Guard</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="staffDepartment">Department *</label>
+                  <select id="staffDepartment" name="department" required>
+                    <option value="">Select Department</option>
+                    <option value="education">Education</option>
+                    <option value="administration">Administration</option>
+                    <option value="health">Health & Safety</option>
+                    <option value="support">Support Services</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="staffEmployeeID">Employee ID *</label>
+                  <input type="text" id="staffEmployeeID" name="employeeId" placeholder="Auto-generated" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="staffStartDate">Start Date *</label>
+                  <input type="date" id="staffStartDate" name="startDate" required>
+                </div>
+                <div class="form-group">
+                  <label for="staffSalary">Salary *</label>
+                  <input type="number" id="staffSalary" name="salary" placeholder="Enter monthly salary" required>
+                </div>
+                <div class="form-group">
+                  <label for="staffQualification">Qualification *</label>
+                  <input type="text" id="staffQualification" name="qualification" placeholder="Degree, Certificate, etc." required>
+                </div>
+                <div class="form-group full-width">
+                  <label for="staffAddress">Address *</label>
+                  <textarea id="staffAddress" name="address" rows="3" required></textarea>
+                </div>
+                <div class="form-group full-width">
+                  <label for="staffExperience">Experience & Skills</label>
+                  <textarea id="staffExperience" name="experience" rows="3" placeholder="Previous work experience, special skills..."></textarea>
+                </div>
+                <div class="form-actions full-width">
+                  <button type="button" class="btn-secondary" onclick="clearForm('staffForm')">Clear Form</button>
+                  <button type="submit" class="btn-primary">Register Staff</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Admin Registration Form -->
+          <div class="tab-content" id="admin-tab">
+            <div class="registration-form">
+              <h4>Administrator Registration</h4>
+              <form id="adminForm" class="form-grid">
+                <div class="form-group">
+                  <label for="adminFirstName">First Name *</label>
+                  <input type="text" id="adminFirstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                  <label for="adminLastName">Last Name *</label>
+                  <input type="text" id="adminLastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                  <label for="adminEmail">Email Address *</label>
+                  <input type="email" id="adminEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="adminPhone">Phone Number *</label>
+                  <input type="tel" id="adminPhone" name="phone" required>
+                </div>
+                <div class="form-group">
+                  <label for="adminRole">Admin Role *</label>
+                  <select id="adminRole" name="role" required>
+                    <option value="">Select Role</option>
+                    <option value="director">School Director</option>
+                    <option value="assistant-director">Assistant Director</option>
+                    <option value="academic-coordinator">Academic Coordinator</option>
+                    <option value="admin-officer">Administrative Officer</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="adminLevel">Access Level *</label>
+                  <select id="adminLevel" name="accessLevel" required>
+                    <option value="">Select Access Level</option>
+                    <option value="full">Full Access</option>
+                    <option value="limited">Limited Access</option>
+                    <option value="read-only">Read Only</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="adminUsername">Username *</label>
+                  <input type="text" id="adminUsername" name="username" placeholder="Login username" required>
+                </div>
+                <div class="form-group">
+                  <label for="adminPassword">Password *</label>
+                  <input type="password" id="adminPassword" name="password" placeholder="Minimum 8 characters" required>
+                </div>
+                <div class="form-group">
+                  <label for="adminEmployeeID">Employee ID *</label>
+                  <input type="text" id="adminEmployeeID" name="employeeId" placeholder="Auto-generated" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="adminStartDate">Start Date *</label>
+                  <input type="date" id="adminStartDate" name="startDate" required>
+                </div>
+                <div class="form-group full-width">
+                  <label for="adminPermissions">Permissions *</label>
+                  <div class="permission-grid">
+                    <label class="permission-item">
+                      <input type="checkbox" name="permissions" value="user-management"> User Management
+                    </label>
+                    <label class="permission-item">
+                      <input type="checkbox" name="permissions" value="student-records"> Student Records
+                    </label>
+                    <label class="permission-item">
+                      <input type="checkbox" name="permissions" value="financial-management"> Financial Management
+                    </label>
+                    <label class="permission-item">
+                      <input type="checkbox" name="permissions" value="reports-analytics"> Reports & Analytics
+                    </label>
+                    <label class="permission-item">
+                      <input type="checkbox" name="permissions" value="system-settings"> System Settings
+                    </label>
+                    <label class="permission-item">
+                      <input type="checkbox" name="permissions" value="communication"> Communication Tools
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group full-width">
+                  <label for="adminAddress">Address *</label>
+                  <textarea id="adminAddress" name="address" rows="3" required></textarea>
+                </div>
+                <div class="form-group full-width">
+                  <label for="adminQualification">Qualifications & Experience</label>
+                  <textarea id="adminQualification" name="qualification" rows="3" placeholder="Education background, management experience..."></textarea>
+                </div>
+                <div class="form-actions full-width">
+                  <button type="button" class="btn-secondary" onclick="clearForm('adminForm')">Clear Form</button>
+                  <button type="submit" class="btn-primary">Register Admin</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* RECENT ACTIVITY ******* -->
+        <div class="activity-section">
+          <h3>Recent System Activity</h3>
+          <div class="activity-log">
+            <div class="activity-item">
+              <div class="activity-icon success">
+                <i class='bx bxs-check-circle'></i>
+              </div>
+              <div class="activity-content">
+                <h4>System Backup Completed</h4>
+                <p>Automated backup successfully created</p>
+                <span class="time">2 hours ago</span>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon info">
+                <i class='bx bxs-user'></i>
+              </div>
+              <div class="activity-content">
+                <h4>New Admin Account Created</h4>
+                <p>Director account activated for Bangu Preschool</p>
+                <span class="time">1 day ago</span>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon warning">
+                <i class='bx bxs-shield'></i>
+              </div>
+              <div class="activity-content">
+                <h4>Security Update Applied</h4>
+                <p>System security patches installed</p>
+                <span class="time">2 days ago</span>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon success">
+                <i class='bx bxs-server'></i>
+              </div>
+              <div class="activity-content">
+                <h4>Server Maintenance Complete</h4>
+                <p>Scheduled maintenance completed successfully</p>
+                <span class="time">3 days ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* EMERGENCY CONTROLS ******* -->
+        <div class="emergency-section">
+          <h3>Emergency Controls</h3>
+          <div class="emergency-grid">
+            <div class="emergency-card critical">
+              <i class='bx bxs-error-circle'></i>
+              <h4>System Lockdown</h4>
+              <p>Emergency system shutdown</p>
+              <button class="emergency-btn">Emergency Stop</button>
+            </div>
+
+            <div class="emergency-card warning">
+              <i class='bx bxs-bell-ring'></i>
+              <h4>Alert Broadcast</h4>
+              <p>Send emergency notification</p>
+              <button class="emergency-btn">Send Alert</button>
+            </div>
+
+            <div class="emergency-card info">
+              <i class='bx bxs-phone'></i>
+              <h4>Support Contact</h4>
+              <p>Emergency technical support</p>
+              <button class="emergency-btn">Call Support</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Navigation functionality
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if(!this.classList.contains('logout')) {
+            e.preventDefault();
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+          }
+        });
+      });
+
+      // Emergency button confirmations
+      document.querySelectorAll('.emergency-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const action = this.textContent;
+          if(confirm(`Are you sure you want to execute: ${action}?`)) {
+            alert(`${action} executed successfully!`);
+          }
+        });
+      });
+
+      // Control button functionality
+      document.querySelectorAll('.control-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const action = this.textContent;
+          alert(`${action} panel will be implemented in the full version.`);
+        });
+      });
+
+      // Tab functionality for registration forms
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const tabName = this.getAttribute('data-tab');
+          
+          // Remove active class from all tabs and content
+          document.querySelectorAll('.tab-btn').forEach(tab => tab.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+          
+          // Add active class to clicked tab and corresponding content
+          this.classList.add('active');
+          document.getElementById(`${tabName}-tab`).classList.add('active');
+        });
+      });
+
+      // Auto-generate IDs
+      function generateID(prefix) {
+        const timestamp = Date.now();
+        const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+        return `${prefix}${timestamp}${random}`;
+      }
+
+      // Set auto-generated IDs when forms load
+      document.getElementById('studentID').value = generateID('STU');
+      document.getElementById('staffEmployeeID').value = generateID('EMP');
+      document.getElementById('adminEmployeeID').value = generateID('ADM');
+
+      // Clear form function
+      function clearForm(formId) {
+        const form = document.getElementById(formId);
+        form.reset();
+        
+        // Regenerate IDs after clearing
+        if (formId === 'studentForm') {
+          document.getElementById('studentID').value = generateID('STU');
+        } else if (formId === 'staffForm') {
+          document.getElementById('staffEmployeeID').value = generateID('EMP');
+        } else if (formId === 'adminForm') {
+          document.getElementById('adminEmployeeID').value = generateID('ADM');
+        }
+      }
+
+      // Data saving functions
+      function saveToFile(data, filename) {
+        const dataString = data.join(' | ');
+        const timestamp = new Date().toISOString().split('T')[0];
+        const fullDataString = dataString + ' | ' + timestamp;
+        
+        // In a real web application, you would send this to a server
+        // For demonstration, we'll show what would be saved
+        console.log(`Would save to ${filename}:`, fullDataString);
+        
+        // Create downloadable file for demonstration
+        const blob = new Blob([fullDataString + '\n'], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        
+        return fullDataString;
+      }
+
+      // Form submission handlers
+      document.getElementById('studentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const studentData = Object.fromEntries(formData);
+        
+        // Prepare data for saving
+        const studentRecord = [
+          studentData.studentId || document.getElementById('studentID').value,
+          studentData.firstName,
+          studentData.lastName,
+          studentData.dateOfBirth,
+          studentData.gender,
+          studentData.class,
+          studentData.parentName,
+          studentData.parentEmail,
+          studentData.parentPhone,
+          studentData.address.replace(/\n/g, ' '),
+          studentData.medicalInfo.replace(/\n/g, ' ') || 'None'
+        ];
+        
+        // Save to file
+        const savedData = saveToFile(studentRecord, 'student_registration.txt');
+        
+        console.log('Student Registration Data:', studentData);
+        alert(`Student ${studentData.firstName} ${studentData.lastName} registered successfully!\nStudent ID: ${studentRecord[0]}\n\nData saved to file.`);
+        
+        clearForm('studentForm');
+      });
+
+      document.getElementById('staffForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const staffData = Object.fromEntries(formData);
+        
+        // Prepare data for saving
+        const staffRecord = [
+          staffData.employeeId || document.getElementById('staffEmployeeID').value,
+          staffData.firstName,
+          staffData.lastName,
+          staffData.email,
+          staffData.phone,
+          staffData.position,
+          staffData.department,
+          staffData.startDate,
+          staffData.salary,
+          staffData.qualification,
+          staffData.address.replace(/\n/g, ' '),
+          staffData.experience.replace(/\n/g, ' ') || 'None'
+        ];
+        
+        // Save to file
+        const savedData = saveToFile(staffRecord, 'staff_registration.txt');
+        
+        console.log('Staff Registration Data:', staffData);
+        alert(`Staff member ${staffData.firstName} ${staffData.lastName} registered successfully!\nEmployee ID: ${staffRecord[0]}\nPosition: ${staffData.position}\n\nData saved to file.`);
+        
+        clearForm('staffForm');
+      });
+
+      document.getElementById('adminForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        
+        // Handle checkboxes for permissions
+        const permissions = [];
+        document.querySelectorAll('input[name="permissions"]:checked').forEach(checkbox => {
+          permissions.push(checkbox.value);
+        });
+        
+        const adminData = Object.fromEntries(formData);
+        adminData.permissions = permissions;
+        
+        // Prepare data for saving (password masked for security)
+        const adminRecord = [
+          adminData.employeeId || document.getElementById('adminEmployeeID').value,
+          adminData.firstName,
+          adminData.lastName,
+          adminData.email,
+          adminData.phone,
+          adminData.role,
+          adminData.accessLevel,
+          adminData.username,
+          '********', // Password masked for security
+          permissions.join(','),
+          adminData.address.replace(/\n/g, ' '),
+          adminData.qualification.replace(/\n/g, ' ') || 'None'
+        ];
+        
+        // Save to file
+        const savedData = saveToFile(adminRecord, 'admin_registration.txt');
+        
+        console.log('Admin Registration Data:', adminData);
+        alert(`Administrator ${adminData.firstName} ${adminData.lastName} registered successfully!\nEmployee ID: ${adminRecord[0]}\nRole: ${adminData.role}\nAccess Level: ${adminData.accessLevel}\n\nData saved to file.`);
+        
+        clearForm('adminForm');
+      });
+        
+        const adminData = Object.fromEntries(formData);
+        adminData.permissions = permissions;
+        
+        // Prepare data for saving (password masked for security)
+        const adminRecord = [
+          adminData.employeeId || document.getElementById('adminEmployeeID').value,
+          adminData.firstName,
+          adminData.lastName,
+          adminData.email,
+          adminData.phone,
+          adminData.role,
+          adminData.accessLevel,
+          adminData.username,
+          '********', // Password masked for security
+          permissions.join(','),
+          adminData.address.replace(/\n/g, ' '),
+          adminData.qualification.replace(/\n/g, ' ') || 'None'
+        ];
+        
+        // Save to file
+        const savedData = saveToFile(adminRecord, 'admin_registration.txt');
+        
+        console.log('Admin Registration Data:', adminData);
+        alert(`Administrator ${adminData.firstName} ${adminData.lastName} registered successfully!\nEmployee ID: ${adminRecord[0]}\nRole: ${adminData.role}\nAccess Level: ${adminData.accessLevel}\n\nData saved to file.`);
+        
+        clearForm('adminForm');
+      });
+
+      // Password strength indicator
+      document.getElementById('adminPassword').addEventListener('input', function() {
+        const password = this.value;
+        const strength = checkPasswordStrength(password);
+        
+        // Remove existing strength indicators
+        const existingIndicator = document.querySelector('.password-strength');
+        if (existingIndicator) {
+          existingIndicator.remove();
+        }
+        
+        // Add new strength indicator
+        const indicator = document.createElement('div');
+        indicator.className = `password-strength ${strength.class}`;
+        indicator.textContent = strength.text;
+        this.parentNode.appendChild(indicator);
+      });
+
+      function checkPasswordStrength(password) {
+        if (password.length < 6) {
+          return { class: 'weak', text: 'Password too short' };
+        } else if (password.length < 8) {
+          return { class: 'medium', text: 'Password medium strength' };
+        } else if (password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)) {
+          return { class: 'strong', text: 'Password strong' };
+        } else {
+          return { class: 'medium', text: 'Password medium strength' };
+        }
+      }
+    </script>
+  </body>
+</html>

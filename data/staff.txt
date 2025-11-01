@@ -1,0 +1,9 @@
+# BANGU PRESCHOOL - STAFF RECORDS
+# =====================================
+# This file contains all registered staff information
+# Format: Employee ID | First Name | Last Name | Email | Phone | Position | Department | Start Date | Salary | Qualification | Address | Experience | Registration Date
+# Example: EMP172530001 | Sarah | Johnson | sarah.johnson@bangu.edu | +1234567890 | Teacher | Education | 2025-01-15 | 45000 | B.Ed Early Childhood | 456 Oak Ave, City | 5 years experience | 2025-11-01
+
+# =====================================
+# STAFF REGISTRATIONS
+# =====================================

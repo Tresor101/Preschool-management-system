@@ -474,6 +474,18 @@ body {
 .teacher-btn { background: linear-gradient(135deg, var(--secondary-color), var(--success-color)); }
 .parent-btn { background: linear-gradient(135deg, var(--pink-color), var(--purple-color)); }
 .staff-btn { background: linear-gradient(135deg, var(--green-color), var(--blue-color)); }
+.super-admin-btn { 
+  background: linear-gradient(135deg, #1a1a2e, #e94560, #16213e);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+}
+
+.super-admin-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(233, 69, 96, 0.6);
+  animation-duration: 1s;
+}
 
 /* ******** FOOTER SECTION ******** */
 .footer-section {
