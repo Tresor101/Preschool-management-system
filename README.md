@@ -37,13 +37,21 @@ When you open the project, VS Code will prompt you to install recommended extens
 
 1. Right-click on `index.html` in the Explorer
 2. Select **"Open with Live Server"**
-3. Your default browser will open with the project running at `http://localhost:5500`
+3. Your default browser will open with the project running at `http://localhost:5500` (default Live Server port)
+4. Changes will automatically reload in the browser
 
-#### Option 2: Direct File Opening
+#### Option 2: With Debugging (Chrome/Edge)
+
+1. First, start Live Server (see Option 1)
+2. Press `F5` or click **Run** → **Start Debugging**
+3. Select **"Open with Chrome (Live Server)"** or **"Open with Edge (Live Server)"**
+4. The page will open with debugging capabilities enabled
+
+#### Option 3: Direct File Opening
 
 1. Press `F5` or click **Run** → **Start Debugging**
-2. Select **"Open index.html"** from the debug configurations
-3. The page will open directly in your browser
+2. Select **"Open index.html (Direct)"** from the debug configurations
+3. The page will open directly in your browser without a local server
 
 ### 5. Features
 
