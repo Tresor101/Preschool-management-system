@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <title>Code Design</title>
+    <title>Bangu Preschool Management System</title>
   </head>
   <body>
     <section class="main-web-box">
@@ -17,62 +17,200 @@
         <!-- ******* HEADER SECTION ******* -->
         <div class="header-section">
           <div class="logo">
-            <span>Secondary School Management System</span>
+            <i class='bx bxs-baby'></i>
+            <span>Bangu Preschool Management</span>
           </div>
 
           <div class="menu">
             <ul>
-              <li><a class="active" href="#">Home</a></li>
-              <li><a href="#"></a></li>
-              <li><a href="#">About Us</a></li>
+              <li><a class="active" href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
             </ul>
           </div>
+
+          <div class="user-profile">
+            <i class='bx bx-user-circle'></i>
+            <span>Guest</span>
+          </div>
         </div>
 
-        <!-- ******* CENTER SECTION ******* -->
-        <div class="center-section">
-          <div class="text-box" style="text-align: center;">
-            <h1>Welcome to</h1>
-            <h1>Fiontonton Secondary School</h1>
-            <p>Excellence is what we aim for</p>
-          </div>
-
-          <div class="image-box">
-            <img src="https://www.nicepng.com/png/detail/155-1550606_28-collection-of-cute-school-kids-clipart-transparent.png" style="border-radius: 60%;"/>
-          </div>
-
-          <div class="salad-items-box">
-            <div id="salad1" class="option">
-              <h1>LogIn</h1>
+        <!-- ******* WELCOME SECTION ******* -->
+        <div class="welcome-section">
+          <div class="welcome-content">
+            <div class="welcome-text">
+              <h1>Welcome to</h1>
+              <h2>Bangu Preschool</h2>
+              <p>Nurturing Young Minds, Building Bright Futures</p>
+              <p class="subtitle">Where Learning Begins with Love and Care</p>
             </div>
-
-            <div id="salad2" class="option">
-              <h1>Curriculum</h1>
-            </div>
-
-            <div id="salad3" class="option">
-              <h1>Application for new student</h1>
+            
+            <div class="welcome-image">
+              <img src="https://png.pngtree.com/png-clipart/20230824/original/pngtree-cute-children-playing-in-preschool-picture-image_8322807.png" alt="Preschool Children"/>
             </div>
           </div>
         </div>
 
-        <!-- ******* CENTER SECTION ******* -->
-        <div class="social-section">
-            <div class="description">
-                <p>You can follow us at </p>
+        <!-- ******* MANAGEMENT OPTIONS SECTION ******* -->
+        <div class="options-section">
+          <h2 class="section-title">What We Offer</h2>
+          
+          <div class="features-grid">
+            <!-- Child Care Features -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class='bx bxs-heart'></i>
+              </div>
+              <h3>Loving Care</h3>
+              <p>Professional caregivers who treat every child with love and attention</p>
             </div>
 
-            <div class="social-icons">
-                <i class='bx bxl-instagram'></i>
-                <i class='bx bxl-twitter' ></i>
-                <i class='bx bxl-linkedin-square'></i>
+            <!-- Educational Programs -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class='bx bxs-book-reader'></i>
+              </div>
+              <h3>Educational Programs</h3>
+              <p>Age-appropriate learning activities that prepare children for their future</p>
             </div>
+
+            <!-- Safe Environment -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class='bx bxs-shield-alt-2'></i>
+              </div>
+              <h3>Safe Environment</h3>
+              <p>Secure and child-proofed facilities with constant supervision</p>
+            </div>
+
+            <!-- Healthy Meals -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class='bx bxs-bowl-hot'></i>
+              </div>
+              <h3>Nutritious Meals</h3>
+              <p>Healthy, balanced meals and snacks prepared fresh daily</p>
+            </div>
+
+            <!-- Parent Communication -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class='bx bxs-message-dots'></i>
+              </div>
+              <h3>Parent Updates</h3>
+              <p>Regular communication about your child's daily activities and progress</p>
+            </div>
+
+            <!-- Development Tracking -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class='bx bxs-trophy'></i>
+              </div>
+              <h3>Growth Tracking</h3>
+              <p>Monitor and celebrate your child's developmental milestones</p>
+            </div>
+          </div>
         </div>
 
+        <!-- ******* LOGIN SECTION ******* -->
+        <div class="login-section">
+          <h2 class="section-title">Quick Access Portal</h2>
+          <div class="login-options">
+            <div class="login-card">
+              <i class='bx bxs-user-circle'></i>
+              <h3>Director Login</h3>
+              <p>Full preschool management and administration</p>
+              <button class="login-btn admin-btn" onclick="window.location.href='admin/dashboard.html'">Login as Director</button>
+            </div>
+            
+            <div class="login-card">
+              <i class='bx bxs-heart'></i>
+              <h3>Teacher Login</h3>
+              <p>Access child profiles and daily activity tools</p>
+              <button class="login-btn teacher-btn" onclick="window.location.href='teacher/dashboard.html'">Login as Teacher</button>
+            </div>
+            
+            <div class="login-card">
+              <i class='bx bxs-group'></i>
+              <h3>Parent Login</h3>
+              <p>View your child's daily activities and progress</p>
+              <button class="login-btn parent-btn" onclick="window.location.href='parent/dashboard.html'">Login as Parent</button>
+            </div>
+            
+            <div class="login-card">
+              <i class='bx bxs-phone'></i>
+              <h3>Staff Login</h3>
+              <p>Access administrative tools and records</p>
+              <button class="login-btn staff-btn" onclick="window.location.href='teacher/dashboard.html'">Login as Staff</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* FOOTER SECTION ******* -->
+        <div class="footer-section">
+          <div class="footer-content">
+            <div class="footer-info">
+              <h3>Little Stars Preschool</h3>
+              <p>Nurturing young minds with love, care, and early childhood education excellence. Creating a safe and stimulating environment for children to grow and learn.</p>
+            </div>
+            
+            <div class="contact-info">
+              <h4>Contact Information</h4>
+              <p><i class='bx bx-phone'></i> +1 (555) 123-KIDS</p>
+              <p><i class='bx bx-envelope'></i> info@littlestars.edu</p>
+              <p><i class='bx bx-map'></i> 123 Rainbow Avenue, Learning City</p>
+              <p><i class='bx bx-time'></i> Mon-Fri: 7:00 AM - 6:00 PM</p>
+            </div>
+            
+            <div class="social-section">
+              <h4>Connect With Us</h4>
+              <div class="social-icons">
+                <a href="#"><i class='bx bxl-facebook'></i></a>
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-youtube'></i></a>
+                <a href="#"><i class='bx bx-envelope'></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="footer-bottom">
+            <p>&copy; 2025 Little Stars Preschool. All rights reserved. | Licensed Childcare Provider</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ******* JAVASCRIPT ******* -->
-    <script src="script.js"></script>
+    <script>
+      // Add interactivity to feature cards
+      const featureCards = document.querySelectorAll('.feature-card');
+      featureCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+
+      // Login button functionality (already updated with onclick handlers)
+
+      // Welcome animation
+      window.addEventListener('load', function() {
+        const welcomeText = document.querySelector('.welcome-text');
+        const welcomeImage = document.querySelector('.welcome-image');
+        
+        setTimeout(() => {
+          welcomeText.style.opacity = '1';
+          welcomeText.style.transform = 'translateX(0)';
+        }, 500);
+        
+        setTimeout(() => {
+          welcomeImage.style.opacity = '1';
+          welcomeImage.style.transform = 'translateX(0)';
+        }, 800);
+      });
+    </script>
   </body>
 </html>

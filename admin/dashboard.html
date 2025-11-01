@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ******* CSS ******* -->
+    <link rel="stylesheet" href="dashboard.css" />
+    <!-- ******* ICONS ******* -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+    <title>Admin Dashboard - Bangu Preschool</title>
+  </head>
+  <body>
+    <section class="main-dashboard">
+      <div class="dashboard-content">
+        <!-- ******* HEADER SECTION ******* -->
+        <div class="header-section">
+          <div class="logo">
+            <i class='bx bxs-crown'></i>
+            <span>Administrator Dashboard</span>
+          </div>
+
+          <div class="nav-menu">
+            <ul>
+              <li><a href="../index.html">Home</a></li>
+              <li><a class="active" href="dashboard.html">Admin Panel</a></li>
+              <li><a href="#">System Settings</a></li>
+              <li><a href="#">Reports</a></li>
+              <li><a href="#">Backup</a></li>
+            </ul>
+          </div>
+
+          <div class="user-profile">
+            <i class='bx bx-shield-alt-2'></i>
+            <span>Director Admin</span>
+            <div class="dropdown">
+              <i class='bx bx-chevron-down'></i>
+              <div class="dropdown-content">
+                <a href="#">Profile Settings</a>
+                <a href="#">System Logs</a>
+                <a href="#">Security</a>
+                <a href="../index.html">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* ADMIN OVERVIEW ******* -->
+        <div class="admin-overview">
+          <div class="overview-header">
+            <h1>School Management Overview</h1>
+            <p>Complete administrative control and monitoring</p>
+          </div>
+          
+          <div class="admin-stats">
+            <div class="stat-card total-children">
+              <i class='bx bxs-group'></i>
+              <div class="stat-info">
+                <h3>85</h3>
+                <p>Total Children</p>
+                <span class="trend up">+5 this month</span>
+              </div>
+            </div>
+            
+            <div class="stat-card total-staff">
+              <i class='bx bxs-user-badge'></i>
+              <div class="stat-info">
+                <h3>12</h3>
+                <p>Staff Members</p>
+                <span class="trend stable">No changes</span>
+              </div>
+            </div>
+            
+            <div class="stat-card revenue">
+              <i class='bx bxs-dollar-circle'></i>
+              <div class="stat-info">
+                <h3>$47,850</h3>
+                <p>Monthly Revenue</p>
+                <span class="trend up">+12% from last month</span>
+              </div>
+            </div>
+            
+            <div class="stat-card pending-payments">
+              <i class='bx bxs-credit-card-alt'></i>
+              <div class="stat-info">
+                <h3>$3,200</h3>
+                <p>Pending Payments</p>
+                <span class="trend down">7 overdue accounts</span>
+              </div>
+            </div>
+            
+            <div class="stat-card incidents">
+              <i class='bx bxs-shield-x'></i>
+              <div class="stat-info">
+                <h3>2</h3>
+                <p>Incidents This Week</p>
+                <span class="trend neutral">Minor incidents</span>
+              </div>
+            </div>
+            
+            <div class="stat-card capacity">
+              <i class='bx bxs-pie-chart-alt-2'></i>
+              <div class="stat-info">
+                <h3>85%</h3>
+                <p>School Capacity</p>
+                <span class="trend up">15 spots available</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* ADMIN MANAGEMENT MODULES ******* -->
+        <div class="admin-modules">
+          <h2 class="section-title">Administrative Control Panel</h2>
+          
+          <div class="modules-grid">
+            <!-- User Management -->
+            <div class="admin-card high-priority">
+              <div class="card-header">
+                <i class='bx bxs-user-account'></i>
+                <h3>User Management</h3>
+                <span class="priority-badge">High Access</span>
+              </div>
+              <p>Manage all user accounts, roles, and permissions</p>
+              <div class="admin-actions">
+                <button class="action-btn primary">Manage Users</button>
+                <button class="action-btn secondary">Role Settings</button>
+                <button class="action-btn secondary">Permissions</button>
+              </div>
+            </div>
+
+            <!-- Financial Management -->
+            <div class="admin-card high-priority">
+              <div class="card-header">
+                <i class='bx bxs-bank'></i>
+                <h3>Financial Management</h3>
+                <span class="priority-badge">High Access</span>
+              </div>
+              <p>Complete financial oversight, billing, and payment management</p>
+              <div class="admin-actions">
+                <button class="action-btn primary">Financial Reports</button>
+                <button class="action-btn secondary">Billing Setup</button>
+                <button class="action-btn secondary">Tax Reports</button>
+              </div>
+            </div>
+
+            <!-- Student Information System -->
+            <div class="admin-card medium-priority">
+              <div class="card-header">
+                <i class='bx bxs-graduation'></i>
+                <h3>Student Information System</h3>
+                <span class="priority-badge">Full Access</span>
+              </div>
+              <p>Complete student records, enrollment, and academic tracking</p>
+              <div class="admin-actions">
+                <button class="action-btn primary">All Students</button>
+                <button class="action-btn secondary">Enrollment</button>
+                <button class="action-btn secondary">Records</button>
+              </div>
+            </div>
+
+            <!-- Staff Management -->
+            <div class="admin-card medium-priority">
+              <div class="card-header">
+                <i class='bx bxs-briefcase'></i>
+                <h3>Staff Administration</h3>
+                <span class="priority-badge">Full Access</span>
+              </div>
+              <p>Staff hiring, scheduling, payroll, and performance management</p>
+              <div class="admin-actions">
+                <button class="action-btn primary">Staff Overview</button>
+                <button class="action-btn secondary">Payroll</button>
+                <button class="action-btn secondary">Schedules</button>
+              </div>
+            </div>
+
+            <!-- Communication Center -->
+            <div class="admin-card medium-priority">
+              <div class="card-header">
+                <i class='bx bxs-megaphone'></i>
+                <h3>Communication Center</h3>
+                <span class="priority-badge">Admin Control</span>
+              </div>
+              <p>School-wide announcements, parent notifications, and messaging</p>
+              <div class="admin-actions">
+                <button class="action-btn primary">Send Announcement</button>
+                <button class="action-btn secondary">Message Center</button>
+                <button class="action-btn secondary">Templates</button>
+              </div>
+            </div>
+
+            <!-- Safety & Compliance -->
+            <div class="admin-card high-priority">
+              <div class="card-header">
+                <i class='bx bxs-shield-alt-2'></i>
+                <h3>Safety & Compliance</h3>
+                <span class="priority-badge">Critical</span>
+              </div>
+              <p>Safety protocols, incident management, and regulatory compliance</p>
+              <div class="admin-actions">
+                <button class="action-btn primary">Safety Dashboard</button>
+                <button class="action-btn secondary">Incidents</button>
+                <button class="action-btn secondary">Compliance</button>
+              </div>
+            </div>
+
+            <!-- System Administration -->
+            <div class="admin-card high-priority">
+              <div class="card-header">
+                <i class='bx bxs-cog'></i>
+                <h3>System Administration</h3>
+                <span class="priority-badge">Super Admin</span>
+              </div>
+              <p>System settings, database management, and technical administration</p>
+              <div class="admin-actions">
+                <button class="action-btn primary">System Settings</button>
+                <button class="action-btn secondary">Database</button>
+                <button class="action-btn secondary">Backup</button>
+              </div>
+            </div>
+
+            <!-- Analytics & Reports -->
+            <div class="admin-card medium-priority">
+              <div class="card-header">
+                <i class='bx bxs-bar-chart-alt-2'></i>
+                <h3>Analytics & Reports</h3>
+                <span class="priority-badge">Full Access</span>
+              </div>
+              <p>Comprehensive analytics, custom reports, and data insights</p>
+              <div class="admin-actions">
+                <button class="action-btn primary">Analytics</button>
+                <button class="action-btn secondary">Custom Reports</button>
+                <button class="action-btn secondary">Export Data</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* SYSTEM ALERTS ******* -->
+        <div class="system-alerts">
+          <h2 class="section-title">System Alerts & Notifications</h2>
+          <div class="alerts-container">
+            <div class="alert-item critical">
+              <i class='bx bxs-error-circle'></i>
+              <div class="alert-content">
+                <h4>Critical: Payment System Issue</h4>
+                <p>Payment gateway connection timeout detected. Immediate attention required.</p>
+                <span class="alert-time">5 minutes ago</span>
+              </div>
+              <button class="alert-action">Resolve</button>
+            </div>
+            
+            <div class="alert-item warning">
+              <i class='bx bxs-bell-ring'></i>
+              <div class="alert-content">
+                <h4>Warning: Staff Shortage Alert</h4>
+                <p>Rainbow Class will be understaffed tomorrow. Backup teacher needed.</p>
+                <span class="alert-time">1 hour ago</span>
+              </div>
+              <button class="alert-action">Schedule</button>
+            </div>
+            
+            <div class="alert-item info">
+              <i class='bx bxs-info-circle'></i>
+              <div class="alert-content">
+                <h4>Info: Monthly Report Ready</h4>
+                <p>October financial and enrollment reports are ready for review.</p>
+                <span class="alert-time">2 hours ago</span>
+              </div>
+              <button class="alert-action">View</button>
+            </div>
+            
+            <div class="alert-item success">
+              <i class='bx bxs-check-circle'></i>
+              <div class="alert-content">
+                <h4>Success: Backup Completed</h4>
+                <p>Daily system backup completed successfully at 2:00 AM.</p>
+                <span class="alert-time">6 hours ago</span>
+              </div>
+              <button class="alert-action">Details</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* QUICK ACTIONS ******* -->
+        <div class="quick-actions">
+          <h2 class="section-title">Quick Administrative Actions</h2>
+          <div class="actions-grid">
+            <button class="quick-btn emergency">
+              <i class='bx bxs-alarm'></i>
+              <span>Emergency Protocol</span>
+            </button>
+            <button class="quick-btn announcement">
+              <i class='bx bxs-megaphone'></i>
+              <span>Send Announcement</span>
+            </button>
+            <button class="quick-btn backup">
+              <i class='bx bxs-cloud-upload'></i>
+              <span>Manual Backup</span>
+            </button>
+            <button class="quick-btn report">
+              <i class='bx bxs-file-export'></i>
+              <span>Generate Report</span>
+            </button>
+            <button class="quick-btn maintenance">
+              <i class='bx bxs-wrench'></i>
+              <span>System Maintenance</span>
+            </button>
+            <button class="quick-btn support">
+              <i class='bx bxs-help-circle'></i>
+              <span>Contact Support</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ******* ADMIN FOOTER ******* -->
+        <div class="admin-footer">
+          <div class="footer-info">
+            <p>&copy; 2025 Bangu Preschool - Administrator Dashboard</p>
+            <p>Last Login: November 1, 2025 at 8:30 AM | System Status: <span class="status-online">Online</span></p>
+          </div>
+          <div class="footer-actions">
+            <button class="footer-btn">System Logs</button>
+            <button class="footer-btn">Security Settings</button>
+            <button class="footer-btn">Emergency Contacts</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ******* JAVASCRIPT ******* -->
+    <script>
+      // Admin dashboard functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        // Dropdown functionality
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        
+        dropdown.addEventListener('click', function() {
+          dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) {
+            dropdownContent.style.display = 'none';
+          }
+        });
+
+        // Action button functionality
+        const actionBtns = document.querySelectorAll('.action-btn');
+        actionBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const module = this.closest('.admin-card').querySelector('h3').textContent;
+            const action = this.textContent;
+            alert(`Opening ${action} in ${module} module...`);
+          });
+        });
+
+        // Alert actions
+        const alertBtns = document.querySelectorAll('.alert-action');
+        alertBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const alertTitle = this.closest('.alert-item').querySelector('h4').textContent;
+            alert(`Taking action on: ${alertTitle}`);
+          });
+        });
+
+        // Quick actions
+        const quickBtns = document.querySelectorAll('.quick-btn');
+        quickBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const action = this.querySelector('span').textContent;
+            if (action === 'Emergency Protocol') {
+              if (confirm('Are you sure you want to activate emergency protocol?')) {
+                alert('Emergency protocol activated!');
+              }
+            } else {
+              alert(`Executing: ${action}`);
+            }
+          });
+        });
+
+        // Stats animation
+        const statCards = document.querySelectorAll('.stat-card');
+        statCards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, index * 100);
+        });
+      });
+    </script>
+  </body>
+</html>

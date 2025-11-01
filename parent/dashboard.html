@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ******* CSS ******* -->
+    <link rel="stylesheet" href="dashboard.css" />
+    <!-- ******* ICONS ******* -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+    <title>Parent Dashboard - Bangu Preschool</title>
+  </head>
+  <body>
+    <section class="main-dashboard">
+      <div class="dashboard-content">
+        <!-- ******* HEADER SECTION ******* -->
+        <div class="header-section">
+          <div class="logo">
+            <i class='bx bxs-heart'></i>
+            <span>Parent Portal</span>
+          </div>
+
+          <div class="nav-menu">
+            <ul>
+              <li><a href="../index.html">Home</a></li>
+              <li><a class="active" href="dashboard.html">My Child</a></li>
+              <li><a href="#">Photos</a></li>
+              <li><a href="#">Messages</a></li>
+              <li><a href="#">Payments</a></li>
+            </ul>
+          </div>
+
+          <div class="user-profile">
+            <i class='bx bx-user-circle'></i>
+            <span>Emma Wilson's Family</span>
+            <div class="dropdown">
+              <i class='bx bx-chevron-down'></i>
+              <div class="dropdown-content">
+                <a href="#">Family Profile</a>
+                <a href="#">Notification Settings</a>
+                <a href="#">Payment Methods</a>
+                <a href="../index.html">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* CHILD OVERVIEW ******* -->
+        <div class="child-overview">
+          <div class="child-header">
+            <div class="child-info">
+              <img src="../assets/emma-wilson.jpg" alt="Emma Wilson" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjOWI1OWI2Ii8+Cjxzdmcgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMzAiIHk9IjMwIj4KPHN0eWxlPi5jbGVycy0xe2ZpbGw6I2ZmZn08L3N0eWxlPgo8cGF0aCBjbGFzcz0iY2xlcnMtMSIgZD0iTTEyIDEyYzIuNDg1MyAwIDQuNS0yLjAxNDcgNC41LTQuNVMxNC40ODUzIDMgMTIgM1M3LjUgNS4wMTQ3IDcuNSA3LjVTOS41MTQ3IDEyIDEyIDEyWiIvPgo8cGF0aCBjbGFzcz0iY2xlcnMtMSIgZD0iTTEyIDE0Yy0zLjMxMzcgMC02IDIuNjg2My02IDZoMTJjMC0zLjMxMzctMi42ODYzLTYtNi02WiIvPgo8L3N2Zz4KPC9zdmc+Cg=='" class="child-photo">
+              <div class="child-details">
+                <h1>Emma Wilson</h1>
+                <p>Age: 3 years, 7 months</p>
+                <p>Class: Rainbow Class | Teacher: Ms. Sarah Johnson</p>
+                <p>Room: 102</p>
+              </div>
+            </div>
+            <div class="today-status">
+              <div class="status-item">
+                <i class='bx bxs-check-circle status-present'></i>
+                <span>Present Today</span>
+                <p>Arrived: 8:15 AM</p>
+              </div>
+              <div class="status-item">
+                <i class='bx bxs-smile status-happy'></i>
+                <span>Happy & Engaged</span>
+                <p>Last update: 10:45 AM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* DAILY HIGHLIGHTS ******* -->
+        <div class="daily-highlights">
+          <h2 class="section-title">Today's Highlights - Friday, November 1, 2025</h2>
+          
+          <div class="highlights-grid">
+            <div class="highlight-card">
+              <div class="highlight-header">
+                <i class='bx bxs-palette'></i>
+                <div class="highlight-info">
+                  <h3>Art & Crafts</h3>
+                  <span class="time">10:30 AM - 11:15 AM</span>
+                </div>
+              </div>
+              <p>Emma created a beautiful fall leaves painting using finger paints! She showed great creativity mixing orange and yellow colors.</p>
+              <div class="highlight-actions">
+                <button class="view-photos-btn">View Photos (3)</button>
+              </div>
+            </div>
+            
+            <div class="highlight-card">
+              <div class="highlight-header">
+                <i class='bx bxs-game'></i>
+                <div class="highlight-info">
+                  <h3>Learning Activity</h3>
+                  <span class="time">10:00 AM - 10:30 AM</span>
+                </div>
+              </div>
+              <p>Emma excelled at shape sorting today! She correctly identified all circles, squares, and triangles. Great progress in cognitive development.</p>
+              <div class="highlight-actions">
+                <button class="achievement-btn">Achievement Unlocked!</button>
+              </div>
+            </div>
+            
+            <div class="highlight-card">
+              <div class="highlight-header">
+                <i class='bx bxs-group'></i>
+                <div class="highlight-info">
+                  <h3>Social Play</h3>
+                  <span class="time">8:30 AM - 9:15 AM</span>
+                </div>
+              </div>
+              <p>Emma played wonderfully with Mason and Ava during free play. She shared toys and helped build a tall block tower together.</p>
+              <div class="highlight-actions">
+                <button class="social-btn">Social Skills +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* DEVELOPMENT PROGRESS ******* -->
+        <div class="development-section">
+          <h2 class="section-title">Development Progress</h2>
+          
+          <div class="progress-grid">
+            <div class="progress-card">
+              <div class="progress-header">
+                <i class='bx bxs-brain'></i>
+                <h3>Cognitive Development</h3>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" data-progress="85"></div>
+              </div>
+              <div class="progress-info">
+                <span class="progress-percentage">85%</span>
+                <p>Excellent shape and color recognition</p>
+              </div>
+            </div>
+            
+            <div class="progress-card">
+              <div class="progress-header">
+                <i class='bx bxs-run'></i>
+                <h3>Physical Development</h3>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" data-progress="78"></div>
+              </div>
+              <div class="progress-info">
+                <span class="progress-percentage">78%</span>
+                <p>Good motor skills and coordination</p>
+              </div>
+            </div>
+            
+            <div class="progress-card">
+              <div class="progress-header">
+                <i class='bx bxs-group'></i>
+                <h3>Social Skills</h3>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" data-progress="92"></div>
+              </div>
+              <div class="progress-info">
+                <span class="progress-percentage">92%</span>
+                <p>Excellent sharing and cooperation</p>
+              </div>
+            </div>
+            
+            <div class="progress-card">
+              <div class="progress-header">
+                <i class='bx bxs-message-square-dots'></i>
+                <h3>Communication</h3>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" data-progress="80"></div>
+              </div>
+              <div class="progress-info">
+                <span class="progress-percentage">80%</span>
+                <p>Clear speech and good vocabulary</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* QUICK INFO CARDS ******* -->
+        <div class="quick-info">
+          <h2 class="section-title">Quick Information</h2>
+          
+          <div class="info-grid">
+            <div class="info-card meals">
+              <i class='bx bxs-bowl-hot'></i>
+              <h3>Meals & Snacks</h3>
+              <div class="meal-status">
+                <div class="meal-item completed">
+                  <span>Morning Snack</span>
+                  <i class='bx bxs-check-circle'></i>
+                </div>
+                <div class="meal-item upcoming">
+                  <span>Lunch</span>
+                  <i class='bx bx-time'></i>
+                </div>
+                <div class="meal-item upcoming">
+                  <span>Afternoon Snack</span>
+                  <i class='bx bx-time'></i>
+                </div>
+              </div>
+              <p class="meal-note">Emma enjoyed apple slices and milk for morning snack!</p>
+            </div>
+            
+            <div class="info-card nap">
+              <i class='bx bxs-moon'></i>
+              <h3>Nap Time</h3>
+              <div class="nap-info">
+                <div class="nap-status upcoming">
+                  <span>Scheduled: 1:00 PM - 2:30 PM</span>
+                  <p>Emma usually naps for 1.5 hours</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="info-card bathroom">
+              <i class='bx bx-home-smile'></i>
+              <h3>Bathroom Visits</h3>
+              <div class="bathroom-log">
+                <div class="log-item">
+                  <span>9:30 AM</span>
+                  <i class='bx bxs-check-circle'></i>
+                </div>
+                <div class="log-item">
+                  <span>11:00 AM</span>
+                  <i class='bx bxs-check-circle'></i>
+                </div>
+              </div>
+              <p class="bathroom-note">Great independence today!</p>
+            </div>
+            
+            <div class="info-card mood">
+              <i class='bx bxs-smile'></i>
+              <h3>Mood & Behavior</h3>
+              <div class="mood-indicator">
+                <div class="mood-emoji active">😊</div>
+                <div class="mood-text">Happy & Cooperative</div>
+              </div>
+              <p class="mood-note">Emma has been cheerful and engaged all morning!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* PHOTO GALLERY ******* -->
+        <div class="photo-gallery">
+          <h2 class="section-title">Today's Photo Gallery</h2>
+          
+          <div class="photos-grid">
+            <div class="photo-item">
+              <img src="../assets/emma-art.jpg" alt="Emma's Art" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjZjhmOWZhIi8+Cjxzdmcgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iNzYiIHk9IjUxIj4KPHN0eWxlPi5jbGVycy0xe2ZpbGw6IzlmOWY5Zn08L3N0eWxlPgo8cGF0aCBjbGFzcz0iY2xlcnMtMSIgZD0iTTEyIDJjNS41MjMgMCAxMCA0LjQ3NyAxMCAxMHMtNC40NzcgMTAtMTAgMTBTMiAxNy41MjMgMiAxMiA2LjQ3NyAyIDEyIDJabTAgMTguNWMtMS45MyAwLTMuNS0xLjU3LTMuNS0zLjVzMS41Ny0zLjUgMy41LTMuNSAzLjUgMS41NyAzLjUgMy41LTEuNTcgMy41LTMuNSAzLjVabTAtMTNjLTEuMzggMC0yLjUgMS4xMi0yLjUgMi41UzEwLjYyIDEyIDEyIDEyczIuNS0xLjEyIDIuNS0yLjVTMTMuMzggNy41IDEyIDcuNVoiLz4KPC9zdmc+Cjx0ZXh0IHg9IjEwMCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWY5ZjlmIiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMTQiPkFydCBDcmVhdGlvbjwvdGV4dD4KPC9zdmc+Cg=='" class="gallery-photo">
+              <div class="photo-overlay">
+                <span>Art Creation</span>
+                <p>10:45 AM</p>
+              </div>
+            </div>
+            
+            <div class="photo-item">
+              <img src="../assets/emma-play.jpg" alt="Emma Playing" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjZjhmOWZhIi8+Cjxzdmcgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iNzYiIHk9IjUxIj4KPHN0eWxlPi5jbGVycy0xe2ZpbGw6IzlmOWY5Zn08L3N0eWxlPgo8cGF0aCBjbGFzcz0iY2xlcnMtMSIgZD0iTTEyIDJjNS41MjMgMCAxMCA0LjQ3NyAxMCAxMHMtNC40NzcgMTAtMTAgMTBTMiAxNy41MjMgMiAxMiA2LjQ3NyAyIDEyIDJaIi8+CjwvdGV4dD4KPC9zdmc+Cjx0ZXh0IHg9IjEwMCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWY5ZjlmIiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMTQiPlBsYXl0aW1lPC90ZXh0Pgo8L3N2Zz4K'" class="gallery-photo">
+              <div class="photo-overlay">
+                <span>Playtime Fun</span>
+                <p>9:00 AM</p>
+              </div>
+            </div>
+            
+            <div class="photo-item">
+              <img src="../assets/emma-learning.jpg" alt="Emma Learning" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjZjhmOWZhIi8+Cjxzdmcgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iNzYiIHk9IjUxIj4KPHN0eWxlPi5jbGVycy0xe2ZpbGw6IzlmOWY5Zn08L3N0eWxlPgo8cGF0aCBjbGFzcz0iY2xlcnMtMSIgZD0iTTEyIDJjNS41MjMgMCAxMCA0LjQ3NyAxMCAxMHMtNC40NzcgMTAtMTAgMTBTMiAxNy41MjMgMiAxMiA2LjQ3NyAyIDEyIDJaIi8+CjwvdGV4dD4KPC9zdmc+Cjx0ZXh0IHg9IjEwMCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWY5ZjlmIiBmb250LWZhbWlseT0iYXJpYWwiIGZvbnQtc2l6ZT0iMTQiPkxlYXJuaW5nPC90ZXh0Pgo8L3N2Zz4K'" class="gallery-photo">
+              <div class="photo-overlay">
+                <span>Learning Shapes</span>
+                <p>10:15 AM</p>
+              </div>
+            </div>
+            
+            <div class="photo-item add-more">
+              <i class='bx bx-plus'></i>
+              <span>View More Photos</span>
+              <p>12 more photos</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* PARENT TOOLS ******* -->
+        <div class="parent-tools">
+          <h2 class="section-title">Parent Tools & Communication</h2>
+          
+          <div class="tools-grid">
+            <div class="tool-card">
+              <i class='bx bxs-message-square-dots'></i>
+              <h3>Message Teacher</h3>
+              <p>Send a message to Ms. Sarah Johnson</p>
+              <button class="tool-btn">Send Message</button>
+              <span class="notification-badge">2</span>
+            </div>
+            
+            <div class="tool-card">
+              <i class='bx bxs-calendar-event'></i>
+              <h3>Schedule & Events</h3>
+              <p>View upcoming events and schedule changes</p>
+              <button class="tool-btn">View Calendar</button>
+            </div>
+            
+            <div class="tool-card">
+              <i class='bx bxs-credit-card'></i>
+              <h3>Payment Information</h3>
+              <p>Manage tuition and fee payments</p>
+              <button class="tool-btn">View Payments</button>
+              <span class="status-badge due">Due Soon</span>
+            </div>
+            
+            <div class="tool-card">
+              <i class='bx bxs-file-doc'></i>
+              <h3>Reports & Documents</h3>
+              <p>Access Emma's progress reports and documents</p>
+              <button class="tool-btn">View Reports</button>
+            </div>
+            
+            <div class="tool-card">
+              <i class='bx bxs-cog'></i>
+              <h3>Account Settings</h3>
+              <p>Update contact info and preferences</p>
+              <button class="tool-btn">Manage Account</button>
+            </div>
+            
+            <div class="tool-card">
+              <i class='bx bxs-phone'></i>
+              <h3>Emergency Contacts</h3>
+              <p>View and update emergency contact information</p>
+              <button class="tool-btn">Update Contacts</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* PARENT FOOTER ******* -->
+        <div class="parent-footer">
+          <div class="footer-info">
+            <p>&copy; 2025 Bangu Preschool - Parent Portal</p>
+            <p>Emma Wilson | Rainbow Class | Emergency: (555) 123-4567</p>
+          </div>
+          <div class="footer-actions">
+            <button class="footer-btn">Contact School</button>
+            <button class="footer-btn">Download App</button>
+            <button class="footer-btn">Help Center</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ******* JAVASCRIPT ******* -->
+    <script>
+      // Parent dashboard functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        // Dropdown functionality
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        
+        dropdown.addEventListener('click', function() {
+          dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) {
+            dropdownContent.style.display = 'none';
+          }
+        });
+
+        // Progress bar animations
+        const progressBars = document.querySelectorAll('.progress-fill');
+        progressBars.forEach(bar => {
+          const progress = bar.getAttribute('data-progress');
+          setTimeout(() => {
+            bar.style.width = progress + '%';
+          }, 500);
+        });
+
+        // Photo gallery interactions
+        const photoItems = document.querySelectorAll('.photo-item:not(.add-more)');
+        photoItems.forEach(item => {
+          item.addEventListener('click', function() {
+            const photoName = this.querySelector('.photo-overlay span').textContent;
+            alert(`Viewing ${photoName} in full size...`);
+          });
+        });
+
+        // Add more photos button
+        const addMoreBtn = document.querySelector('.photo-item.add-more');
+        addMoreBtn.addEventListener('click', function() {
+          alert('Opening full photo gallery...');
+        });
+
+        // Tool buttons
+        const toolBtns = document.querySelectorAll('.tool-btn');
+        toolBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const toolName = this.closest('.tool-card').querySelector('h3').textContent;
+            
+            if (toolName === 'Message Teacher') {
+              alert('Opening message composer to Ms. Sarah Johnson...');
+            } else if (toolName === 'Payment Information') {
+              alert('Redirecting to payment portal...');
+            } else {
+              alert(`Opening ${toolName}...`);
+            }
+          });
+        });
+
+        // Highlight action buttons
+        const highlightBtns = document.querySelectorAll('.highlight-actions button');
+        highlightBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            if (this.classList.contains('view-photos-btn')) {
+              alert('Opening activity photos...');
+            } else if (this.classList.contains('achievement-btn')) {
+              alert('Emma unlocked "Shape Master" achievement!');
+            } else if (this.classList.contains('social-btn')) {
+              alert('Emma earned social skills points!');
+            }
+          });
+        });
+
+        // Live updates simulation
+        function simulateLiveUpdates() {
+          // Update last activity time
+          const lastUpdate = document.querySelector('.today-status .status-item:last-child p');
+          const now = new Date();
+          const timeString = now.toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: true 
+          });
+          lastUpdate.textContent = `Last update: ${timeString}`;
+        }
+
+        // Update every 5 minutes
+        setInterval(simulateLiveUpdates, 300000);
+
+        // Notification badge clicks
+        const notificationBadges = document.querySelectorAll('.notification-badge');
+        notificationBadges.forEach(badge => {
+          badge.addEventListener('click', function(e) {
+            e.stopPropagation();
+            alert('You have 2 new messages from Ms. Sarah Johnson');
+          });
+        });
+
+        // Status badge clicks
+        const statusBadges = document.querySelectorAll('.status-badge');
+        statusBadges.forEach(badge => {
+          badge.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (this.textContent === 'Due Soon') {
+              alert('November tuition payment due in 3 days');
+            }
+          });
+        });
+
+        // Mood indicator interaction
+        const moodEmoji = document.querySelector('.mood-emoji');
+        moodEmoji.addEventListener('click', function() {
+          alert('Emma has been happy and engaged throughout the day!');
+        });
+
+        // Child photo click
+        const childPhoto = document.querySelector('.child-photo');
+        childPhoto.addEventListener('click', function() {
+          alert('Opening Emma\'s profile...');
+        });
+
+        // Footer button actions
+        const footerBtns = document.querySelectorAll('.footer-btn');
+        footerBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const action = this.textContent;
+            if (action === 'Contact School') {
+              alert('School Main Office: (555) 123-4567\nEmail: info@littlestarspreschool.com');
+            } else if (action === 'Download App') {
+              alert('Redirecting to app store...');
+            } else {
+              alert(`Opening ${action}...`);
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

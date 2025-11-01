@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ******* CSS ******* -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="contact.css" />
+    <!-- ******* ICONS ******* -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+    <title>Contact Us - Bangu Preschool</title>
+  </head>
+  <body>
+    <section class="main-container">
+      <!-- ******* HEADER SECTION ******* -->
+      <div class="header-section">
+        <div class="header-content">
+          <div class="logo-section">
+            <div class="logo">
+              <i class='bx bxs-star animated-star'></i>
+              <span class="logo-text">Bangu Preschool</span>
+            </div>
+            <p class="tagline">Where Every Child Shines Bright ✨</p>
+          </div>
+
+          <nav class="main-nav">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html" class="active">Contact</a></li>
+              <li><a href="#programs">Programs</a></li>
+              <li><a href="#admissions">Admissions</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <!-- ******* CONTACT HERO SECTION ******* -->
+      <div class="contact-hero">
+        <div class="hero-content">
+          <h1>Get in Touch with Us</h1>
+          <p>We'd love to hear from you! Reach out for tours, enrollment, or any questions about Bangu Preschool.</p>
+          <div class="hero-features">
+            <div class="feature-item">
+              <i class='bx bxs-phone'></i>
+              <span>Quick Response</span>
+            </div>
+            <div class="feature-item">
+              <i class='bx bxs-calendar'></i>
+              <span>Schedule Tours</span>
+            </div>
+            <div class="feature-item">
+              <i class='bx bxs-heart'></i>
+              <span>Personalized Care</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ******* CONTACT INFORMATION ******* -->
+      <div class="contact-info-section">
+        <div class="contact-content">
+          <div class="contact-cards">
+            <div class="contact-card primary">
+              <div class="card-icon">
+                <i class='bx bxs-phone'></i>
+              </div>
+              <h3>Call Us</h3>
+              <p class="contact-detail">+1 (555) 123-KIDS</p>
+              <p class="contact-description">Mon-Fri: 7:00 AM - 6:00 PM</p>
+              <p class="contact-description">Sat: 8:00 AM - 2:00 PM</p>
+              <a href="tel:+15551234537" class="contact-btn">Call Now</a>
+            </div>
+            
+            <div class="contact-card primary">
+              <div class="card-icon">
+                <i class='bx bxs-envelope'></i>
+              </div>
+              <h3>Email Us</h3>
+              <p class="contact-detail">info@littlestars.edu</p>
+              <p class="contact-description">General inquiries and information</p>
+              <br>
+              <a href="mailto:info@littlestars.edu" class="contact-btn">Send Email</a>
+            </div>
+            
+            <div class="contact-card primary">
+              <div class="card-icon">
+                <i class='bx bxs-map'></i>
+              </div>
+              <h3>Visit Us</h3>
+              <p class="contact-detail">123 Rainbow Avenue</p>
+              <p class="contact-description">Learning City, LC 12345</p>
+              <p class="contact-description">Near Sunshine Elementary</p>
+              <a href="#map" class="contact-btn">Get Directions</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ******* CONTACT FORM SECTION ******* -->
+      <div class="contact-form-section">
+        <div class="form-container">
+          <div class="form-header">
+            <h2>Send Us a Message</h2>
+            <p>Fill out the form below and we'll get back to you within 24 hours. We're here to help with any questions about enrollment, programs, or scheduling a tour.</p>
+          </div>
+          
+          <form class="contact-form" id="contactForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required>
+                <span class="form-icon"><i class='bx bx-user'></i></span>
+              </div>
+              
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required>
+                <span class="form-icon"><i class='bx bx-user'></i></span>
+              </div>
+            </div>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+                <span class="form-icon"><i class='bx bx-envelope'></i></span>
+              </div>
+              
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+                <span class="form-icon"><i class='bx bx-phone'></i></span>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <select id="subject" name="subject" required>
+                <option value="">Select a subject</option>
+                <option value="enrollment">Enrollment Information</option>
+                <option value="tour">Schedule a Tour</option>
+                <option value="programs">Program Details</option>
+                <option value="tuition">Tuition & Fees</option>
+                <option value="current-parent">Current Parent Inquiry</option>
+                <option value="employment">Employment Opportunities</option>
+                <option value="general">General Question</option>
+                <option value="other">Other</option>
+              </select>
+              <span class="form-icon"><i class='bx bx-category'></i></span>
+            </div>
+            
+            <div class="form-group">
+              <label for="childAge">Child's Age (if applicable)</label>
+              <select id="childAge" name="childAge">
+                <option value="">Select age</option>
+                <option value="infant">Infant (6-18 months)</option>
+                <option value="toddler">Toddler (18 months - 2 years)</option>
+                <option value="preschool">Preschool (3-4 years)</option>
+                <option value="pre-k">Pre-K (4-5 years)</option>
+                <option value="multiple">Multiple children</option>
+                <option value="not-applicable">Not applicable</option>
+              </select>
+              <span class="form-icon"><i class='bx bx-child'></i></span>
+            </div>
+            
+            <div class="form-group">
+              <label for="preferredContact">Preferred Contact Method</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="preferredContact" value="email" checked>
+                  <span class="radio-custom"></span>
+                  Email
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="preferredContact" value="phone">
+                  <span class="radio-custom"></span>
+                  Phone
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="preferredContact" value="either">
+                  <span class="radio-custom"></span>
+                  Either
+                </label>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" rows="5" placeholder="Please tell us about your inquiry, any specific questions you have, or what you'd like to know about Bangu Preschool..." required></textarea>
+              <span class="form-icon"><i class='bx bx-message-square-dots'></i></span>
+            </div>
+            
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="newsletter" name="newsletter">
+                <span class="checkbox-custom"></span>
+                I would like to receive newsletters and updates about Bangu Preschool
+              </label>
+            </div>
+            
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="terms" name="terms" required>
+                <span class="checkbox-custom"></span>
+                I agree to the <a href="#" target="_blank">Privacy Policy</a> and <a href="#" target="_blank">Terms of Service</a> *
+              </label>
+            </div>
+            
+            <div class="form-submit">
+              <button type="submit" class="submit-btn">
+                <i class='bx bx-send'></i>
+                Send Message
+              </button>
+              <p class="form-note">We'll respond within 24 hours during business days</p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ******* DEPARTMENT CONTACTS ******* -->
+      <div class="department-contacts">
+        <div class="department-content">
+          <h2>Direct Department Contacts</h2>
+          <p>Need to reach a specific department? Here are our direct contact details.</p>
+          
+          <div class="department-grid">
+            <div class="department-card">
+              <div class="dept-icon">
+                <i class='bx bxs-user-account'></i>
+              </div>
+              <h3>Admissions Office</h3>
+              <div class="dept-info">
+                <p><i class='bx bx-user'></i> <strong>Director:</strong> Dr. Sarah Martinez</p>
+                <p><i class='bx bx-phone'></i> <strong>Phone:</strong> +1 (555) 123-4537 ext. 101</p>
+                <p><i class='bx bx-envelope'></i> <strong>Email:</strong> admissions@littlestars.edu</p>
+                <p><i class='bx bx-time'></i> <strong>Hours:</strong> Mon-Fri 8:00 AM - 5:00 PM</p>
+              </div>
+              <a href="mailto:admissions@littlestars.edu" class="dept-btn">Contact Admissions</a>
+            </div>
+            
+            <div class="department-card">
+              <div class="dept-icon">
+                <i class='bx bxs-graduation'></i>
+              </div>
+              <h3>Academic Programs</h3>
+              <div class="dept-info">
+                <p><i class='bx bx-user'></i> <strong>Director:</strong> Ms. Emily Chen</p>
+                <p><i class='bx bx-phone'></i> <strong>Phone:</strong> +1 (555) 123-4537 ext. 102</p>
+                <p><i class='bx bx-envelope'></i> <strong>Email:</strong> programs@littlestars.edu</p>
+                <p><i class='bx bx-time'></i> <strong>Hours:</strong> Mon-Fri 9:00 AM - 4:00 PM</p>
+              </div>
+              <a href="mailto:programs@littlestars.edu" class="dept-btn">Contact Programs</a>
+            </div>
+            
+            <div class="department-card">
+              <div class="dept-icon">
+                <i class='bx bxs-dollar-circle'></i>
+              </div>
+              <h3>Finance & Billing</h3>
+              <div class="dept-info">
+                <p><i class='bx bx-user'></i> <strong>Manager:</strong> Mr. Michael Rodriguez</p>
+                <p><i class='bx bx-phone'></i> <strong>Phone:</strong> +1 (555) 123-4537 ext. 103</p>
+                <p><i class='bx bx-envelope'></i> <strong>Email:</strong> billing@littlestars.edu</p>
+                <p><i class='bx bx-time'></i> <strong>Hours:</strong> Mon-Fri 8:30 AM - 4:30 PM</p>
+              </div>
+              <a href="mailto:billing@littlestars.edu" class="dept-btn">Contact Finance</a>
+            </div>
+            
+            <div class="department-card">
+              <div class="dept-icon">
+                <i class='bx bxs-first-aid'></i>
+              </div>
+              <h3>Health & Safety</h3>
+              <div class="dept-info">
+                <p><i class='bx bx-user'></i> <strong>Nurse:</strong> Ms. Jennifer Walsh, RN</p>
+                <p><i class='bx bx-phone'></i> <strong>Phone:</strong> +1 (555) 123-4537 ext. 104</p>
+                <p><i class='bx bx-envelope'></i> <strong>Email:</strong> health@littlestars.edu</p>
+                <p><i class='bx bx-time'></i> <strong>Hours:</strong> Mon-Fri 7:30 AM - 5:30 PM</p>
+              </div>
+              <a href="mailto:health@littlestars.edu" class="dept-btn">Contact Health Office</a>
+            </div>
+            
+            <div class="department-card">
+              <div class="dept-icon">
+                <i class='bx bxs-briefcase'></i>
+              </div>
+              <h3>Human Resources</h3>
+              <div class="dept-info">
+                <p><i class='bx bx-user'></i> <strong>Manager:</strong> Ms. Amanda Foster</p>
+                <p><i class='bx bx-phone'></i> <strong>Phone:</strong> +1 (555) 123-4537 ext. 105</p>
+                <p><i class='bx bx-envelope'></i> <strong>Email:</strong> careers@littlestars.edu</p>
+                <p><i class='bx bx-time'></i> <strong>Hours:</strong> Mon-Fri 9:00 AM - 5:00 PM</p>
+              </div>
+              <a href="mailto:careers@littlestars.edu" class="dept-btn">Contact HR</a>
+            </div>
+            
+            <div class="department-card">
+              <div class="dept-icon">
+                <i class='bx bxs-alarm'></i>
+              </div>
+              <h3>Emergency Contact</h3>
+              <div class="dept-info">
+                <p><i class='bx bx-phone'></i> <strong>24/7 Emergency:</strong> +1 (555) 911-HELP</p>
+                <p><i class='bx bx-phone'></i> <strong>After Hours:</strong> +1 (555) 123-9999</p>
+                <p><i class='bx bx-envelope'></i> <strong>Email:</strong> emergency@littlestars.edu</p>
+                <p><i class='bx bx-info-circle'></i> For urgent matters only</p>
+              </div>
+              <a href="tel:+15559114357" class="dept-btn emergency">Emergency Line</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ******* LOCATION & MAP ******* -->
+      <div class="location-section" id="map">
+        <div class="location-content">
+          <div class="location-info">
+            <h2>Visit Our Campus</h2>
+            <p>Come see our beautiful facility and meet our wonderful team! We're conveniently located in the heart of Learning City.</p>
+            
+            <div class="location-details">
+              <div class="detail-item">
+                <i class='bx bxs-map'></i>
+                <div class="detail-content">
+                  <h4>Our Address</h4>
+                  <p>123 Rainbow Avenue<br>Learning City, LC 12345</p>
+                </div>
+              </div>
+              
+              <div class="detail-item">
+                <i class='bx bxs-car'></i>
+                <div class="detail-content">
+                  <h4>Parking</h4>
+                  <p>Free parking available<br>Safe drop-off zone</p>
+                </div>
+              </div>
+              
+              <div class="detail-item">
+                <i class='bx bxs-bus'></i>
+                <div class="detail-content">
+                  <h4>Public Transport</h4>
+                  <p>Bus routes 12, 34, 56<br>Metro station nearby</p>
+                </div>
+              </div>
+              
+              <div class="detail-item">
+                <i class='bx bxs-time'></i>
+                <div class="detail-content">
+                  <h4>Tour Hours</h4>
+                  <p>Mon-Fri: 9:00 AM - 3:00 PM<br>Sat: 10:00 AM - 2:00 PM</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="location-actions">
+              <a href="https://maps.google.com/directions" target="_blank" class="location-btn primary">
+                <i class='bx bx-map'></i>
+                Get Directions
+              </a>
+              <a href="#" class="location-btn secondary">
+                <i class='bx bx-calendar'></i>
+                Schedule Tour
+              </a>
+            </div>
+          </div>
+          
+          <div class="map-container">
+            <div class="map-placeholder">
+              <div class="map-content">
+                <i class='bx bxs-map'></i>
+                <h3>Interactive Map</h3>
+                <p>123 Rainbow Avenue, Learning City</p>
+                <button class="map-btn" onclick="openMap()">
+                  <i class='bx bx-current-location'></i>
+                  View in Google Maps
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ******* FAQ SECTION ******* -->
+      <div class="faq-section">
+        <div class="faq-content">
+          <h2>Frequently Asked Questions</h2>
+          <p>Here are some common questions we receive. Can't find what you're looking for? Contact us directly!</p>
+          
+          <div class="faq-grid">
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                <h4>What are your operating hours?</h4>
+                <i class='bx bx-chevron-down'></i>
+              </div>
+              <div class="faq-answer">
+                <p>We're open Monday through Friday from 7:00 AM to 6:00 PM, and Saturdays from 8:00 AM to 2:00 PM. We're closed on Sundays and major holidays.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                <h4>How do I schedule a tour?</h4>
+                <i class='bx bx-chevron-down'></i>
+              </div>
+              <div class="faq-answer">
+                <p>You can schedule a tour by calling us at (555) 123-KIDS, emailing admissions@littlestars.edu, or filling out our contact form above. Tours are available Monday through Friday from 9:00 AM to 3:00 PM, and Saturdays from 10:00 AM to 2:00 PM.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                <h4>What age groups do you accept?</h4>
+                <i class='bx bx-chevron-down'></i>
+              </div>
+              <div class="faq-answer">
+                <p>We welcome children from 6 months to 5 years old. We have specialized programs for infants (6-18 months), toddlers (18 months - 2 years), preschoolers (3-4 years), and pre-K students (4-5 years).</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                <h4>Do you offer part-time programs?</h4>
+                <i class='bx bx-chevron-down'></i>
+              </div>
+              <div class="faq-answer">
+                <p>Yes! We offer both full-time and part-time options to accommodate different family needs. Part-time options include 2-day, 3-day, and morning-only programs.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                <h4>What should I bring for enrollment?</h4>
+                <i class='bx bx-chevron-down'></i>
+              </div>
+              <div class="faq-answer">
+                <p>Please bring your child's immunization records, birth certificate, emergency contact information, and any relevant medical information. We'll provide you with our enrollment packet during your tour.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                <h4>Do you provide meals and snacks?</h4>
+                <i class='bx bx-chevron-down'></i>
+              </div>
+              <div class="faq-answer">
+                <p>Yes, we provide healthy, nutritious meals and snacks daily. Our menu is designed by a pediatric nutritionist and accommodates various dietary restrictions and allergies.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ******* FOOTER SECTION ******* -->
+      <div class="footer-section">
+        <div class="footer-content">
+          <div class="footer-info">
+            <h3>Bangu Preschool</h3>
+            <p>Nurturing young minds with love, care, and early childhood education excellence. Creating a safe and stimulating environment for children to grow and learn.</p>
+          </div>
+          
+          <div class="contact-info">
+            <h4>Contact Information</h4>
+            <p><i class='bx bx-phone'></i> +1 (555) 123-KIDS</p>
+            <p><i class='bx bx-envelope'></i> info@littlestars.edu</p>
+            <p><i class='bx bx-map'></i> 123 Rainbow Avenue, Learning City</p>
+            <p><i class='bx bx-time'></i> Mon-Fri: 7:00 AM - 6:00 PM</p>
+          </div>
+          
+          <div class="quick-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="#programs">Programs</a></li>
+              <li><a href="#admissions">Admissions</a></li>
+            </ul>
+          </div>
+          
+          <div class="social-section">
+            <h4>Connect With Us</h4>
+            <div class="social-icons">
+              <a href="#"><i class='bx bxl-facebook'></i></a>
+              <a href="#"><i class='bx bxl-instagram'></i></a>
+              <a href="#"><i class='bx bxl-youtube'></i></a>
+              <a href="#"><i class='bx bx-envelope'></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2025 Bangu Preschool. All rights reserved. | Licensed Childcare Provider</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ******* JAVASCRIPT ******* -->
+    <script>
+      // Form submission handling
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        const submitBtn = document.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        // Simulate form submission
+        setTimeout(() => {
+          alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+          this.reset();
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }, 2000);
+      });
+
+      // FAQ toggle functionality
+      function toggleFAQ(element) {
+        const faqItem = element.parentNode;
+        const answer = faqItem.querySelector('.faq-answer');
+        const icon = element.querySelector('i');
+        
+        // Close all other FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+          if (item !== faqItem) {
+            item.classList.remove('active');
+            item.querySelector('.faq-answer').style.maxHeight = null;
+            item.querySelector('.faq-question i').style.transform = 'rotate(0deg)';
+          }
+        });
+        
+        // Toggle current FAQ item
+        faqItem.classList.toggle('active');
+        
+        if (faqItem.classList.contains('active')) {
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          answer.style.maxHeight = null;
+          icon.style.transform = 'rotate(0deg)';
+        }
+      }
+
+      // Open map functionality
+      function openMap() {
+        window.open('https://maps.google.com/?q=123+Rainbow+Avenue,+Learning+City', '_blank');
+      }
+
+      // Form validation enhancement
+      const inputs = document.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+          if (this.hasAttribute('required') && !this.value.trim()) {
+            this.classList.add('error');
+          } else {
+            this.classList.remove('error');
+          }
+        });
+        
+        input.addEventListener('input', function() {
+          this.classList.remove('error');
+        });
+      });
+
+      // Contact card animations
+      const contactCards = document.querySelectorAll('.contact-card, .department-card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      });
+
+      contactCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'all 0.6s ease';
+        observer.observe(card);
+      });
+
+      // Department card hover effects
+      const departmentCards = document.querySelectorAll('.department-card');
+      departmentCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-5px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+
+      // Navigation active state
+      const navLinks = document.querySelectorAll('.main-nav a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          navLinks.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Form field focus animations
+      const formGroups = document.querySelectorAll('.form-group');
+      formGroups.forEach(group => {
+        const input = group.querySelector('input, select, textarea');
+        const label = group.querySelector('label');
+        
+        if (input && label) {
+          input.addEventListener('focus', function() {
+            group.classList.add('focused');
+          });
+          
+          input.addEventListener('blur', function() {
+            if (!this.value) {
+              group.classList.remove('focused');
+            }
+          });
+          
+          // Check if field has value on load
+          if (input.value) {
+            group.classList.add('focused');
+          }
+        }
+      });
+
+      // Phone number formatting
+      const phoneInput = document.getElementById('phone');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+          let value = this.value.replace(/\D/g, '');
+          if (value.length >= 6) {
+            value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+          } else if (value.length >= 3) {
+            value = value.replace(/(\d{3})(\d{3})/, '($1) $2');
+          }
+          this.value = value;
+        });
+      }
+    </script>
+  </body>
+</html>

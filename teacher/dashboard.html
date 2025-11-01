@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ******* CSS ******* -->
+    <link rel="stylesheet" href="dashboard.css" />
+    <!-- ******* ICONS ******* -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+    <title>Teacher Dashboard - Bangu Preschool</title>
+  </head>
+  <body>
+    <section class="main-dashboard">
+      <div class="dashboard-content">
+        <!-- ******* HEADER SECTION ******* -->
+        <div class="header-section">
+          <div class="logo">
+            <i class='bx bxs-graduation'></i>
+            <span>Teacher Dashboard</span>
+          </div>
+
+          <div class="nav-menu">
+            <ul>
+              <li><a href="../index.html">Home</a></li>
+              <li><a class="active" href="dashboard.html">My Classroom</a></li>
+              <li><a href="#">Lesson Plans</a></li>
+              <li><a href="#">Student Reports</a></li>
+              <li><a href="#">Resources</a></li>
+            </ul>
+          </div>
+
+          <div class="user-profile">
+            <i class='bx bx-user-circle'></i>
+            <span>Ms. Sarah Johnson</span>
+            <div class="dropdown">
+              <i class='bx bx-chevron-down'></i>
+              <div class="dropdown-content">
+                <a href="#">My Profile</a>
+                <a href="#">Class Settings</a>
+                <a href="#">Help & Support</a>
+                <a href="../index.html">Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* TEACHER OVERVIEW ******* -->
+        <div class="teacher-overview">
+          <div class="overview-header">
+            <h1>Welcome Back, Ms. Sarah!</h1>
+            <p>Rainbow Class - Age Group 3-4 Years | Room 102</p>
+          </div>
+          
+          <div class="class-stats">
+            <div class="stat-card present-children">
+              <i class='bx bxs-group'></i>
+              <div class="stat-info">
+                <h3>18/20</h3>
+                <p>Children Present</p>
+                <span class="trend up">2 absent today</span>
+              </div>
+            </div>
+            
+            <div class="stat-card activities-planned">
+              <i class='bx bxs-calendar-check'></i>
+              <div class="stat-info">
+                <h3>6</h3>
+                <p>Activities Today</p>
+                <span class="trend stable">On schedule</span>
+              </div>
+            </div>
+            
+            <div class="stat-card next-activity">
+              <i class='bx bxs-time'></i>
+              <div class="stat-info">
+                <h3>10:30 AM</h3>
+                <p>Next Activity</p>
+                <span class="trend neutral">Art & Crafts</span>
+              </div>
+            </div>
+            
+            <div class="stat-card parent-messages">
+              <i class='bx bxs-message-dots'></i>
+              <div class="stat-info">
+                <h3>3</h3>
+                <p>New Messages</p>
+                <span class="trend up">From parents</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* DAILY SCHEDULE ******* -->
+        <div class="daily-schedule">
+          <h2 class="section-title">Today's Schedule - Friday, November 1, 2025</h2>
+          
+          <div class="schedule-timeline">
+            <div class="schedule-item completed">
+              <div class="time-slot">8:00 AM</div>
+              <div class="activity-info">
+                <h4>Morning Circle Time</h4>
+                <p>Welcome song, weather discussion, calendar time</p>
+                <span class="status completed">Completed</span>
+              </div>
+            </div>
+            
+            <div class="schedule-item completed">
+              <div class="time-slot">8:30 AM</div>
+              <div class="activity-info">
+                <h4>Free Play</h4>
+                <p>Building blocks, puzzles, reading corner</p>
+                <span class="status completed">Completed</span>
+              </div>
+            </div>
+            
+            <div class="schedule-item completed">
+              <div class="time-slot">9:15 AM</div>
+              <div class="activity-info">
+                <h4>Snack Time</h4>
+                <p>Healthy snacks and milk, table manners practice</p>
+                <span class="status completed">Completed</span>
+              </div>
+            </div>
+            
+            <div class="schedule-item current">
+              <div class="time-slot">10:00 AM</div>
+              <div class="activity-info">
+                <h4>Learning Activity - Colors & Shapes</h4>
+                <p>Interactive shape sorting, color matching games</p>
+                <span class="status current">In Progress</span>
+              </div>
+            </div>
+            
+            <div class="schedule-item upcoming">
+              <div class="time-slot">10:30 AM</div>
+              <div class="activity-info">
+                <h4>Art & Crafts</h4>
+                <p>Finger painting - Fall leaves theme</p>
+                <span class="status upcoming">Next</span>
+              </div>
+            </div>
+            
+            <div class="schedule-item upcoming">
+              <div class="time-slot">11:15 AM</div>
+              <div class="activity-info">
+                <h4>Outdoor Play</h4>
+                <p>Playground time, nature walk</p>
+                <span class="status upcoming">Upcoming</span>
+              </div>
+            </div>
+            
+            <div class="schedule-item upcoming">
+              <div class="time-slot">12:00 PM</div>
+              <div class="activity-info">
+                <h4>Lunch Time</h4>
+                <p>Meal supervision, social skills development</p>
+                <span class="status upcoming">Upcoming</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* STUDENT QUICK VIEW ******* -->
+        <div class="student-section">
+          <h2 class="section-title">My Students - Quick View</h2>
+          
+          <div class="students-grid">
+            <div class="student-card present">
+              <img src="../assets/child1.jpg" alt="Emma Wilson" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjMjc5ZjYwIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiMyN2FlNjAiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
+              <div class="student-info">
+                <h4>Emma Wilson</h4>
+                <p>Age: 3 | Arrival: 8:15 AM</p>
+                <span class="status-badge present">Present</span>
+              </div>
+              <div class="student-actions">
+                <button class="action-btn"><i class='bx bx-note'></i></button>
+                <button class="action-btn"><i class='bx bx-camera'></i></button>
+              </div>
+            </div>
+            
+            <div class="student-card present">
+              <img src="../assets/child2.jpg" alt="Liam Parker" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjMzQ5OGRiIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiMzNDk4ZGIiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
+              <div class="student-info">
+                <h4>Liam Parker</h4>
+                <p>Age: 4 | Arrival: 7:45 AM</p>
+                <span class="status-badge present">Present</span>
+              </div>
+              <div class="student-actions">
+                <button class="action-btn"><i class='bx bx-note'></i></button>
+                <button class="action-btn"><i class='bx bx-camera'></i></button>
+              </div>
+            </div>
+            
+            <div class="student-card absent">
+              <img src="../assets/child3.jpg" alt="Sophia Davis" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjZTc0YzNjIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiNlNzRjM2MiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
+              <div class="student-info">
+                <h4>Sophia Davis</h4>
+                <p>Age: 3 | Reason: Sick</p>
+                <span class="status-badge absent">Absent</span>
+              </div>
+              <div class="student-actions">
+                <button class="action-btn"><i class='bx bx-note'></i></button>
+                <button class="action-btn disabled"><i class='bx bx-camera'></i></button>
+              </div>
+            </div>
+            
+            <div class="student-card present">
+              <img src="../assets/child4.jpg" alt="Mason Brown" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjZjM5YzEyIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiNmMzljMTIiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
+              <div class="student-info">
+                <h4>Mason Brown</h4>
+                <p>Age: 4 | Arrival: 8:00 AM</p>
+                <span class="status-badge present">Present</span>
+              </div>
+              <div class="student-actions">
+                <button class="action-btn"><i class='bx bx-note'></i></button>
+                <button class="action-btn"><i class='bx bx-camera'></i></button>
+              </div>
+            </div>
+            
+            <div class="student-card present">
+              <img src="../assets/child5.jpg" alt="Ava Miller" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjOWI1OWI2Ii8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiM5YjU5YjYiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
+              <div class="student-info">
+                <h4>Ava Miller</h4>
+                <p>Age: 3 | Arrival: 8:30 AM</p>
+                <span class="status-badge present">Present</span>
+              </div>
+              <div class="student-actions">
+                <button class="action-btn"><i class='bx bx-note'></i></button>
+                <button class="action-btn"><i class='bx bx-camera'></i></button>
+              </div>
+            </div>
+            
+            <div class="student-card late">
+              <img src="../assets/child6.jpg" alt="Noah Garcia" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjZmY2YjZiIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiNmZjZiNmIiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
+              <div class="student-info">
+                <h4>Noah Garcia</h4>
+                <p>Age: 4 | Expected: 8:00 AM</p>
+                <span class="status-badge late">Running Late</span>
+              </div>
+              <div class="student-actions">
+                <button class="action-btn"><i class='bx bx-note'></i></button>
+                <button class="action-btn disabled"><i class='bx bx-camera'></i></button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="view-all-students">
+            <button class="view-all-btn">View All Students (20)</button>
+          </div>
+        </div>
+
+        <!-- ******* TEACHING TOOLS ******* -->
+        <div class="teaching-tools">
+          <h2 class="section-title">Teaching Tools & Resources</h2>
+          
+          <div class="tools-grid">
+            <div class="tool-card">
+              <i class='bx bxs-book-content'></i>
+              <h3>Lesson Plans</h3>
+              <p>Create and manage daily lesson plans</p>
+              <button class="tool-btn">Open Planner</button>
+            </div>
+            
+            <div class="tool-card">
+              <i class='bx bxs-camera'></i>
+              <h3>Photo Gallery</h3>
+              <p>Capture and share classroom moments</p>
+              <button class="tool-btn">Take Photo</button>
+            </div>
+            
+            <div class="tool-card">
+              <i class='bx bxs-note'></i>
+              <h3>Daily Reports</h3>
+              <p>Send updates to parents about their child</p>
+              <button class="tool-btn">Write Report</button>
+            </div>
+            
+            <div class="tool-card">
+              <i class='bx bxs-message-square-dots'></i>
+              <h3>Parent Communication</h3>
+              <p>Message parents and respond to inquiries</p>
+              <button class="tool-btn">Messages (3)</button>
+            </div>
+            
+            <div class="tool-card">
+              <i class='bx bxs-calendar-event'></i>
+              <h3>Attendance</h3>
+              <p>Track daily attendance and absences</p>
+              <button class="tool-btn">Take Attendance</button>
+            </div>
+            
+            <div class="tool-card">
+              <i class='bx bxs-first-aid'></i>
+              <h3>Incident Reports</h3>
+              <p>Report any incidents or concerns</p>
+              <button class="tool-btn">New Report</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ******* QUICK ACTIONS ******* -->
+        <div class="quick-actions">
+          <h2 class="section-title">Quick Actions</h2>
+          <div class="actions-grid">
+            <button class="quick-btn emergency">
+              <i class='bx bxs-alarm'></i>
+              <span>Emergency Alert</span>
+            </button>
+            <button class="quick-btn help">
+              <i class='bx bxs-help-circle'></i>
+              <span>Request Help</span>
+            </button>
+            <button class="quick-btn supply">
+              <i class='bx bxs-package'></i>
+              <span>Supply Request</span>
+            </button>
+            <button class="quick-btn break">
+              <i class='bx bxs-coffee'></i>
+              <span>Break Coverage</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ******* TEACHER FOOTER ******* -->
+        <div class="teacher-footer">
+          <div class="footer-info">
+            <p>&copy; 2025 Bangu Preschool - Teacher Portal</p>
+            <p>Rainbow Class | Room 102 | Capacity: 20 Students</p>
+          </div>
+          <div class="footer-actions">
+            <button class="footer-btn">Help & Support</button>
+            <button class="footer-btn">Class Settings</button>
+            <button class="footer-btn">Resource Library</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ******* JAVASCRIPT ******* -->
+    <script>
+      // Teacher dashboard functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        // Dropdown functionality
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        
+        dropdown.addEventListener('click', function() {
+          dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) {
+            dropdownContent.style.display = 'none';
+          }
+        });
+
+        // Student action buttons
+        const studentActionBtns = document.querySelectorAll('.student-actions .action-btn:not(.disabled)');
+        studentActionBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const studentCard = this.closest('.student-card');
+            const studentName = studentCard.querySelector('h4').textContent;
+            const icon = this.querySelector('i').className;
+            
+            if (icon.includes('note')) {
+              alert(`Opening notes for ${studentName}...`);
+            } else if (icon.includes('camera')) {
+              alert(`Taking photo of ${studentName}...`);
+            }
+          });
+        });
+
+        // Tool buttons
+        const toolBtns = document.querySelectorAll('.tool-btn');
+        toolBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const toolName = this.closest('.tool-card').querySelector('h3').textContent;
+            alert(`Opening ${toolName} tool...`);
+          });
+        });
+
+        // Quick action buttons
+        const quickBtns = document.querySelectorAll('.quick-btn');
+        quickBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const action = this.querySelector('span').textContent;
+            if (action === 'Emergency Alert') {
+              if (confirm('Are you sure you want to send an emergency alert?')) {
+                alert('Emergency alert sent to administration!');
+              }
+            } else {
+              alert(`Executing: ${action}`);
+            }
+          });
+        });
+
+        // Schedule item interactions
+        const scheduleItems = document.querySelectorAll('.schedule-item');
+        scheduleItems.forEach(item => {
+          item.addEventListener('click', function() {
+            if (this.classList.contains('upcoming')) {
+              const activity = this.querySelector('h4').textContent;
+              if (confirm(`Mark "${activity}" as completed?`)) {
+                this.classList.remove('upcoming');
+                this.classList.add('completed');
+                this.querySelector('.status').textContent = 'Completed';
+                this.querySelector('.status').className = 'status completed';
+              }
+            }
+          });
+        });
+
+        // View all students button
+        const viewAllBtn = document.querySelector('.view-all-btn');
+        viewAllBtn.addEventListener('click', function() {
+          alert('Opening complete student roster...');
+        });
+
+        // Animation for stats cards
+        const statCards = document.querySelectorAll('.stat-card');
+        statCards.forEach((card, index) => {
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, index * 100);
+        });
+
+        // Live time update for current activity
+        function updateCurrentTime() {
+          const now = new Date();
+          const timeString = now.toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: true 
+          });
+          
+          const currentTimeElements = document.querySelectorAll('.current .time-slot');
+          currentTimeElements.forEach(element => {
+            if (element.textContent.includes('10:00 AM')) {
+              // Update with current progress indication
+            }
+          });
+        }
+
+        // Update time every minute
+        setInterval(updateCurrentTime, 60000);
+        updateCurrentTime();
+      });
+    </script>
+  </body>
+</html>
