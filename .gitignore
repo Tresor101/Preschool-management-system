@@ -1,0 +1,15 @@
+# VS Code debug profiles
+.vscode/chrome-debug-profile/
+.vscode/edge-debug-profile/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor backup files
+*~
+*.swp
+*.swo
+
+# Logs
+*.log
