@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Directory - Super Admin</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+    
+    <!-- Include Shared Database System -->
+    <script src="../database.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- ******* ENHANCED MODERN SIDEBAR ******* -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class='bx bxs-crown'></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">Super Admin</span>
+                        <span class="logo-subtitle">Management Portal</span>
+                    </div>
+                </div>
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class='bx bx-menu'></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-profile">
+                <div class="profile-avatar">
+                    <i class='bx bxs-user-circle'></i>
+                </div>
+                <div class="profile-info">
+                    <span class="profile-name">Administrator</span>
+                    <span class="profile-role">System Admin</span>
+                </div>
+                <div class="profile-status">
+                    <div class="status-indicator online"></div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-title">Main Navigation</span>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="dashboard.html" class="nav-link">
+                                <div class="nav-icon">
+                                    <i class='bx bxs-dashboard'></i>
+                                </div>
+                                <span class="nav-text">Overview</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="user-registration.html" class="nav-link">
+                                <div class="nav-icon">
+                                    <i class='bx bx-user-plus'></i>
+                                </div>
+                                <span class="nav-text">User Registration</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="user-directory.html" class="nav-link active">
+                                <div class="nav-icon">
+                                    <i class='bx bx-group'></i>
+                                </div>
+                                <span class="nav-text">User Directory</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="school-applications.html" class="nav-link">
+                                <div class="nav-icon">
+                                    <i class='bx bx-file-blank'></i>
+                                </div>
+                                <span class="nav-text">School Applications</span>
+                                <div class="nav-badge pending-count">0</div>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="student-reports.html" class="nav-link">
+                                <div class="nav-icon">
+                                    <i class='bx bxs-report'></i>
+                                </div>
+                                <span class="nav-text">Student Reports</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-title">System Management</span>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="system-logs.html" class="nav-link">
+                                <div class="nav-icon">
+                                    <i class='bx bxs-file-doc'></i>
+                                </div>
+                                <span class="nav-text">System Logs</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-title">Quick Actions</span>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link logout-link">
+                                <div class="nav-icon">
+                                    <i class='bx bx-home'></i>
+                                </div>
+                                <span class="nav-text">Back to Home</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <div class="status-item">
+                        <i class='bx bx-wifi'></i>
+                        <span>Online</span>
+                    </div>
+                    <div class="status-item">
+                        <i class='bx bx-time'></i>
+                        <span id="currentTime">--:--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="content-header">
+                <h1>User Directory</h1>
+                <div class="user-info">
+                    <span>Welcome, Super Admin</span>
+                    <i class='bx bxs-user-circle'></i>
+                </div>
+            </div>
+
+            <!-- Directory Content -->
+            <div class="content-section">
+                <!-- Directory Overview -->
+                <div class="directory-overview">
+                    <h3>User Management Center</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card success">
+                            <div class="stat-icon">
+                                <i class='bx bxs-graduation'></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Students</h4>
+                                <p class="stat-number" id="totalStudents">0</p>
+                                <small>Registered</small>
+                            </div>
+                        </div>
+                        <div class="stat-card info">
+                            <div class="stat-icon">
+                                <i class='bx bxs-briefcase'></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Staff</h4>
+                                <p class="stat-number" id="totalStaff">0</p>
+                                <small>Registered</small>
+                            </div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-icon">
+                                <i class='bx bxs-user-badge'></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Administrators</h4>
+                                <p class="stat-number" id="totalAdmins">0</p>
+                                <small>Registered</small>
+                            </div>
+                        </div>
+                        <div class="stat-card critical">
+                            <div class="stat-icon">
+                                <i class='bx bxs-group'></i>
+                            </div>
+                            <div class="stat-content">
+                                <h4>Total Users</h4>
+                                <p class="stat-number" id="totalUsers">0</p>
+                                <small>System Wide</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="view-students">
+                        <i class='bx bx-table'></i> Students Directory
+                    </button>
+                    <button class="tab-btn" data-tab="view-staff">
+                        <i class='bx bx-table'></i> Staff Directory
+                    </button>
+                    <button class="tab-btn" data-tab="view-admins">
+                        <i class='bx bx-table'></i> Administrators Directory
+                    </button>
+                </div>
+
+                <!-- View Students Tab -->
+                <div class="tab-content active" id="view-students-tab">
+                    <div class="table-section">
+                        <div class="table-header">
+                            <h3>Students Directory</h3>
+                            <div class="table-controls">
+                                <input type="text" id="student-search" placeholder="Search students..." class="search-input">
+                                <select id="student-class-filter" class="filter-select">
+                                    <option value="">All Classes</option>
+                                    <option value="Grade 1A">Grade 1A</option>
+                                    <option value="Grade 1B">Grade 1B</option>
+                                    <option value="Grade 1C">Grade 1C</option>
+                                    <option value="Grade 2A">Grade 2A</option>
+                                    <option value="Grade 2B">Grade 2B</option>
+                                    <option value="Grade 2C">Grade 2C</option>
+                                    <option value="Grade 3A">Grade 3A</option>
+                                    <option value="Grade 3B">Grade 3B</option>
+                                    <option value="Grade 3C">Grade 3C</option>
+                                </select>
+                                <button onclick="exportStudents()" class="btn-secondary">
+                                    <i class='bx bx-download'></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table id="students-table" class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Name</th>
+                                        <th>Class</th>
+                                        <th>Age</th>
+                                        <th>Parent Name</th>
+                                        <th>Parent Email</th>
+                                        <th>Parent Phone</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="students-tbody">
+                                    <!-- Dynamic content will be loaded here -->
+                                </tbody>
+                            </table>
+                            <div id="no-students" class="no-data" style="display: none;">
+                                <i class='bx bx-user-x'></i>
+                                <p>No students registered yet</p>
+                                <button onclick="window.location.href='user-registration.html'" class="btn-primary">Register First Student</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Staff Tab -->
+                <div class="tab-content" id="view-staff-tab">
+                    <div class="table-section">
+                        <div class="table-header">
+                            <h3>Staff Directory</h3>
+                            <div class="table-controls">
+                                <input type="text" id="staff-search" placeholder="Search staff..." class="search-input">
+                                <select id="staff-department-filter" class="filter-select">
+                                    <option value="">All Departments</option>
+                                    <option value="education">Education</option>
+                                    <option value="administration">Administration</option>
+                                    <option value="health">Health Services</option>
+                                    <option value="maintenance">Maintenance</option>
+                                    <option value="food-service">Food Service</option>
+                                </select>
+                                <button onclick="exportStaff()" class="btn-secondary">
+                                    <i class='bx bx-download'></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table id="staff-table" class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Employee ID</th>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <th>Department</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Start Date</th>
+                                        <th>Salary</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="staff-tbody">
+                                    <!-- Dynamic content will be loaded here -->
+                                </tbody>
+                            </table>
+                            <div id="no-staff" class="no-data" style="display: none;">
+                                <i class='bx bx-briefcase'></i>
+                                <p>No staff registered yet</p>
+                                <button onclick="window.location.href='user-registration.html'" class="btn-primary">Register First Staff Member</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Admins Tab -->
+                <div class="tab-content" id="view-admins-tab">
+                    <div class="table-section">
+                        <div class="table-header">
+                            <h3>Administrators Directory</h3>
+                            <div class="table-controls">
+                                <input type="text" id="admin-search" placeholder="Search administrators..." class="search-input">
+                                <select id="admin-role-filter" class="filter-select">
+                                    <option value="">All Roles</option>
+                                    <option value="principal">Principal</option>
+                                    <option value="vice-principal">Vice Principal</option>
+                                    <option value="admin">Administrator</option>
+                                    <option value="coordinator">Coordinator</option>
+                                </select>
+                                <button onclick="exportAdmins()" class="btn-secondary">
+                                    <i class='bx bx-download'></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table id="admins-table" class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Employee ID</th>
+                                        <th>Name</th>
+                                        <th>Role</th>
+                                        <th>Access Level</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Username</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admins-tbody">
+                                    <!-- Dynamic content will be loaded here -->
+                                </tbody>
+                            </table>
+                            <div id="no-admins" class="no-data" style="display: none;">
+                                <i class='bx bx-user-badge'></i>
+                                <p>No administrators registered yet</p>
+                                <button onclick="window.location.href='user-registration.html'" class="btn-primary">Register First Administrator</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Details Modal -->
+    <div id="userModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">User Details</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeModal()" class="btn-secondary">Close</button>
+                <button id="edit-user-btn" onclick="editUser()" class="btn-primary">Edit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="edit-modal-title">Edit User</h3>
+                <span class="close" onclick="closeEditModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="edit-modal-body">
+                <!-- Dynamic edit form will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeEditModal()" class="btn-secondary">Cancel</button>
+                <button id="save-user-btn" onclick="saveUserChanges()" class="btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/user-directory.js"></script>
+    
+    <!-- Enhanced Sidebar JavaScript -->
+    <script>
+        // Enhanced Sidebar functionality
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const isCollapsed = sidebar.classList.toggle('collapsed');
+            
+            // Save state in localStorage
+            localStorage.setItem('sidebarCollapsed', isCollapsed);
+        }
+
+        // Initialize sidebar state from localStorage
+        function initializeSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            
+            if (isCollapsed) {
+                sidebar.classList.add('collapsed');
+            }
+        }
+
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            const timeElement = document.getElementById('currentTime');
+            if (timeElement) {
+                timeElement.textContent = timeString;
+            }
+        }
+
+        // Update pending applications count
+        function updatePendingCount() {
+            const pendingCountElement = document.querySelector('.pending-count');
+            if (pendingCountElement) {
+                // This would typically fetch from your backend/database
+                const pendingCount = 0; // Replace with actual pending count
+                pendingCountElement.textContent = pendingCount;
+                pendingCountElement.style.display = pendingCount > 0 ? 'block' : 'none';
+            }
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSidebar();
+            updateTime();
+            updatePendingCount();
+            
+            // Update time every minute
+            setInterval(updateTime, 60000);
+            
+            // Update pending count every 5 minutes
+            setInterval(updatePendingCount, 300000);
+        });
+    </script>
+</body>
+</html>

@@ -8,7 +8,73 @@
     <link rel="stylesheet" href="dashboard.css" />
     <!-- ******* ICONS ******* -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
-    <title>Teacher Dashboard - Bangu Preschool</title>
+    
+    <!-- Include Shared Database System -->
+    <script src="../database.js"></script>
+    
+    <!-- Additional Styles for Database Integration -->
+    <style>
+      .loading-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        color: #666;
+        grid-column: 1 / -1;
+      }
+      
+      .loading-placeholder i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #4CAF50;
+      }
+      
+      .no-students, .error-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        text-align: center;
+        color: #666;
+        grid-column: 1 / -1;
+        background: #f9f9f9;
+        border-radius: 10px;
+        border: 2px dashed #ddd;
+      }
+      
+      .no-students i, .error-message i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #999;
+      }
+      
+      .error-message i {
+        color: #f44336;
+      }
+      
+      .retry-btn {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        background: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      .retry-btn:hover {
+        background: #45a049;
+      }
+      
+      .student-info p {
+        font-size: 0.85rem;
+        margin: 0.25rem 0;
+      }
+    </style>
+    
+    <title>Teacher Dashboard - School Management System</title>
   </head>
   <body>
     <section class="main-dashboard">
@@ -32,7 +98,7 @@
 
           <div class="user-profile">
             <i class='bx bx-user-circle'></i>
-            <span>Ms. Sarah Johnson</span>
+            <span id="teacherName">Loading...</span>
             <div class="dropdown">
               <i class='bx bx-chevron-down'></i>
               <div class="dropdown-content">
@@ -48,17 +114,17 @@
         <!-- ******* TEACHER OVERVIEW ******* -->
         <div class="teacher-overview">
           <div class="overview-header">
-            <h1>Welcome Back, Ms. Sarah!</h1>
-            <p>Rainbow Class - Age Group 3-4 Years | Room 102</p>
+            <h1 id="welcomeMessage">Welcome Back, Teacher!</h1>
+            <p id="classInfo">Loading class information...</p>
           </div>
           
           <div class="class-stats">
             <div class="stat-card present-children">
               <i class='bx bxs-group'></i>
               <div class="stat-info">
-                <h3>18/20</h3>
+                <h3 id="presentCount">0/0</h3>
                 <p>Children Present</p>
-                <span class="trend up">2 absent today</span>
+                <span class="trend up" id="absentInfo">Loading...</span>
               </div>
             </div>
             
@@ -165,89 +231,17 @@
         <div class="student-section">
           <h2 class="section-title">My Students - Quick View</h2>
           
-          <div class="students-grid">
-            <div class="student-card present">
-              <img src="../assets/child1.jpg" alt="Emma Wilson" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjMjc5ZjYwIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiMyN2FlNjAiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
-              <div class="student-info">
-                <h4>Emma Wilson</h4>
-                <p>Age: 3 | Arrival: 8:15 AM</p>
-                <span class="status-badge present">Present</span>
-              </div>
-              <div class="student-actions">
-                <button class="action-btn"><i class='bx bx-note'></i></button>
-                <button class="action-btn"><i class='bx bx-camera'></i></button>
-              </div>
-            </div>
-            
-            <div class="student-card present">
-              <img src="../assets/child2.jpg" alt="Liam Parker" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjMzQ5OGRiIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiMzNDk4ZGIiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
-              <div class="student-info">
-                <h4>Liam Parker</h4>
-                <p>Age: 4 | Arrival: 7:45 AM</p>
-                <span class="status-badge present">Present</span>
-              </div>
-              <div class="student-actions">
-                <button class="action-btn"><i class='bx bx-note'></i></button>
-                <button class="action-btn"><i class='bx bx-camera'></i></button>
-              </div>
-            </div>
-            
-            <div class="student-card absent">
-              <img src="../assets/child3.jpg" alt="Sophia Davis" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjZTc0YzNjIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiNlNzRjM2MiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
-              <div class="student-info">
-                <h4>Sophia Davis</h4>
-                <p>Age: 3 | Reason: Sick</p>
-                <span class="status-badge absent">Absent</span>
-              </div>
-              <div class="student-actions">
-                <button class="action-btn"><i class='bx bx-note'></i></button>
-                <button class="action-btn disabled"><i class='bx bx-camera'></i></button>
-              </div>
-            </div>
-            
-            <div class="student-card present">
-              <img src="../assets/child4.jpg" alt="Mason Brown" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjZjM5YzEyIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiNmMzljMTIiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
-              <div class="student-info">
-                <h4>Mason Brown</h4>
-                <p>Age: 4 | Arrival: 8:00 AM</p>
-                <span class="status-badge present">Present</span>
-              </div>
-              <div class="student-actions">
-                <button class="action-btn"><i class='bx bx-note'></i></button>
-                <button class="action-btn"><i class='bx bx-camera'></i></button>
-              </div>
-            </div>
-            
-            <div class="student-card present">
-              <img src="../assets/child5.jpg" alt="Ava Miller" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjOWI1OWI2Ii8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiM5YjU5YjYiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
-              <div class="student-info">
-                <h4>Ava Miller</h4>
-                <p>Age: 3 | Arrival: 8:30 AM</p>
-                <span class="status-badge present">Present</span>
-              </div>
-              <div class="student-actions">
-                <button class="action-btn"><i class='bx bx-note'></i></button>
-                <button class="action-btn"><i class='bx bx-camera'></i></button>
-              </div>
-            </div>
-            
-            <div class="student-card late">
-              <img src="../assets/child6.jpg" alt="Noah Garcia" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjZmY2YjZiIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiNmZjZiNmIiLz4KPC9zdmc+Cjwvc3ZnPgo='"class="student-photo">
-              <div class="student-info">
-                <h4>Noah Garcia</h4>
-                <p>Age: 4 | Expected: 8:00 AM</p>
-                <span class="status-badge late">Running Late</span>
-              </div>
-              <div class="student-actions">
-                <button class="action-btn"><i class='bx bx-note'></i></button>
-                <button class="action-btn disabled"><i class='bx bx-camera'></i></button>
-              </div>
+          <div class="students-grid" id="studentsGrid">
+            <div class="loading-placeholder">
+              <i class='bx bx-loader-alt bx-spin'></i>
+              <p>Loading students from database...</p>
             </div>
           </div>
           
           <div class="view-all-students">
-            <button class="view-all-btn">View All Students (20)</button>
+            <button class="view-all-btn" id="viewAllBtn">View All Students (Loading...)</button>
           </div>
+        </div>
         </div>
 
         <!-- ******* TEACHING TOOLS ******* -->
@@ -339,8 +333,15 @@
 
     <!-- ******* JAVASCRIPT ******* -->
     <script>
+      // Global variables
+      let currentTeacher = null;
+      let teacherStudents = [];
+      
       // Teacher dashboard functionality
       document.addEventListener('DOMContentLoaded', function() {
+        // Initialize database-driven dashboard
+        initializeTeacherDashboard();
+        
         // Dropdown functionality
         const dropdown = document.querySelector('.dropdown');
         const dropdownContent = document.querySelector('.dropdown-content');
@@ -354,22 +355,6 @@
           if (!dropdown.contains(e.target)) {
             dropdownContent.style.display = 'none';
           }
-        });
-
-        // Student action buttons
-        const studentActionBtns = document.querySelectorAll('.student-actions .action-btn:not(.disabled)');
-        studentActionBtns.forEach(btn => {
-          btn.addEventListener('click', function() {
-            const studentCard = this.closest('.student-card');
-            const studentName = studentCard.querySelector('h4').textContent;
-            const icon = this.querySelector('i').className;
-            
-            if (icon.includes('note')) {
-              alert(`Opening notes for ${studentName}...`);
-            } else if (icon.includes('camera')) {
-              alert(`Taking photo of ${studentName}...`);
-            }
-          });
         });
 
         // Tool buttons
@@ -412,12 +397,6 @@
           });
         });
 
-        // View all students button
-        const viewAllBtn = document.querySelector('.view-all-btn');
-        viewAllBtn.addEventListener('click', function() {
-          alert('Opening complete student roster...');
-        });
-
         // Animation for stats cards
         const statCards = document.querySelectorAll('.stat-card');
         statCards.forEach((card, index) => {
@@ -448,6 +427,187 @@
         setInterval(updateCurrentTime, 60000);
         updateCurrentTime();
       });
+
+      // Initialize database-driven teacher dashboard
+      function initializeTeacherDashboard() {
+        // Check if database is available
+        if (typeof window.db === 'undefined') {
+          console.error('Database not loaded');
+          showErrorMessage('Database connection failed. Please refresh the page.');
+          return;
+        }
+
+        // Load teacher information (for demo, we'll use the first teacher)
+        loadTeacherInfo();
+        
+        // Load students for this teacher's class
+        loadTeacherStudents();
+      }
+
+      // Load teacher information from database
+      function loadTeacherInfo() {
+        try {
+          const teachers = window.db.getCollection('teachers');
+          const teacherArray = Object.values(teachers);
+          
+          if (teacherArray.length > 0) {
+            // For demo, use the first teacher, but in real app this would be based on login
+            currentTeacher = teacherArray[0];
+            
+            // Update UI with teacher info
+            document.getElementById('teacherName').textContent = `${currentTeacher.firstName} ${currentTeacher.lastName}`;
+            document.getElementById('welcomeMessage').textContent = `Welcome Back, ${currentTeacher.firstName}!`;
+            document.getElementById('classInfo').textContent = `Class ${currentTeacher.assignedClass} | ID: ${currentTeacher.employeeId} | Position: ${currentTeacher.position}`;
+            
+            console.log('Teacher loaded:', currentTeacher);
+          } else {
+            showErrorMessage('No teacher data found. Please register teachers first.');
+          }
+        } catch (error) {
+          console.error('Error loading teacher info:', error);
+          showErrorMessage('Error loading teacher information.');
+        }
+      }
+
+      // Load students for the teacher's class
+      function loadTeacherStudents() {
+        try {
+          const students = window.db.getCollection('students');
+          const studentArray = Object.values(students);
+          
+          if (currentTeacher && currentTeacher.assignedClass) {
+            // Filter students by teacher's assigned class
+            teacherStudents = studentArray.filter(student => 
+              student.grade === currentTeacher.assignedClass
+            );
+            
+            // Update UI with student information
+            updateStudentStats();
+            displayStudents();
+            
+            console.log('Students loaded for class:', currentTeacher.assignedClass, teacherStudents);
+          } else {
+            showErrorMessage('Teacher class assignment not found.');
+          }
+        } catch (error) {
+          console.error('Error loading students:', error);
+          showErrorMessage('Error loading student information.');
+        }
+      }
+
+      // Update student statistics
+      function updateStudentStats() {
+        const totalStudents = teacherStudents.length;
+        const presentStudents = Math.floor(totalStudents * 0.9); // Simulate 90% attendance
+        const absentStudents = totalStudents - presentStudents;
+        
+        document.getElementById('presentCount').textContent = `${presentStudents}/${totalStudents}`;
+        document.getElementById('absentInfo').textContent = `${absentStudents} absent today`;
+        document.getElementById('viewAllBtn').textContent = `View All Students (${totalStudents})`;
+      }
+
+      // Display students in the grid
+      function displayStudents() {
+        const studentsGrid = document.getElementById('studentsGrid');
+        
+        if (teacherStudents.length === 0) {
+          studentsGrid.innerHTML = `
+            <div class="no-students">
+              <i class='bx bx-user-plus'></i>
+              <p>No students registered for this class yet.</p>
+              <p>Students will appear here once they are registered through the super admin.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Show first 6 students for quick view
+        const studentsToShow = teacherStudents.slice(0, 6);
+        
+        studentsGrid.innerHTML = studentsToShow.map((student, index) => {
+          const isPresent = Math.random() > 0.1; // 90% chance of being present
+          const statusClass = isPresent ? 'present' : 'absent';
+          const statusText = isPresent ? 'Present' : 'Absent';
+          const arrivalTime = isPresent ? generateRandomArrivalTime() : 'N/A';
+          
+          return `
+            <div class="student-card ${statusClass}">
+              <img src="../assets/child${(index % 6) + 1}.jpg" alt="${student.firstName} ${student.lastName}" 
+                   onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiNmOGY5ZmEiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxOCIgeT0iMTgiPgo8cGF0aCBkPSJNMTIgMTJDMTQuNDg1MyAxMiAxNi41IDkuOTg1MjggMTYuNSA3LjVDMTYuNSA1LjAxNDcyIDE0LjQ4NTMgMyAxMiAzQzkuNTE0NzIgMyA3LjUgNS4wMTQ3MiA3LjUgNy41QzcuNSA5Ljk4NTI4IDkuNTE0NzIgMTIgMTIgMTJaIiBmaWxsPSIjMjc5ZjYwIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjY4NjI5IDE0IDYgMTYuNjg2MyA2IDIwSDEyQzE1LjMxMzcgMjAgMTggMTYuNjg2MyAxOCAxNEgxMloiIGZpbGw9IiMyN2FlNjAiLz4KPC9zdmc+Cjwvc3ZnPgo='" 
+                   class="student-photo">
+              <div class="student-info">
+                <h4>${student.firstName} ${student.lastName}</h4>
+                <p>ID: ${student.studentId} | ${isPresent ? 'Arrival: ' + arrivalTime : 'Reason: ' + (Math.random() > 0.5 ? 'Sick' : 'Family')}</p>
+                <span class="status-badge ${statusClass}">${statusText}</span>
+              </div>
+              <div class="student-actions">
+                <button class="action-btn" onclick="openStudentNotes('${student.studentId}')"><i class='bx bx-note'></i></button>
+                <button class="action-btn ${!isPresent ? 'disabled' : ''}" onclick="takeStudentPhoto('${student.studentId}')"><i class='bx bx-camera'></i></button>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Add event listeners to new buttons
+        addStudentActionListeners();
+      }
+
+      // Generate random arrival time for simulation
+      function generateRandomArrivalTime() {
+        const times = ['7:45 AM', '8:00 AM', '8:15 AM', '8:30 AM', '8:45 AM'];
+        return times[Math.floor(Math.random() * times.length)];
+      }
+
+      // Add event listeners to student action buttons
+      function addStudentActionListeners() {
+        // View all students button
+        const viewAllBtn = document.getElementById('viewAllBtn');
+        if (viewAllBtn) {
+          viewAllBtn.onclick = function() {
+            showAllStudents();
+          };
+        }
+      }
+
+      // Open student notes
+      function openStudentNotes(studentId) {
+        const student = teacherStudents.find(s => s.studentId === studentId);
+        if (student) {
+          alert(`Opening notes for ${student.firstName} ${student.lastName} (${student.studentId})...`);
+        }
+      }
+
+      // Take student photo
+      function takeStudentPhoto(studentId) {
+        const student = teacherStudents.find(s => s.studentId === studentId);
+        if (student) {
+          alert(`Taking photo of ${student.firstName} ${student.lastName} (${student.studentId})...`);
+        }
+      }
+
+      // Show all students
+      function showAllStudents() {
+        alert(`Viewing all ${teacherStudents.length} students in ${currentTeacher ? currentTeacher.assignedClass : 'this class'}...`);
+      }
+
+      // Show error message
+      function showErrorMessage(message) {
+        const studentsGrid = document.getElementById('studentsGrid');
+        if (studentsGrid) {
+          studentsGrid.innerHTML = `
+            <div class="error-message">
+              <i class='bx bx-error-circle'></i>
+              <p>${message}</p>
+              <button onclick="location.reload()" class="retry-btn">Retry</button>
+            </div>
+          `;
+        }
+        
+        // Also update other elements
+        document.getElementById('teacherName').textContent = 'Error Loading';
+        document.getElementById('welcomeMessage').textContent = 'Error Loading Teacher Data';
+        document.getElementById('classInfo').textContent = message;
+      }
     </script>
   </body>
 </html>

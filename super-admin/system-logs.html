@@ -1,0 +1,2061 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Logs - Super Admin</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
+    
+    <!-- Include Shared Database System -->
+    <script src="../database.js"></script>
+    
+    <!-- Enhanced Statistics Styles -->
+    <style>
+        .enhanced-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+            padding: 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card.primary::before { background: linear-gradient(90deg, #667eea, #764ba2); }
+        .stat-card.success::before { background: linear-gradient(90deg, #4CAF50, #45a049); }
+        .stat-card.info::before { background: linear-gradient(90deg, #2196F3, #1976D2); }
+        .stat-card.warning::before { background: linear-gradient(90deg, #FF9800, #F57C00); }
+        .stat-card.error::before { background: linear-gradient(90deg, #F44336, #D32F2F); }
+        .stat-card.special::before { background: linear-gradient(90deg, #9C27B0, #673AB7); }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-card:hover::before {
+            height: 6px;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .stat-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            transition: all 0.3s ease;
+        }
+
+        .stat-card.primary .stat-icon-wrapper { background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); }
+        .stat-card.success .stat-icon-wrapper { background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(69, 160, 73, 0.1)); }
+        .stat-card.info .stat-icon-wrapper { background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(25, 118, 210, 0.1)); }
+        .stat-card.warning .stat-icon-wrapper { background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(245, 124, 0, 0.1)); }
+        .stat-card.error .stat-icon-wrapper { background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(211, 47, 47, 0.1)); }
+        .stat-card.special .stat-icon-wrapper { background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(103, 58, 183, 0.1)); }
+
+        .stat-icon {
+            font-size: 24px;
+            color: #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card.primary .stat-icon { color: #667eea; }
+        .stat-card.success .stat-icon { color: #4CAF50; }
+        .stat-card.info .stat-icon { color: #2196F3; }
+        .stat-card.warning .stat-icon { color: #FF9800; }
+        .stat-card.error .stat-icon { color: #F44336; }
+        .stat-card.special .stat-icon { color: #9C27B0; }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .stat-trend.error {
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        .trend-icon {
+            font-size: 16px;
+            color: #4CAF50;
+        }
+
+        .stat-trend.error .trend-icon {
+            color: #F44336;
+        }
+
+        .stat-content {
+            margin-bottom: 16px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            line-height: 1;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card.success .stat-value {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card.info .stat-value {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card.warning .stat-value {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card.error .stat-value {
+            background: linear-gradient(135deg, #F44336, #D32F2F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card.special .stat-value {
+            background: linear-gradient(135deg, #9C27B0, #673AB7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 4px;
+        }
+
+        .stat-description {
+            font-size: 0.875rem;
+            color: #718096;
+            opacity: 0.8;
+        }
+
+        .stat-progress {
+            height: 4px;
+            background: rgba(226, 232, 240, 0.6);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .stat-card.success .progress-bar { background: linear-gradient(90deg, #4CAF50, #45a049); }
+        .stat-card.info .progress-bar { background: linear-gradient(90deg, #2196F3, #1976D2); }
+        .stat-card.warning .progress-bar { background: linear-gradient(90deg, #FF9800, #F57C00); }
+        .stat-card.error .progress-bar { background: linear-gradient(90deg, #F44336, #D32F2F); }
+        .stat-card.special .progress-bar { background: linear-gradient(90deg, #9C27B0, #673AB7); }
+
+        .progress-bar.pulse {
+            animation: pulse-progress 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-progress {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+        }
+
+        .summary-label {
+            font-size: 0.875rem;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .summary-value {
+            font-size: 0.875rem;
+            color: #1a202c;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .health-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        .health-indicator.warning {
+            background: #FF9800;
+        }
+
+        .health-indicator.error {
+            background: #F44336;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+        }
+
+        /* Enhanced Filter Section Styles */
+        .advanced-filter-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 25px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .filter-header h3 {
+            margin: 0;
+            color: #1a202c;
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-header h3 i {
+            color: #667eea;
+            font-size: 1.5rem;
+        }
+
+        .filter-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .filter-count {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #F44336, #D32F2F);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-reset:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+        }
+
+        .btn-reset:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filter-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(226, 232, 240, 0.6);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .filter-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .filter-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.95rem;
+        }
+
+        .filter-label i {
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .filter-control {
+            position: relative;
+        }
+
+        .modern-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            font-size: 0.95rem;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        .modern-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .modern-select:hover {
+            border-color: #cbd5e0;
+        }
+
+        .modern-date {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            font-size: 0.95rem;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
+        }
+
+        .modern-date:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .date-shortcuts {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .date-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 70px;
+        }
+
+        .date-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .modern-search {
+            width: 100%;
+            padding: 12px 16px 12px 44px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            font-size: 0.95rem;
+            color: #374151;
+            transition: all 0.3s ease;
+        }
+
+        .modern-search:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            color: #9ca3af;
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 12px;
+            background: transparent;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .clear-search:hover {
+            color: #f44336;
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        .clear-search.active {
+            display: block;
+        }
+
+        .filter-indicator {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            border: 2px solid white;
+            display: none;
+            animation: pulse-filter 2s ease-in-out infinite;
+        }
+
+        .filter-indicator.active {
+            display: block;
+        }
+
+        @keyframes pulse-filter {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+        }
+
+        .filter-summary {
+            background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+            border-radius: 10px;
+            padding: 16px;
+            border-left: 4px solid #2196F3;
+            margin-top: 16px;
+        }
+
+        .summary-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: #0277bd;
+            font-weight: 500;
+        }
+
+        .active-filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            background: rgba(33, 150, 243, 0.1);
+            color: #1976d2;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .filter-tag i {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .filter-tag i:hover {
+            color: #f44336;
+        }
+
+        /* Responsive Design for Filters */
+        @media (max-width: 768px) {
+            .filter-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .filter-header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+            
+            .filter-status {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .date-shortcuts {
+                justify-content: space-between;
+            }
+            
+            .date-btn {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .advanced-filter-section {
+                padding: 16px;
+                margin: 16px 0;
+            }
+            
+            .filter-card {
+                padding: 16px;
+            }
+            
+            .filter-header h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .enhanced-stats-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .stat-card {
+                padding: 20px;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+            
+            .stats-summary {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .enhanced-stats-grid {
+                margin: 16px 0;
+            }
+            
+            .stat-card {
+                padding: 16px;
+            }
+            
+            .stat-value {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    
+    <!-- Enhanced Database Logging System -->
+    <script>
+        // Enhanced Database System with Comprehensive Logging
+        class EnhancedLocalDatabase {
+            constructor() {
+                this.storage = localStorage;
+                this.initialized = true;
+                this.initializeLogging();
+            }
+
+            // Initialize logging system
+            initializeLogging() {
+                if (!this.storage.getItem('db_activity_logs')) {
+                    this.storage.setItem('db_activity_logs', JSON.stringify([]));
+                }
+            }
+
+            // Enhanced logging method
+            addLog(type, message, level = 'INFO', details = {}) {
+                try {
+                    const logs = this.getActivityLogs();
+                    const logEntry = {
+                        id: Date.now() + Math.random().toString(36).substr(2, 9),
+                        timestamp: new Date().toISOString(),
+                        type: type.toUpperCase(),
+                        message: message,
+                        level: level.toUpperCase(),
+                        details: details,
+                        userAgent: navigator.userAgent,
+                        sessionId: this.getSessionId()
+                    };
+                    
+                    logs.unshift(logEntry);
+                    
+                    // Keep only last 500 logs to prevent storage overflow
+                    if (logs.length > 500) {
+                        logs.splice(500);
+                    }
+                    
+                    this.storage.setItem('db_activity_logs', JSON.stringify(logs));
+                    console.log('📝 Log added:', logEntry);
+                    return true;
+                } catch (error) {
+                    console.error('❌ Failed to add log:', error);
+                    return false;
+                }
+            }
+
+            // Get or create session ID
+            getSessionId() {
+                let sessionId = sessionStorage.getItem('db_session_id');
+                if (!sessionId) {
+                    sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                    sessionStorage.setItem('db_session_id', sessionId);
+                }
+                return sessionId;
+            }
+
+            // Enhanced save method with logging
+            save(collection, id, data) {
+                try {
+                    const key = `db_${collection}`;
+                    const existing = this.getCollection(collection);
+                    const isNew = !existing[id];
+                    
+                    // Add metadata
+                    data.id = id;
+                    data.createdAt = existing[id]?.createdAt || new Date().toISOString();
+                    data.updatedAt = new Date().toISOString();
+                    
+                    existing[id] = data;
+                    this.storage.setItem(key, JSON.stringify(existing));
+                    
+                    // Log the database operation
+                    const operation = isNew ? 'CREATE' : 'UPDATE';
+                    const userType = collection.slice(0, -1); // Remove 's' from collection name
+                    const userName = `${data.firstName} ${data.lastName}`;
+                    
+                    this.addLog('DATABASE', `${operation}: ${userType} record for ${userName} (ID: ${id})`, 'INFO', {
+                        collection: collection,
+                        recordId: id,
+                        operation: operation,
+                        recordData: {
+                            name: userName,
+                            email: data.email,
+                            userType: userType
+                        }
+                    });
+                    
+                    console.log(`✅ ${operation} in ${collection}:`, id);
+                    return { success: true, id: id, operation: operation };
+                } catch (error) {
+                    this.addLog('DATABASE', `Failed to save ${collection} record: ${error.message}`, 'ERROR', {
+                        collection: collection,
+                        recordId: id,
+                        error: error.message
+                    });
+                    console.error(`❌ Save failed:`, error);
+                    return { success: false, error: error.message };
+                }
+            }
+
+            // Enhanced get collection with logging
+            getCollection(collection) {
+                try {
+                    const key = `db_${collection}`;
+                    const data = this.storage.getItem(key);
+                    const result = data ? JSON.parse(data) : {};
+                    
+                    // Log read operation (only for significant reads)
+                    if (Object.keys(result).length > 0) {
+                        this.addLog('DATABASE', `Read ${Object.keys(result).length} records from ${collection}`, 'INFO', {
+                            collection: collection,
+                            recordCount: Object.keys(result).length
+                        });
+                    }
+                    
+                    return result;
+                } catch (error) {
+                    this.addLog('DATABASE', `Failed to read ${collection}: ${error.message}`, 'ERROR', {
+                        collection: collection,
+                        error: error.message
+                    });
+                    console.error(`❌ Get collection failed:`, error);
+                    return {};
+                }
+            }
+
+            // Delete record with logging
+            delete(collection, id) {
+                try {
+                    const key = `db_${collection}`;
+                    const existing = this.getCollection(collection);
+                    
+                    if (existing[id]) {
+                        const deletedRecord = existing[id];
+                        delete existing[id];
+                        this.storage.setItem(key, JSON.stringify(existing));
+                        
+                        this.addLog('DATABASE', `DELETE: Removed ${collection.slice(0, -1)} record for ${deletedRecord.firstName} ${deletedRecord.lastName} (ID: ${id})`, 'WARNING', {
+                            collection: collection,
+                            recordId: id,
+                            operation: 'DELETE',
+                            deletedRecord: {
+                                name: `${deletedRecord.firstName} ${deletedRecord.lastName}`,
+                                email: deletedRecord.email
+                            }
+                        });
+                        
+                        return { success: true, deleted: true };
+                    } else {
+                        this.addLog('DATABASE', `DELETE failed: Record ${id} not found in ${collection}`, 'WARNING');
+                        return { success: false, error: 'Record not found' };
+                    }
+                } catch (error) {
+                    this.addLog('DATABASE', `Delete operation failed: ${error.message}`, 'ERROR');
+                    return { success: false, error: error.message };
+                }
+            }
+
+            // Login tracking
+            logLogin(userType, userData, success = true) {
+                const message = success 
+                    ? `Successful login: ${userType} ${userData.firstName} ${userData.lastName} (${userData.email})`
+                    : `Failed login attempt: ${userData.email || 'Unknown user'}`;
+                
+                this.addLog('LOGIN', message, success ? 'INFO' : 'WARNING', {
+                    userType: userType,
+                    email: userData.email,
+                    success: success,
+                    timestamp: new Date().toISOString()
+                });
+            }
+
+            // Logout tracking
+            logLogout(userType, userData) {
+                this.addLog('LOGOUT', `User logout: ${userType} ${userData.firstName} ${userData.lastName} (${userData.email})`, 'INFO', {
+                    userType: userType,
+                    email: userData.email,
+                    sessionDuration: this.getSessionDuration()
+                });
+            }
+
+            // Get session duration
+            getSessionDuration() {
+                const sessionStart = sessionStorage.getItem('session_start');
+                if (sessionStart) {
+                    const duration = Date.now() - parseInt(sessionStart);
+                    return Math.floor(duration / 1000 / 60); // Duration in minutes
+                }
+                return 0;
+            }
+
+            // Get activity logs
+            getActivityLogs() {
+                try {
+                    const logs = this.storage.getItem('db_activity_logs');
+                    return logs ? JSON.parse(logs) : [];
+                } catch (error) {
+                    console.error('❌ Failed to get activity logs:', error);
+                    return [];
+                }
+            }
+
+            // Clear logs with logging
+            clearActivityLogs() {
+                try {
+                    const logCount = this.getActivityLogs().length;
+                    this.storage.removeItem('db_activity_logs');
+                    this.initializeLogging(); // Reinitialize
+                    this.addLog('SYSTEM', `Activity logs cleared: ${logCount} entries removed by admin`, 'WARNING');
+                    return true;
+                } catch (error) {
+                    console.error('❌ Failed to clear logs:', error);
+                    return false;
+                }
+            }
+
+            // Export data with logging
+            exportData() {
+                try {
+                    const allData = {
+                        students: this.getCollection('students'),
+                        staff: this.getCollection('staff'),
+                        admins: this.getCollection('admins'),
+                        logs: this.getActivityLogs(),
+                        exportDate: new Date().toISOString(),
+                        exportedBy: 'Super Admin'
+                    };
+                    
+                    this.addLog('EXPORT', `Data export completed: ${Object.keys(allData.students).length} students, ${Object.keys(allData.staff).length} staff, ${Object.keys(allData.admins).length} admins`, 'INFO');
+                    
+                    return JSON.stringify(allData, null, 2);
+                } catch (error) {
+                    this.addLog('EXPORT', `Data export failed: ${error.message}`, 'ERROR');
+                    return null;
+                }
+            }
+
+            // Count with logging
+            count(collection) {
+                const data = this.getCollection(collection);
+                const count = Object.keys(data).length;
+                return count;
+            }
+
+            // System health check
+            performHealthCheck() {
+                const health = {
+                    timestamp: new Date().toISOString(),
+                    studentsCount: this.count('students'),
+                    staffCount: this.count('staff'),
+                    adminsCount: this.count('admins'),
+                    logsCount: this.getActivityLogs().length,
+                    storageUsed: this.getStorageUsage()
+                };
+                
+                this.addLog('SYSTEM', `Health check completed: ${health.studentsCount + health.staffCount + health.adminsCount} total users, ${health.logsCount} logs`, 'INFO', health);
+                return health;
+            }
+
+            // Get storage usage
+            getStorageUsage() {
+                let total = 0;
+                for (let key in this.storage) {
+                    if (this.storage.hasOwnProperty(key)) {
+                        total += this.storage[key].length;
+                    }
+                }
+                return Math.round(total / 1024) + ' KB'; // Convert to KB
+            }
+        }
+
+        // Initialize enhanced database
+        window.db = new EnhancedLocalDatabase();
+        
+        // Set session start time
+        if (!sessionStorage.getItem('session_start')) {
+            sessionStorage.setItem('session_start', Date.now().toString());
+        }
+        
+        console.log('🗄️ Enhanced Database with Comprehensive Logging initialized!');
+    </script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- ******* ENHANCED MODERN SIDEBAR ******* -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class='bx bxs-crown'></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">Super Admin</span>
+                        <span class="logo-subtitle">Management Portal</span>
+                    </div>
+                </div>
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class='bx bx-menu'></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-profile">
+                <div class="profile-avatar">
+                    <i class='bx bxs-user-circle'></i>
+                </div>
+                <div class="profile-info">
+                    <span class="profile-name">Administrator</span>
+                    <span class="profile-role">System Admin</span>
+                </div>
+                <div class="profile-status">
+                    <div class="status-indicator online"></div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-title">Main Navigation</span>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="dashboard.html" class="nav-link">
+                                <div class="nav-icon">
+                                    <i class='bx bxs-dashboard'></i>
+                                </div>
+                                <span class="nav-text">Overview</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="user-registration.html" class="nav-link">
+                                <div class="nav-icon">
+                                    <i class='bx bx-user-plus'></i>
+                                </div>
+                                <span class="nav-text">User Registration</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="user-directory.html" class="nav-link">
+                                <div class="nav-icon">
+                                    <i class='bx bx-group'></i>
+                                </div>
+                                <span class="nav-text">User Directory</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="school-applications.html" class="nav-link">
+                                <div class="nav-icon">
+                                    <i class='bx bx-file-blank'></i>
+                                </div>
+                                <span class="nav-text">School Applications</span>
+                                <div class="nav-badge pending-count">0</div>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="student-reports.html" class="nav-link">
+                                <div class="nav-icon">
+                                    <i class='bx bxs-report'></i>
+                                </div>
+                                <span class="nav-text">Student Reports</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-title">System Management</span>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="system-logs.html" class="nav-link active">
+                                <div class="nav-icon">
+                                    <i class='bx bxs-file-doc'></i>
+                                </div>
+                                <span class="nav-text">System Logs</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-section-title">Quick Actions</span>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link logout-link">
+                                <div class="nav-icon">
+                                    <i class='bx bx-home'></i>
+                                </div>
+                                <span class="nav-text">Back to Home</span>
+                                <div class="nav-indicator"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <div class="status-item">
+                        <i class='bx bx-wifi'></i>
+                        <span>Online</span>
+                    </div>
+                    <div class="status-item">
+                        <i class='bx bx-time'></i>
+                        <span id="currentTime">--:--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="content-header">
+                <h1>System Logs</h1>
+                <div class="user-info">
+                    <span>Welcome, Super Admin</span>
+                    <i class='bx bxs-user-circle'></i>
+                </div>
+            </div>
+            <div class="content-section">
+                <div class="section-header">
+                    <h2>�️ Database Operations & CRUD Activity Monitoring</h2>
+                    <div class="section-actions">
+                        <button class="btn-primary" onclick="refreshLogs()"><i class='bx bx-refresh'></i> Refresh</button>
+                        <button class="btn-secondary" onclick="exportLogs()"><i class='bx bx-download'></i> Export</button>
+                        <button class="btn-secondary" onclick="clearLogs()"><i class='bx bx-trash'></i> Clear</button>
+                        <button class="btn-secondary" onclick="performHealthCheck()"><i class='bx bx-check-circle'></i> Health Check</button>
+                    </div>
+                </div>
+
+                <!-- Enhanced Log Statistics -->
+                <div class="enhanced-stats-grid">
+                    <div class="stat-card primary">
+                        <div class="stat-header">
+                            <div class="stat-icon-wrapper">
+                                <i class='bx bx-file-blank stat-icon'></i>
+                            </div>
+                            <div class="stat-trend">
+                                <i class='bx bx-trending-up trend-icon'></i>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="totalLogs">0</div>
+                            <div class="stat-label">Total Logs</div>
+                            <div class="stat-description">All system activities</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="totalLogsProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card success">
+                        <div class="stat-header">
+                            <div class="stat-icon-wrapper">
+                                <i class='bx bx-calendar-today stat-icon'></i>
+                            </div>
+                            <div class="stat-trend">
+                                <i class='bx bx-trending-up trend-icon'></i>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="todayLogs">0</div>
+                            <div class="stat-label">Today's Activity</div>
+                            <div class="stat-description">Last 24 hours</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="todayLogsProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card info">
+                        <div class="stat-header">
+                            <div class="stat-icon-wrapper">
+                                <i class='bx bx-data stat-icon'></i>
+                            </div>
+                            <div class="stat-trend">
+                                <i class='bx bx-trending-up trend-icon'></i>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="dbLogs">0</div>
+                            <div class="stat-label">Create Ops</div>
+                            <div class="stat-description">New records</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="dbLogsProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card warning">
+                        <div class="stat-header">
+                            <div class="stat-icon-wrapper">
+                                <i class='bx bx-log-in stat-icon'></i>
+                            </div>
+                            <div class="stat-trend">
+                                <i class='bx bx-trending-up trend-icon'></i>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="loginLogs">0</div>
+                            <div class="stat-label">Update Ops</div>
+                            <div class="stat-description">Record changes</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="loginLogsProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card error">
+                        <div class="stat-header">
+                            <div class="stat-icon-wrapper">
+                                <i class='bx bx-error-circle stat-icon'></i>
+                            </div>
+                            <div class="stat-trend error">
+                                <i class='bx bx-trending-down trend-icon'></i>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="errorLogs">0</div>
+                            <div class="stat-label">Failed Ops</div>
+                            <div class="stat-description">Database errors</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="errorLogsProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card special">
+                        <div class="stat-header">
+                            <div class="stat-icon-wrapper">
+                                <i class='bx bx-time stat-icon'></i>
+                            </div>
+                            <div class="stat-trend">
+                                <i class='bx bx-pulse trend-icon'></i>
+                            </div>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="realtimeLogs">Live</div>
+                            <div class="stat-label">Real-time Status</div>
+                            <div class="stat-description" id="lastUpdateTime">Just now</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar pulse" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Summary -->
+                <div class="stats-summary">
+                    <div class="summary-item">
+                        <span class="summary-label">System Health:</span>
+                        <span class="summary-value" id="systemHealth">Excellent</span>
+                        <div class="health-indicator" id="healthIndicator"></div>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Average Daily Logs:</span>
+                        <span class="summary-value" id="avgDailyLogs">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Peak Activity:</span>
+                        <span class="summary-value" id="peakActivity">N/A</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Last Activity:</span>
+                        <span class="summary-value" id="lastActivity">Never</span>
+                    </div>
+                </div>
+
+                <!-- Enhanced Log Filters -->
+                <div class="advanced-filter-section">
+                    <div class="filter-header">
+                        <h3><i class='bx bx-filter-alt'></i> Advanced Log Filtering</h3>
+                        <div class="filter-status">
+                            <span id="activeFiltersCount" class="filter-count">0 active filters</span>
+                            <button class="btn-reset" onclick="clearFilters()" id="clearFiltersBtn">
+                                <i class='bx bx-refresh'></i> Reset All
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filter-grid">
+                        <div class="filter-card">
+                            <div class="filter-label">
+                                <i class='bx bx-category-alt'></i>
+                                <span>Log Type</span>
+                            </div>
+                            <div class="filter-control">
+                                <select id="logType" onchange="filterLogs()" class="modern-select">
+                                    <option value="all">🔍 All Database Operations</option>
+                                    <option value="CREATE">➕ Create Records</option>
+                                    <option value="READ">👁️ Read Records</option>
+                                    <option value="UPDATE">✏️ Update Records</option>
+                                    <option value="DELETE">�️ Delete Records</option>
+                                </select>
+                                <div class="filter-indicator" id="typeIndicator"></div>
+                            </div>
+                        </div>
+
+                        <div class="filter-card">
+                            <div class="filter-label">
+                                <i class='bx bx-signal-5'></i>
+                                <span>Severity Level</span>
+                            </div>
+                            <div class="filter-control">
+                                <select id="logLevel" onchange="filterLogs()" class="modern-select">
+                                    <option value="all">📊 All Levels</option>
+                                    <option value="INFO">ℹ️ Information</option>
+                                    <option value="WARNING">⚠️ Warnings</option>
+                                    <option value="ERROR">🚨 Errors Only</option>
+                                </select>
+                                <div class="filter-indicator" id="levelIndicator"></div>
+                            </div>
+                        </div>
+
+                        <div class="filter-card">
+                            <div class="filter-label">
+                                <i class='bx bx-calendar'></i>
+                                <span>Date Range</span>
+                            </div>
+                            <div class="filter-control">
+                                <input type="date" id="logDate" onchange="filterLogs()" class="modern-date">
+                                <div class="date-shortcuts">
+                                    <button class="date-btn" onclick="setDateFilter('today')">Today</button>
+                                    <button class="date-btn" onclick="setDateFilter('yesterday')">Yesterday</button>
+                                    <button class="date-btn" onclick="setDateFilter('week')">This Week</button>
+                                </div>
+                                <div class="filter-indicator" id="dateIndicator"></div>
+                            </div>
+                        </div>
+
+                        <div class="filter-card">
+                            <div class="filter-label">
+                                <i class='bx bx-search-alt'></i>
+                                <span>Search Logs</span>
+                            </div>
+                            <div class="filter-control">
+                                <div class="search-wrapper">
+                                    <input type="text" id="searchLogs" placeholder="Search operations, collections, records..." 
+                                           onkeyup="searchLogs()" class="modern-search">
+                                    <i class='bx bx-search search-icon'></i>
+                                    <button class="clear-search" onclick="clearSearch()" id="clearSearchBtn">
+                                        <i class='bx bx-x'></i>
+                                    </button>
+                                </div>
+                                <div class="filter-indicator" id="searchIndicator"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Summary -->
+                    <div class="filter-summary" id="filterSummary" style="display: none;">
+                        <div class="summary-content">
+                            <i class='bx bx-info-circle'></i>
+                            <span id="filterResultText">Showing all logs</span>
+                        </div>
+                        <div class="active-filters" id="activeFiltersList"></div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Logs Table -->
+                <div class="table-container">
+                    <table class="data-table" id="logsTable">
+                        <thead>
+                            <tr>
+                                <th><i class='bx bx-time'></i> Timestamp</th>
+                                <th><i class='bx bx-cog'></i> Operation</th>
+                                <th><i class='bx bx-message-dots'></i> Description</th>
+                                <th><i class='bx bx-signal-5'></i> Status</th>
+                                <th><i class='bx bx-collection'></i> Collection</th>
+                                <th><i class='bx bx-info-circle'></i> Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logTableBody">
+                            <tr>
+                                <td colspan="6" class="loading-cell">
+                                    <i class='bx bx-loader-alt bx-spin'></i> Loading real database operations...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-container">
+                    <button class="btn-secondary" onclick="previousPage()" id="prevBtn">Previous</button>
+                    <span class="page-info" id="pageInfo">Page 1 of 1</span>
+                    <button class="btn-secondary" onclick="nextPage()" id="nextBtn">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Global variables for pagination and filtering
+        let currentPage = 1;
+        let logsPerPage = 20;
+        let filteredLogs = [];
+        let allLogs = [];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Perform initial health check
+            window.db.performHealthCheck();
+            
+            // Load and display logs
+            loadLogs();
+            updateStats();
+            
+            // Initialize filter UI
+            updateFilterUI();
+            
+            // Set up auto-refresh
+            setInterval(() => {
+                loadLogs();
+                updateStats();
+            }, 10000); // Refresh every 10 seconds
+            
+            console.log('📊 Database-driven System Logs initialized');
+        });
+
+        // Load and process logs
+        function loadLogs() {
+            const allDatabaseLogs = window.db.getActivityLogs().filter(log => log.type === 'DATABASE');
+            allLogs = allDatabaseLogs;
+            
+            filteredLogs = [...allLogs];
+            displayLogs();
+        }
+
+        // Enhanced statistics update with dynamic calculations
+        function updateStats() {
+            const logs = window.db.getActivityLogs().filter(log => log.type === 'DATABASE');
+            const today = new Date().toDateString();
+            
+            // Calculate database-focused stats
+            const totalLogs = logs.length;
+            const todayLogs = logs.filter(log => new Date(log.timestamp).toDateString() === today).length;
+            const createLogs = logs.filter(log => log.details && log.details.operation === 'CREATE').length;
+            const updateLogs = logs.filter(log => log.details && log.details.operation === 'UPDATE').length;
+            const errorLogs = logs.filter(log => log.level === 'ERROR').length;
+            
+            // Calculate percentages for progress bars (relative to total logs)
+            const maxLogs = Math.max(totalLogs, 1); // Prevent division by zero
+            const todayPercentage = Math.min((todayLogs / maxLogs) * 100, 100);
+            const createPercentage = Math.min((createLogs / maxLogs) * 100, 100);
+            const updatePercentage = Math.min((updateLogs / maxLogs) * 100, 100);
+            const errorPercentage = Math.min((errorLogs / maxLogs) * 100, 100);
+            const totalPercentage = totalLogs > 0 ? Math.min((totalLogs / 500) * 100, 100) : 0; // Max 500 logs
+            
+            // Update basic statistics
+            document.getElementById('totalLogs').textContent = formatNumber(totalLogs);
+            document.getElementById('todayLogs').textContent = formatNumber(todayLogs);
+            document.getElementById('dbLogs').textContent = formatNumber(createLogs);
+            document.getElementById('loginLogs').textContent = formatNumber(updateLogs);
+            document.getElementById('errorLogs').textContent = formatNumber(errorLogs);
+            
+            // Update progress bars with smooth animation
+            updateProgressBar('totalLogsProgress', totalPercentage);
+            updateProgressBar('todayLogsProgress', todayPercentage);
+            updateProgressBar('dbLogsProgress', createPercentage);
+            updateProgressBar('loginLogsProgress', updatePercentage);
+            updateProgressBar('errorLogsProgress', errorPercentage);
+            
+            // Update advanced statistics
+            updateAdvancedStats(logs, today);
+            
+            // Update last update time
+            updateLastUpdateTime();
+        }
+
+        // Format numbers with appropriate suffixes
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+
+        // Update progress bar with smooth animation
+        function updateProgressBar(elementId, percentage) {
+            const progressBar = document.getElementById(elementId);
+            if (progressBar) {
+                // Add a small delay for smooth animation
+                setTimeout(() => {
+                    progressBar.style.width = percentage + '%';
+                }, 100);
+            }
+        }
+
+        // Update advanced statistics
+        function updateAdvancedStats(logs, today) {
+            // Calculate average daily logs (last 7 days)
+            const last7Days = [];
+            for (let i = 0; i < 7; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dayLogs = logs.filter(log => 
+                    new Date(log.timestamp).toDateString() === date.toDateString()
+                ).length;
+                last7Days.push(dayLogs);
+            }
+            const avgDailyLogs = Math.round(last7Days.reduce((sum, count) => sum + count, 0) / 7);
+            
+            // Find peak activity time
+            const hourCounts = {};
+            logs.forEach(log => {
+                const hour = new Date(log.timestamp).getHours();
+                hourCounts[hour] = (hourCounts[hour] || 0) + 1;
+            });
+            
+            const peakHour = Object.keys(hourCounts).reduce((a, b) => 
+                hourCounts[a] > hourCounts[b] ? a : b, '0'
+            );
+            const peakActivity = peakHour ? `${peakHour}:00 - ${parseInt(peakHour) + 1}:00` : 'N/A';
+            
+            // Get last activity
+            const lastActivity = logs.length > 0 ? 
+                getRelativeTime(new Date(logs[0].timestamp)) : 'Never';
+            
+            // Determine system health
+            const errorRate = logs.length > 0 ? (logs.filter(log => log.level === 'ERROR').length / logs.length) * 100 : 0;
+            let systemHealth, healthClass;
+            
+            if (errorRate <= 1) {
+                systemHealth = 'Excellent';
+                healthClass = '';
+            } else if (errorRate <= 5) {
+                systemHealth = 'Good';
+                healthClass = '';
+            } else if (errorRate <= 10) {
+                systemHealth = 'Fair';
+                healthClass = 'warning';
+            } else {
+                systemHealth = 'Poor';
+                healthClass = 'error';
+            }
+            
+            // Update UI elements
+            const avgElement = document.getElementById('avgDailyLogs');
+            const peakElement = document.getElementById('peakActivity');
+            const lastElement = document.getElementById('lastActivity');
+            const healthElement = document.getElementById('systemHealth');
+            const healthIndicator = document.getElementById('healthIndicator');
+            
+            if (avgElement) avgElement.textContent = formatNumber(avgDailyLogs);
+            if (peakElement) peakElement.textContent = peakActivity;
+            if (lastElement) lastElement.textContent = lastActivity;
+            if (healthElement) healthElement.textContent = systemHealth;
+            
+            if (healthIndicator) {
+                healthIndicator.className = `health-indicator ${healthClass}`;
+            }
+        }
+
+        // Update last update time
+        function updateLastUpdateTime() {
+            const lastUpdateElement = document.getElementById('lastUpdateTime');
+            if (lastUpdateElement) {
+                lastUpdateElement.textContent = 'Just updated';
+                
+                // Reset to relative time after 3 seconds
+                setTimeout(() => {
+                    lastUpdateElement.textContent = 'Just now';
+                }, 3000);
+            }
+        }
+
+        // Get relative time string
+        function getRelativeTime(date) {
+            const now = new Date();
+            const diffInSeconds = Math.floor((now - date) / 1000);
+            
+            if (diffInSeconds < 60) {
+                return 'Just now';
+            } else if (diffInSeconds < 3600) {
+                const minutes = Math.floor(diffInSeconds / 60);
+                return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+            } else if (diffInSeconds < 86400) {
+                const hours = Math.floor(diffInSeconds / 3600);
+                return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+            } else {
+                const days = Math.floor(diffInSeconds / 86400);
+                return `${days} day${days !== 1 ? 's' : ''} ago`;
+            }
+        }
+
+        // Add animation to statistics cards on update
+        function animateStatsUpdate() {
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        card.style.transform = '';
+                    }, 150);
+                }, index * 50);
+            });
+        }
+
+        // Display logs in table
+        function displayLogs() {
+            const tbody = document.getElementById('logTableBody');
+            const startIndex = (currentPage - 1) * logsPerPage;
+            const endIndex = startIndex + logsPerPage;
+            const pageLog = filteredLogs.slice(startIndex, endIndex);
+            
+            if (pageLog.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="no-data">
+                            <i class='bx bx-info-circle'></i> No database operations recorded yet. Logs will appear when users interact with the system.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tbody.innerHTML = pageLog.map(log => {
+                const timestamp = new Date(log.timestamp).toLocaleString();
+                const levelClass = log.level.toLowerCase();
+                const operation = (log.details && log.details.operation) || 'N/A';
+                const collection = (log.details && log.details.collection) || 'Unknown';
+                
+                // Determine badge styles for database operations
+                const operationBadge = getOperationBadge(operation);
+                const levelBadge = getLevelBadge(log.level);
+                
+                return `
+                    <tr class="log-row ${levelClass}" onclick="showLogDetails('${log.id}')">
+                        <td class="timestamp-cell" title="${timestamp}">${timestamp}</td>
+                        <td class="operation-cell">${operationBadge}</td>
+                        <td class="message-cell">${log.message}</td>
+                        <td class="level-cell">${levelBadge}</td>
+                        <td class="collection-cell" title="${collection}">${collection}</td>
+                        <td class="details-cell">
+                            ${Object.keys(log.details || {}).length > 0 ? 
+                                '<i class="bx bx-info-circle" title="Has details"></i>' : 
+                                '<i class="bx bx-minus" title="No details"></i>'
+                            }
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+            
+            // Update pagination
+            updatePagination();
+        }
+
+        // Get operation badge HTML for database operations
+        function getOperationBadge(operation) {
+            const badges = {
+                'CREATE': '<span class="badge create"><i class="bx bx-plus"></i> CREATE</span>',
+                'READ': '<span class="badge read"><i class="bx bx-show"></i> READ</span>',
+                'UPDATE': '<span class="badge update"><i class="bx bx-edit"></i> UPDATE</span>',
+                'DELETE': '<span class="badge delete"><i class="bx bx-trash"></i> DELETE</span>',
+                'BACKUP': '<span class="badge backup"><i class="bx bx-data"></i> BACKUP</span>',
+                'RESTORE': '<span class="badge restore"><i class="bx bx-reset"></i> RESTORE</span>'
+            };
+            return badges[operation] || `<span class="badge default">${operation}</span>`;
+        }
+
+        // Get level badge HTML
+        function getLevelBadge(level) {
+            const badges = {
+                'INFO': '<span class="level-badge info"><i class="bx bx-info-circle"></i> INFO</span>',
+                'WARNING': '<span class="level-badge warning"><i class="bx bx-error"></i> WARNING</span>',
+                'ERROR': '<span class="level-badge error"><i class="bx bx-x-circle"></i> ERROR</span>'
+            };
+            return badges[level] || `<span class="level-badge default">${level}</span>`;
+        }
+
+        // Show detailed log information
+        function showLogDetails(logId) {
+            const log = allLogs.find(l => l.id === logId);
+            if (!log) return;
+            
+            const detailsHtml = `
+                <div class="log-details-modal">
+                    <h3>Log Details</h3>
+                    <p><strong>ID:</strong> ${log.id}</p>
+                    <p><strong>Timestamp:</strong> ${new Date(log.timestamp).toLocaleString()}</p>
+                    <p><strong>Type:</strong> ${log.type}</p>
+                    <p><strong>Level:</strong> ${log.level}</p>
+                    <p><strong>Message:</strong> ${log.message}</p>
+                    <p><strong>Session:</strong> ${log.sessionId}</p>
+                    ${Object.keys(log.details || {}).length > 0 ? 
+                        `<p><strong>Details:</strong><br><pre>${JSON.stringify(log.details, null, 2)}</pre>` : 
+                        '<p><strong>Details:</strong> None</p>'
+                    }
+                </div>
+            `;
+            
+            alert(detailsHtml.replace(/<[^>]*>/g, '\n').replace(/\n+/g, '\n').trim());
+        }
+
+        // Enhanced filter logs with search functionality
+        function filterLogs() {
+            const operationFilter = document.getElementById('logType').value;
+            const levelFilter = document.getElementById('logLevel').value;
+            const dateFilter = document.getElementById('logDate').value;
+            const searchFilter = document.getElementById('searchLogs').value.toLowerCase();
+            
+            filteredLogs = allLogs.filter(log => {
+                const operationMatch = operationFilter === 'all' || 
+                    (log.details && log.details.operation === operationFilter);
+                const levelMatch = levelFilter === 'all' || log.level === levelFilter;
+                const dateMatch = !dateFilter || new Date(log.timestamp).toDateString() === new Date(dateFilter).toDateString();
+                const searchMatch = !searchFilter || 
+                    log.message.toLowerCase().includes(searchFilter) ||
+                    (log.details && log.details.collection && log.details.collection.toLowerCase().includes(searchFilter)) ||
+                    (log.details && log.details.operation && log.details.operation.toLowerCase().includes(searchFilter)) ||
+                    JSON.stringify(log.details || {}).toLowerCase().includes(searchFilter);
+                
+                return operationMatch && levelMatch && dateMatch && searchMatch;
+            });
+            
+            currentPage = 1;
+            displayLogs();
+            updateFilterUI();
+        }
+
+        // Search logs function
+        function searchLogs() {
+            const searchInput = document.getElementById('searchLogs');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+            
+            if (searchInput.value.length > 0) {
+                clearSearchBtn.classList.add('active');
+            } else {
+                clearSearchBtn.classList.remove('active');
+            }
+            
+            filterLogs();
+        }
+
+        // Clear search function
+        function clearSearch() {
+            document.getElementById('searchLogs').value = '';
+            document.getElementById('clearSearchBtn').classList.remove('active');
+            filterLogs();
+        }
+
+        // Set date filter shortcuts
+        function setDateFilter(period) {
+            const dateInput = document.getElementById('logDate');
+            const today = new Date();
+            
+            switch(period) {
+                case 'today':
+                    dateInput.value = today.toISOString().split('T')[0];
+                    break;
+                case 'yesterday':
+                    const yesterday = new Date(today);
+                    yesterday.setDate(yesterday.getDate() - 1);
+                    dateInput.value = yesterday.toISOString().split('T')[0];
+                    break;
+                case 'week':
+                    const weekStart = new Date(today);
+                    weekStart.setDate(today.getDate() - today.getDay());
+                    dateInput.value = weekStart.toISOString().split('T')[0];
+                    break;
+            }
+            
+            filterLogs();
+        }
+
+        // Update filter UI indicators and summary
+        function updateFilterUI() {
+            const typeFilter = document.getElementById('logType').value;
+            const levelFilter = document.getElementById('logLevel').value;
+            const dateFilter = document.getElementById('logDate').value;
+            const searchFilter = document.getElementById('searchLogs').value;
+            
+            // Update indicators
+            updateFilterIndicator('typeIndicator', typeFilter !== 'all');
+            updateFilterIndicator('levelIndicator', levelFilter !== 'all');
+            updateFilterIndicator('dateIndicator', dateFilter !== '');
+            updateFilterIndicator('searchIndicator', searchFilter !== '');
+            
+            // Count active filters
+            const activeFilters = [
+                typeFilter !== 'all',
+                levelFilter !== 'all',
+                dateFilter !== '',
+                searchFilter !== ''
+            ].filter(Boolean).length;
+            
+            // Update filter count
+            const filterCountEl = document.getElementById('activeFiltersCount');
+            const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+            
+            if (activeFilters > 0) {
+                filterCountEl.textContent = `${activeFilters} active filter${activeFilters !== 1 ? 's' : ''}`;
+                filterCountEl.style.background = 'linear-gradient(135deg, #FF9800, #F57C00)';
+                clearFiltersBtn.disabled = false;
+            } else {
+                filterCountEl.textContent = '0 active filters';
+                filterCountEl.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                clearFiltersBtn.disabled = true;
+            }
+            
+            // Update filter summary
+            updateFilterSummary(activeFilters, typeFilter, levelFilter, dateFilter, searchFilter);
+        }
+
+        // Update individual filter indicator
+        function updateFilterIndicator(elementId, isActive) {
+            const indicator = document.getElementById(elementId);
+            if (indicator) {
+                if (isActive) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            }
+        }
+
+        // Update filter summary
+        function updateFilterSummary(activeFilters, typeFilter, levelFilter, dateFilter, searchFilter) {
+            const filterSummary = document.getElementById('filterSummary');
+            const filterResultText = document.getElementById('filterResultText');
+            const activeFiltersList = document.getElementById('activeFiltersList');
+            
+            if (activeFilters > 0) {
+                filterSummary.style.display = 'block';
+                filterResultText.textContent = `Showing ${filteredLogs.length} of ${allLogs.length} logs`;
+                
+                // Create active filter tags
+                const filterTags = [];
+                
+                if (typeFilter !== 'all') {
+                    filterTags.push(`<span class="filter-tag">
+                        <span>Type: ${typeFilter}</span>
+                        <i class='bx bx-x' onclick="clearSingleFilter('type')"></i>
+                    </span>`);
+                }
+                
+                if (levelFilter !== 'all') {
+                    filterTags.push(`<span class="filter-tag">
+                        <span>Level: ${levelFilter}</span>
+                        <i class='bx bx-x' onclick="clearSingleFilter('level')"></i>
+                    </span>`);
+                }
+                
+                if (dateFilter !== '') {
+                    const dateObj = new Date(dateFilter);
+                    const formattedDate = dateObj.toLocaleDateString();
+                    filterTags.push(`<span class="filter-tag">
+                        <span>Date: ${formattedDate}</span>
+                        <i class='bx bx-x' onclick="clearSingleFilter('date')"></i>
+                    </span>`);
+                }
+                
+                if (searchFilter !== '') {
+                    filterTags.push(`<span class="filter-tag">
+                        <span>Search: "${searchFilter}"</span>
+                        <i class='bx bx-x' onclick="clearSingleFilter('search')"></i>
+                    </span>`);
+                }
+                
+                activeFiltersList.innerHTML = filterTags.join('');
+            } else {
+                filterSummary.style.display = 'none';
+            }
+        }
+
+        // Clear single filter
+        function clearSingleFilter(filterType) {
+            switch(filterType) {
+                case 'type':
+                    document.getElementById('logType').value = 'all';
+                    break;
+                case 'level':
+                    document.getElementById('logLevel').value = 'all';
+                    break;
+                case 'date':
+                    document.getElementById('logDate').value = '';
+                    break;
+                case 'search':
+                    document.getElementById('searchLogs').value = '';
+                    document.getElementById('clearSearchBtn').classList.remove('active');
+                    break;
+            }
+            
+            filterLogs();
+        }
+
+        // Enhanced clear filters function
+        function clearFilters() {
+            document.getElementById('logType').value = 'all';
+            document.getElementById('logLevel').value = 'all';
+            document.getElementById('logDate').value = '';
+            document.getElementById('searchLogs').value = '';
+            document.getElementById('clearSearchBtn').classList.remove('active');
+            
+            filteredLogs = [...allLogs];
+            currentPage = 1;
+            displayLogs();
+            updateFilterUI();
+            
+            // Add animation feedback
+            const filterCards = document.querySelectorAll('.filter-card');
+            filterCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        card.style.transform = '';
+                    }, 150);
+                }, index * 50);
+            });
+        }
+
+        // Refresh logs with enhanced animations
+        function refreshLogs() {
+            // Add loading animation to stats
+            const statValues = document.querySelectorAll('.stat-value');
+            statValues.forEach(value => {
+                value.style.opacity = '0.5';
+                value.style.transform = 'scale(0.95)';
+            });
+            
+            // Refresh data
+            loadLogs();
+            updateStats();
+            
+            // Animate stats back
+            setTimeout(() => {
+                statValues.forEach(value => {
+                    value.style.opacity = '1';
+                    value.style.transform = 'scale(1)';
+                });
+                animateStatsUpdate();
+            }, 300);
+            
+            alert('📊 Database logs refreshed successfully!');
+        }
+
+        // Export logs
+        function exportLogs() {
+            const logs = window.db.getActivityLogs().filter(log => log.type === 'DATABASE');
+            let exportData = "DATABASE OPERATIONS LOG EXPORT\n";
+            exportData += `Generated: ${new Date().toLocaleString()}\n`;
+            exportData += `Total Database Operations: ${logs.length}\n\n`;
+            exportData += "TIMESTAMP\tOPERATION\tCOLLECTION\tSTATUS\tDESCRIPTION\tDETAILS\n";
+            
+            logs.forEach(log => {
+                const operation = (log.details && log.details.operation) || 'N/A';
+                const collection = (log.details && log.details.collection) || 'Unknown';
+                const details = Object.keys(log.details || {}).length > 0 ? JSON.stringify(log.details) : 'None';
+                exportData += `${new Date(log.timestamp).toLocaleString()}\t${operation}\t${collection}\t${log.level}\t${log.message}\t${details}\n`;
+            });
+            
+            // Create and download file
+            const blob = new Blob([exportData], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `database_operations_export_${new Date().toISOString().split('T')[0]}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('📥 Database operations exported successfully!');
+        }
+
+        // Clear logs
+        function clearLogs() {
+            if (confirm('⚠️ Are you sure you want to clear all database operation logs? This action cannot be undone.')) {
+                const clearedCount = window.db.getActivityLogs().filter(log => log.type === 'DATABASE').length;
+                window.db.clearActivityLogs();
+                loadLogs();
+                updateStats();
+                alert(`🗑️ ${clearedCount} database operation logs cleared successfully!`);
+            }
+        }
+
+        // Perform health check
+        function performHealthCheck() {
+            const health = window.db.performHealthCheck();
+            const healthReport = `
+SYSTEM HEALTH CHECK REPORT
+Generated: ${new Date().toLocaleString()}
+
+📊 Database Statistics:
+• Students: ${health.studentsCount}
+• Staff: ${health.staffCount} 
+• Admins: ${health.adminsCount}
+• Total Users: ${health.studentsCount + health.staffCount + health.adminsCount}
+
+📝 Logging Statistics:
+• Total Logs: ${health.logsCount}
+• Storage Used: ${health.storageUsed}
+
+✅ System Status: Operational
+            `;
+            
+            alert(healthReport);
+        }
+
+        // Update pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredLogs.length / logsPerPage);
+            document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages} (${filteredLogs.length} logs)`;
+            
+            document.getElementById('prevBtn').disabled = currentPage <= 1;
+            document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+        }
+
+        // Navigation functions
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayLogs();
+            }
+        }
+
+        function nextPage() {
+            const totalPages = Math.ceil(filteredLogs.length / logsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayLogs();
+            }
+        }
+
+        // Log window unload for session tracking
+        window.addEventListener('beforeunload', function() {
+            window.db.addLog('SESSION', 'System Logs page session ended', 'INFO');
+        });
+    </script>
+    <script src="js/system-logs.js"></script>
+    
+    <!-- Enhanced Sidebar JavaScript -->
+    <script>
+        // Enhanced Sidebar functionality
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const isCollapsed = sidebar.classList.toggle('collapsed');
+            
+            // Save state in localStorage
+            localStorage.setItem('sidebarCollapsed', isCollapsed);
+        }
+
+        // Initialize sidebar state from localStorage
+        function initializeSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            
+            if (isCollapsed) {
+                sidebar.classList.add('collapsed');
+            }
+        }
+
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            const timeElement = document.getElementById('currentTime');
+            if (timeElement) {
+                timeElement.textContent = timeString;
+            }
+        }
+
+        // Update pending applications count
+        function updatePendingCount() {
+            const pendingCountElement = document.querySelector('.pending-count');
+            if (pendingCountElement) {
+                // This would typically fetch from your backend/database
+                const pendingCount = 0; // Replace with actual pending count
+                pendingCountElement.textContent = pendingCount;
+                pendingCountElement.style.display = pendingCount > 0 ? 'block' : 'none';
+            }
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSidebar();
+            updateTime();
+            updatePendingCount();
+            
+            // Update time every minute
+            setInterval(updateTime, 60000);
+            
+            // Update pending count every 5 minutes
+            setInterval(updatePendingCount, 300000);
+        });
+    </script>
+</body>
+</html>

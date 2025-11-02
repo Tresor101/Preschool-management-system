@@ -1,9 +1,0 @@
-# BANGU PRESCHOOL - ADMINISTRATOR RECORDS
-# =====================================
-# This file contains all registered administrator information
-# Format: Employee ID | First Name | Last Name | Email | Phone | Role | Access Level | Username | Password | Permissions | Address | Qualification | Registration Date
-# Example: ADM172530001 | Michael | Smith | m.smith@bangu.edu | +1234567890 | Director | Full Access | msmith | ******** | user-management,student-records,financial-management | 789 Pine St, City | MBA Education Admin | 2025-11-01
-
-# =====================================
-# ADMINISTRATOR REGISTRATIONS
-# =====================================

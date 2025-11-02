@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Data Generator</title>
+    
+    <!-- Include Shared Database System -->
+    <script src="../database.js"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .success {
+            color: #28a745;
+            margin: 10px 0;
+        }
+        .info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Sample Data Generator</h1>
+        <div class="info">
+            <p><strong>Purpose:</strong> This tool generates sample data for testing the User Management System.</p>
+            <p><strong>Note:</strong> Click the buttons below to add sample students, staff, and administrators to your database.</p>
+        </div>
+        
+        <button onclick="addSampleStudents()">👦 Add Sample Students</button>
+        <button onclick="addSampleStaff()">👨‍🏫 Add Sample Staff</button>
+        <button onclick="addSampleAdmins()">👨‍💼 Add Sample Administrators</button>
+        <button onclick="clearAllData()">🗑️ Clear All Data</button>
+        
+        <div id="results"></div>
+        
+        <br><br>
+        <a href="user-registration.html" style="text-decoration: none;">
+            <button>📊 Go to User Registration</button>
+        </a>
+        <br><br>
+        <a href="user-directory.html" style="text-decoration: none;">
+            <button>📋 Go to User Directory</button>
+        </a>
+    </div>
+
+    <script>
+        // Simple Local Database System (same as in user-registration.html and user-directory.html)
+        class LocalDatabase {
+            constructor() {
+                this.storage = localStorage;
+                this.initialized = true;
+            }
+
+            save(collection, id, data) {
+                try {
+                    const key = `db_${collection}`;
+                    const existing = this.getCollection(collection);
+                    
+                    data.id = id;
+                    data.createdAt = new Date().toISOString();
+                    data.updatedAt = new Date().toISOString();
+                    
+                    existing[id] = data;
+                    this.storage.setItem(key, JSON.stringify(existing));
+                    
+                    return { success: true, id: id };
+                } catch (error) {
+                    return { success: false, error: error.message };
+                }
+            }
+
+            getCollection(collection) {
+                try {
+                    const key = `db_${collection}`;
+                    const data = this.storage.getItem(key);
+                    return data ? JSON.parse(data) : {};
+                } catch (error) {
+                    return {};
+                }
+            }
+
+            count(collection) {
+                const data = this.getCollection(collection);
+                return Object.keys(data).length;
+            }
+        }
+
+        const db = new LocalDatabase();
+
+        function generateId(prefix) {
+            return `${prefix}${Date.now()}${Math.floor(Math.random() * 1000)}`;
+        }
+
+        function addSampleStudents() {
+            const students = [
+                {
+                    firstName: "Emma", lastName: "Johnson", dateOfBirth: "2019-03-15", gender: "female", class: "Grade 1A",
+                    parentName: "Sarah Johnson", parentEmail: "sarah.johnson@email.com", parentPhone: "(555) 123-4567",
+                    address: "123 Oak Street, Springfield, IL", medicalInfo: "No known allergies", status: "active"
+                },
+                {
+                    firstName: "Liam", lastName: "Smith", dateOfBirth: "2018-07-22", gender: "male", class: "Grade 2B",
+                    parentName: "Michael Smith", parentEmail: "mike.smith@email.com", parentPhone: "(555) 234-5678",
+                    address: "456 Pine Avenue, Springfield, IL", medicalInfo: "Mild asthma", status: "active"
+                },
+                {
+                    firstName: "Olivia", lastName: "Brown", dateOfBirth: "2017-11-08", gender: "female", class: "Grade 3C",
+                    parentName: "Jennifer Brown", parentEmail: "jen.brown@email.com", parentPhone: "(555) 345-6789",
+                    address: "789 Maple Drive, Springfield, IL", medicalInfo: "None", status: "active"
+                },
+                {
+                    firstName: "Noah", lastName: "Davis", dateOfBirth: "2019-01-12", gender: "male", class: "Grade 1B",
+                    parentName: "David Davis", parentEmail: "david.davis@email.com", parentPhone: "(555) 456-7890",
+                    address: "321 Elm Street, Springfield, IL", medicalInfo: "Lactose intolerant", status: "active"
+                },
+                {
+                    firstName: "Ava", lastName: "Wilson", dateOfBirth: "2018-05-30", gender: "female", class: "Grade 2A",
+                    parentName: "Lisa Wilson", parentEmail: "lisa.wilson@email.com", parentPhone: "(555) 567-8901",
+                    address: "654 Cedar Lane, Springfield, IL", medicalInfo: "Food allergies (nuts)", status: "active"
+                }
+            ];
+
+            let added = 0;
+            students.forEach(student => {
+                const studentId = generateId('STU');
+                student.studentId = studentId;
+                const result = db.save('students', studentId, student);
+                if (result.success) added++;
+            });
+
+            showResults(`✅ Added ${added} sample students!`);
+        }
+
+        function addSampleStaff() {
+            const staff = [
+                {
+                    firstName: "Mary", lastName: "Thompson", email: "mary.thompson@school.edu", phone: "(555) 111-2222",
+                    position: "teacher", department: "education", startDate: "2020-08-15", salary: 45000,
+                    qualification: "Bachelor's in Early Childhood Education", address: "111 Teacher Lane, Springfield, IL",
+                    experience: "5 years teaching preschool", status: "active"
+                },
+                {
+                    firstName: "James", lastName: "Anderson", email: "james.anderson@school.edu", phone: "(555) 222-3333",
+                    position: "assistant", department: "education", startDate: "2021-01-10", salary: 32000,
+                    qualification: "Associate's in Child Development", address: "222 Helper Street, Springfield, IL",
+                    experience: "2 years as assistant", status: "active"
+                },
+                {
+                    firstName: "Linda", lastName: "Martinez", email: "linda.martinez@school.edu", phone: "(555) 333-4444",
+                    position: "teacher", department: "education", startDate: "2019-06-20", salary: 48000,
+                    qualification: "Bachelor's in Elementary Education", address: "333 Education Avenue, Springfield, IL",
+                    experience: "8 years teaching experience", status: "active"
+                },
+                {
+                    firstName: "Robert", lastName: "Garcia", email: "robert.garcia@school.edu", phone: "(555) 444-5555",
+                    position: "assistant", department: "education", startDate: "2018-03-05", salary: 30000,
+                    qualification: "Associate's in Education", address: "444 Learning Street, Springfield, IL",
+                    experience: "3 years as teaching assistant", status: "active"
+                },
+                {
+                    firstName: "Patricia", lastName: "Lee", email: "patricia.lee@school.edu", phone: "(555) 555-6666",
+                    position: "teacher", department: "education", startDate: "2020-09-12", salary: 46000,
+                    qualification: "Bachelor's in Early Childhood Development", address: "555 Teaching Road, Springfield, IL",
+                    experience: "6 years classroom teaching", status: "active"
+                }
+            ];
+
+            let added = 0;
+            staff.forEach(member => {
+                const employeeId = generateId('EMP');
+                member.employeeId = employeeId;
+                const result = db.save('staff', employeeId, member);
+                if (result.success) added++;
+            });
+
+            showResults(`✅ Added ${added} sample staff members!`);
+        }
+
+        function addSampleAdmins() {
+            const admins = [
+                {
+                    firstName: "Dr. Sarah", lastName: "Williams", email: "principal@school.edu", phone: "(555) 777-8888",
+                    role: "principal", accessLevel: "full", username: "swilliams", password: "admin123",
+                    permissions: ["user-management", "school-settings", "system-settings", "security-center", "reports"],
+                    address: "777 Leadership Blvd, Springfield, IL", qualification: "Ed.D in Educational Leadership", status: "active"
+                },
+                {
+                    firstName: "Michael", lastName: "Johnson", email: "vprincipal@school.edu", phone: "(555) 888-9999",
+                    role: "vice-principal", accessLevel: "limited", username: "mjohnson", password: "admin456",
+                    permissions: ["user-management", "school-settings", "reports"],
+                    address: "888 Deputy Drive, Springfield, IL", qualification: "Master's in Educational Administration", status: "active"
+                },
+                {
+                    firstName: "Jennifer", lastName: "Davis", email: "admin@school.edu", phone: "(555) 999-0000",
+                    role: "admin", accessLevel: "limited", username: "jdavis", password: "admin789",
+                    permissions: ["user-management", "system-settings"],
+                    address: "999 Admin Street, Springfield, IL", qualification: "Bachelor's in Business Administration", status: "active"
+                }
+            ];
+
+            let added = 0;
+            admins.forEach(admin => {
+                const employeeId = generateId('EMP');
+                admin.employeeId = employeeId;
+                const result = db.save('admins', employeeId, admin);
+                if (result.success) added++;
+            });
+
+            showResults(`✅ Added ${added} sample administrators!`);
+        }
+
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear ALL data? This cannot be undone!')) {
+                localStorage.removeItem('db_students');
+                localStorage.removeItem('db_staff');
+                localStorage.removeItem('db_admins');
+                showResults('🗑️ All data cleared!');
+            }
+        }
+
+        function showResults(message) {
+            const results = document.getElementById('results');
+            results.innerHTML = `<div class="success">${message}</div>`;
+        }
+
+        // Show current counts on load
+        window.onload = function() {
+            const studentCount = db.count('students');
+            const staffCount = db.count('staff');
+            const adminCount = db.count('admins');
+            
+            showResults(`📊 Current Database: ${studentCount} students, ${staffCount} staff, ${adminCount} administrators`);
+        };
+    </script>
+</body>
+</html>

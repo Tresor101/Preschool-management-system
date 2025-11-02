@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Assessments - Teacher Dashboard</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+            --dark-bg: #1e293b;
+            --darker-bg: #0f172a;
+            --card-bg: #334155;
+            --border-color: #475569;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .teacher-header {
+            background: var(--card-bg);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-title i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .header-title h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .teacher-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--dark-bg);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+        }
+
+        .teacher-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .teacher-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 0.5rem;
+        }
+
+        .btn-icon {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .btn-icon:hover {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-color: var(--primary-color);
+        }
+
+        .logout-btn:hover {
+            background: var(--danger-color);
+            border-color: var(--danger-color);
+            color: white;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .action-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .action-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .assessments-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+        }
+
+        .btn-success:hover {
+            background: #047857;
+        }
+
+        .controls-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        select, input[type="text"] {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            min-width: 200px;
+        }
+
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .student-card {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .student-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .student-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .student-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .student-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .assessment-status {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-complete {
+            background: rgba(5, 150, 105, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .status-pending {
+            background: rgba(217, 119, 6, 0.2);
+            color: var(--warning-color);
+            border: 1px solid var(--warning-color);
+        }
+
+        .student-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .grade-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .grade-option {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--dark-bg);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .grade-option:hover {
+            border-color: var(--primary-color);
+            color: var(--text-primary);
+        }
+
+        .grade-option.selected {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .skills-assessment {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .skill-assessment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--dark-bg);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-name-form {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .star-rating-input {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .star-input {
+            font-size: 1.2rem;
+            color: var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .star-input:hover,
+        .star-input.active {
+            color: #fbbf24;
+        }
+
+        textarea {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            width: 100%;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .btn-secondary {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 0 1rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .controls-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .students-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .grade-selector {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Teacher Header -->
+    <header class="teacher-header">
+        <div class="header-content">
+            <div class="header-title">
+                <i class='bx bxs-graduation'></i>
+                <div>
+                    <h1>Student Assessments</h1>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Create and manage student academic evaluations</p>
+                </div>
+            </div>
+            <div class="teacher-info">
+                <div class="teacher-avatar">MT</div>
+                <div>
+                    <p style="font-weight: 500;">Ms. Teacher</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Grade 2 Educator</p>
+                </div>
+                <div class="teacher-actions">
+                    <button class="btn-icon" onclick="showTeacherSettings()" title="Settings">
+                        <i class='bx bx-cog'></i>
+                    </button>
+                    <button class="btn-icon logout-btn" onclick="confirmLogout()" title="Logout">
+                        <i class='bx bx-log-out'></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="action-card" onclick="openAssessmentModal()">
+                <i class='bx bxs-edit-alt'></i>
+                <h3>New Assessment</h3>
+                <p>Create a new academic assessment for a student</p>
+            </div>
+            <div class="action-card" onclick="showReportsView()">
+                <i class='bx bxs-report'></i>
+                <h3>View Reports</h3>
+                <p>Review completed assessment reports and progress</p>
+            </div>
+            <div class="action-card" onclick="showBulkAssessment()">
+                <i class='bx bxs-group'></i>
+                <h3>Class Assessment</h3>
+                <p>Assess multiple students for the same term</p>
+            </div>
+            <div class="action-card" onclick="exportAssessments()">
+                <i class='bx bxs-download'></i>
+                <h3>Export Data</h3>
+                <p>Download assessment reports and progress summaries</p>
+            </div>
+        </div>
+
+        <!-- Statistics Overview -->
+        <div class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-number" id="totalStudents">0</div>
+                <div class="stat-label">Total Students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completedAssessments">0</div>
+                <div class="stat-label">Completed Assessments</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pendingAssessments">0</div>
+                <div class="stat-label">Pending Assessments</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="currentTerm">Term 1</div>
+                <div class="stat-label">Current Term</div>
+            </div>
+        </div>
+
+        <!-- Main Assessment Section -->
+        <div class="assessments-section">
+            <div class="section-header">
+                <h2><i class='bx bxs-user-detail'></i> Student Assessments</h2>
+                <button class="btn btn-success" onclick="openAssessmentModal()">
+                    <i class='bx bx-plus'></i>
+                    New Assessment
+                </button>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls-section">
+                <div class="form-group">
+                    <label for="classFilter">Filter by Class</label>
+                    <select id="classFilter" onchange="filterStudents()">
+                        <option value="">All Classes</option>
+                        <option value="Grade 1">Grade 1</option>
+                        <option value="Grade 2">Grade 2</option>
+                        <option value="Nursery">Nursery</option>
+                        <option value="Reception">Reception</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="termFilter">Filter by Term</label>
+                    <select id="termFilter" onchange="filterStudents()">
+                        <option value="">All Terms</option>
+                        <option value="Term 1">Term 1</option>
+                        <option value="Term 2">Term 2</option>
+                        <option value="Term 3">Term 3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="statusFilter">Assessment Status</label>
+                    <select id="statusFilter" onchange="filterStudents()">
+                        <option value="">All Status</option>
+                        <option value="completed">Completed</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="searchStudent">Search Student</label>
+                    <input type="text" id="searchStudent" placeholder="Search by name..." oninput="filterStudents()">
+                </div>
+            </div>
+
+            <!-- Students Grid -->
+            <div class="students-grid" id="studentsGrid">
+                <!-- Students will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class='bx bx-user-x'></i>
+                <h3>No Students Found</h3>
+                <p>No students match the current filter criteria.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assessment Modal -->
+    <div class="modal" id="assessmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Student Assessment</h3>
+                <button class="close-btn" onclick="closeAssessmentModal()">&times;</button>
+            </div>
+            <form id="assessmentForm">
+                <div class="modal-body">
+                    <!-- Student and Term Selection -->
+                    <div class="form-section">
+                        <h4>Assessment Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="assessmentStudent">Select Student *</label>
+                                <select id="assessmentStudent" required onchange="loadStudentForAssessment()">
+                                    <option value="">Choose a student...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="assessmentTerm">Term *</label>
+                                <select id="assessmentTerm" required onchange="loadStudentForAssessment()">
+                                    <option value="">Choose term...</option>
+                                    <option value="Term 1">Term 1</option>
+                                    <option value="Term 2">Term 2</option>
+                                    <option value="Term 3">Term 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Attendance Section -->
+                    <div class="form-section">
+                        <h4>Attendance Record</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="daysPresent">Days Present *</label>
+                                <input type="number" id="daysPresent" min="0" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="totalDays">Total School Days *</label>
+                                <input type="number" id="totalDays" value="95" min="1" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="attendancePercentage">Attendance Percentage</label>
+                                <input type="text" id="attendancePercentage" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subjects Assessment -->
+                    <div class="form-section">
+                        <h4>Academic Assessment</h4>
+                        <div id="subjectsAssessment">
+                            <!-- Dynamic subjects will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- General Comments -->
+                    <div class="form-section">
+                        <h4>Teacher Comments</h4>
+                        <div class="form-group">
+                            <label for="generalComments">Overall Comments</label>
+                            <textarea id="generalComments" placeholder="Enter general comments about the student's progress, behavior, and areas for improvement..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeAssessmentModal()">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save Assessment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="modal" id="logoutModal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class='bx bx-log-out' style="color: var(--danger-color); margin-right: 0.5rem;"></i>
+                    Confirm Logout
+                </h3>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                    Are you sure you want to logout? Any unsaved changes will be lost.
+                </p>
+                <div style="background: var(--dark-bg); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--warning-color);">
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+                        <i class='bx bx-info-circle' style="margin-right: 0.5rem;"></i>
+                        Make sure all assessment forms are saved before logging out.
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeLogoutModal()">
+                    <i class='bx bx-x'></i>
+                    Cancel
+                </button>
+                <button type="button" class="btn logout-btn" onclick="performLogout()" style="background: var(--danger-color); border-color: var(--danger-color);">
+                    <i class='bx bx-log-out'></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teacher Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class='bx bx-cog' style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                    Teacher Settings
+                </h3>
+                <button class="close-btn" onclick="closeSettingsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-section">
+                    <h4>Profile Information</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacherName">Teacher Name</label>
+                            <input type="text" id="teacherName" value="Ms. Teacher" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="teacherClass">Primary Class</label>
+                            <select id="teacherClass">
+                                <option value="Grade 1">Grade 1</option>
+                                <option value="Grade 2" selected>Grade 2</option>
+                                <option value="Nursery">Nursery</option>
+                                <option value="Reception">Reception</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h4>Assessment Preferences</h4>
+                    <div class="form-group">
+                        <label for="defaultTerm">Default Term</label>
+                        <select id="defaultTerm">
+                            <option value="Term 1">Term 1</option>
+                            <option value="Term 2">Term 2</option>
+                            <option value="Term 3">Term 3</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="defaultDays">Default School Days</label>
+                        <input type="number" id="defaultDays" value="95" min="80" max="100">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4>Session Information</h4>
+                    <div style="background: var(--dark-bg); padding: 1rem; border-radius: 8px;">
+                        <p style="margin: 0; color: var(--text-secondary); font-size: 0.9rem;">
+                            <strong>Login Time:</strong> <span id="loginTime">--</span><br>
+                            <strong>Session Duration:</strong> <span id="sessionDuration">--</span><br>
+                            <strong>Last Activity:</strong> <span id="lastActivity">--</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeSettingsModal()">Close</button>
+                <button type="button" class="btn btn-success" onclick="saveTeacherSettings()">
+                    <i class='bx bx-save'></i>
+                    Save Settings
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Database -->
+    <script src="../database.js"></script>
+    <script>
+        // Global variables
+        let allStudents = [];
+        let currentTerm = 'Term 1';
+        let assessmentStats = {
+            total: 0,
+            completed: 0,
+            pending: 0
+        };
+        
+        // Session management
+        let sessionData = {
+            loginTime: new Date(),
+            lastActivity: new Date(),
+            teacherName: 'Ms. Teacher',
+            teacherClass: 'Grade 2'
+        };
+
+        // Initialize the system
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTeacherDashboard();
+            loadTeacherSession();
+            loadStudentsForTeacher();
+            updateStatistics();
+            startSessionTimer();
+            
+            // Add event listeners for attendance calculation
+            document.getElementById('daysPresent').addEventListener('input', calculateAttendance);
+            document.getElementById('totalDays').addEventListener('input', calculateAttendance);
+            
+            // Form submission
+            document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveAssessmentData();
+            });
+
+            // Update last activity on user interaction
+            document.addEventListener('click', updateLastActivity);
+            document.addEventListener('keypress', updateLastActivity);
+        });
+
+        // Initialize teacher dashboard
+        function initializeTeacherDashboard() {
+            // Set current term based on date
+            const currentDate = new Date();
+            const month = currentDate.getMonth() + 1;
+            
+            if (month >= 9 || month <= 12) {
+                currentTerm = 'Term 1';
+            } else if (month >= 1 && month <= 3) {
+                currentTerm = 'Term 2';
+            } else {
+                currentTerm = 'Term 3';
+            }
+            
+            document.getElementById('currentTerm').textContent = currentTerm;
+            document.getElementById('termFilter').value = currentTerm;
+        }
+
+        // Load students for teacher
+        function loadStudentsForTeacher() {
+            const students = window.db.getCollection('students');
+            allStudents = Object.keys(students)
+                .map(id => ({ id, ...students[id] }))
+                .filter(student => student.status === 'Enrolled');
+            
+            displayStudents(allStudents);
+            loadStudentsForAssessmentModal();
+        }
+
+        // Display students in grid
+        function displayStudents(students) {
+            const container = document.getElementById('studentsGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (students.length === 0) {
+                container.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            container.style.display = 'grid';
+            emptyState.style.display = 'none';
+            
+            container.innerHTML = students.map(student => {
+                const assessmentStatus = getAssessmentStatus(student.id, currentTerm);
+                const initials = (student.firstName.charAt(0) + student.lastName.charAt(0)).toUpperCase();
+                
+                return `
+                    <div class="student-card">
+                        <div class="student-header">
+                            <div class="student-avatar">${initials}</div>
+                            <div class="student-info">
+                                <h4>${student.firstName} ${student.lastName}</h4>
+                                <p>Class: ${student.class} • Age: ${student.age}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-status">
+                            <span class="status-badge ${assessmentStatus.class}">${assessmentStatus.text}</span>
+                            ${assessmentStatus.termBadge ? `<span class="status-badge status-pending">${assessmentStatus.termBadge}</span>` : ''}
+                        </div>
+                        
+                        <div class="student-actions">
+                            <button class="btn btn-sm" onclick="openAssessmentForStudent('${student.id}')">
+                                <i class='bx bx-edit'></i>
+                                ${assessmentStatus.completed ? 'Edit' : 'Assess'}
+                            </button>
+                            ${assessmentStatus.completed ? `
+                                <button class="btn btn-outline btn-sm" onclick="viewStudentReport('${student.id}')">
+                                    <i class='bx bx-show'></i>
+                                    View Report
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Get assessment status for student and term
+        function getAssessmentStatus(studentId, term) {
+            const records = window.db.getStudentRecords(studentId);
+            const termRecord = records.find(r => r.term === term);
+            
+            if (termRecord) {
+                return {
+                    completed: true,
+                    class: 'status-complete',
+                    text: 'Assessment Complete',
+                    termBadge: null
+                };
+            } else {
+                return {
+                    completed: false,
+                    class: 'status-pending',
+                    text: 'Assessment Pending',
+                    termBadge: term
+                };
+            }
+        }
+
+        // Filter students based on criteria
+        function filterStudents() {
+            const classFilter = document.getElementById('classFilter').value;
+            const termFilter = document.getElementById('termFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const searchText = document.getElementById('searchStudent').value.toLowerCase();
+            
+            let filteredStudents = allStudents.filter(student => {
+                // Class filter
+                if (classFilter && student.class !== classFilter) return false;
+                
+                // Search filter
+                if (searchText) {
+                    const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
+                    if (!fullName.includes(searchText)) return false;
+                }
+                
+                // Status filter
+                if (statusFilter) {
+                    const status = getAssessmentStatus(student.id, termFilter || currentTerm);
+                    if (statusFilter === 'completed' && !status.completed) return false;
+                    if (statusFilter === 'pending' && status.completed) return false;
+                }
+                
+                return true;
+            });
+            
+            displayStudents(filteredStudents);
+        }
+
+        // Update statistics
+        function updateStatistics() {
+            assessmentStats.total = allStudents.length;
+            assessmentStats.completed = 0;
+            assessmentStats.pending = 0;
+            
+            allStudents.forEach(student => {
+                const status = getAssessmentStatus(student.id, currentTerm);
+                if (status.completed) {
+                    assessmentStats.completed++;
+                } else {
+                    assessmentStats.pending++;
+                }
+            });
+            
+            document.getElementById('totalStudents').textContent = assessmentStats.total;
+            document.getElementById('completedAssessments').textContent = assessmentStats.completed;
+            document.getElementById('pendingAssessments').textContent = assessmentStats.pending;
+        }
+
+        // Open assessment modal
+        function openAssessmentModal() {
+            const modal = document.getElementById('assessmentModal');
+            modal.style.display = 'flex';
+            document.getElementById('assessmentTerm').value = currentTerm;
+        }
+
+        // Open assessment for specific student
+        function openAssessmentForStudent(studentId) {
+            openAssessmentModal();
+            document.getElementById('assessmentStudent').value = studentId;
+            document.getElementById('assessmentTerm').value = currentTerm;
+            loadStudentForAssessment();
+        }
+
+        // Close assessment modal
+        function closeAssessmentModal() {
+            const modal = document.getElementById('assessmentModal');
+            modal.style.display = 'none';
+            document.getElementById('assessmentForm').reset();
+        }
+
+        // Load students for assessment dropdown
+        function loadStudentsForAssessmentModal() {
+            const select = document.getElementById('assessmentStudent');
+            select.innerHTML = '<option value="">Choose a student...</option>';
+            
+            allStudents.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.id;
+                option.textContent = `${student.firstName} ${student.lastName} (${student.class})`;
+                select.appendChild(option);
+            });
+        }
+
+        // Load student data for assessment
+        function loadStudentForAssessment() {
+            const studentId = document.getElementById('assessmentStudent').value;
+            const term = document.getElementById('assessmentTerm').value;
+            
+            if (!studentId || !term) return;
+
+            // Check if existing record exists
+            const records = window.db.getStudentRecords(studentId);
+            const existingRecord = records.find(r => r.term === term);
+            
+            if (existingRecord) {
+                populateAssessmentForm(existingRecord);
+            } else {
+                // Create new record template
+                const result = window.db.createAcademicRecord(studentId, term, '2024-2025');
+                if (result.success) {
+                    const newRecord = window.db.getCollection('academic_records')[result.id];
+                    populateAssessmentForm(newRecord);
+                }
+            }
+        }
+
+        // Populate assessment form with existing data
+        function populateAssessmentForm(record) {
+            // Set attendance data
+            document.getElementById('daysPresent').value = record.attendance.daysPresent || 0;
+            document.getElementById('totalDays').value = record.attendance.totalDays || 95;
+            calculateAttendance();
+
+            // Set general comments
+            document.getElementById('generalComments').value = record.teacherComments || '';
+
+            // Load subjects with current data
+            loadSubjectsForAssessment(record);
+        }
+
+        // Load subjects for assessment
+        function loadSubjectsForAssessment(existingRecord = null) {
+            const subjects = window.db.getCollection('subjects');
+            const container = document.getElementById('subjectsAssessment');
+            
+            let subjectsHtml = '';
+            Object.keys(subjects).forEach(subjectId => {
+                const subject = subjects[subjectId];
+                const existingSubject = existingRecord?.subjects[subjectId];
+                
+                let skillsHtml = '';
+                subject.skills.forEach(skill => {
+                    const currentRating = existingSubject?.skills[skill] || 0;
+                    skillsHtml += `
+                        <div class="skill-assessment-item">
+                            <span class="skill-name-form">${skill}</span>
+                            <div class="star-rating-input" data-skill="${skill}" data-subject="${subjectId}">
+                                ${[1,2,3,4,5].map(rating => 
+                                    `<i class="bx bxs-star star-input ${rating <= currentRating ? 'active' : ''}" 
+                                       data-rating="${rating}" onclick="setSkillRating('${subjectId}', '${skill}', ${rating})"></i>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                const currentGrade = existingSubject?.grade || 'Developing';
+                const gradeOptions = ['Excellent', 'Good', 'Satisfactory', 'Developing'];
+                
+                subjectsHtml += `
+                    <div class="form-section">
+                        <h4>${subject.name}</h4>
+                        
+                        <!-- Grade Selection -->
+                        <div class="form-group">
+                            <label>Overall Grade</label>
+                            <div class="grade-selector" data-subject="${subjectId}">
+                                ${gradeOptions.map(grade => 
+                                    `<div class="grade-option ${grade === currentGrade ? 'selected' : ''}" 
+                                          onclick="setSubjectGrade('${subjectId}', '${grade}')">${grade}</div>`
+                                ).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Skills Assessment -->
+                        <div class="form-group">
+                            <label>Individual Skills (1-5 stars)</label>
+                            <div class="skills-assessment">
+                                ${skillsHtml}
+                            </div>
+                        </div>
+
+                        <!-- Subject Notes -->
+                        <div class="form-group">
+                            <label for="notes_${subjectId}">Teacher Notes</label>
+                            <textarea id="notes_${subjectId}" rows="3" placeholder="Enter specific notes for ${subject.name}...">${existingSubject?.teacherNotes || ''}</textarea>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = subjectsHtml;
+        }
+
+        // Set skill rating
+        function setSkillRating(subjectId, skill, rating) {
+            const ratingContainer = document.querySelector(`[data-skill="${skill}"][data-subject="${subjectId}"]`);
+            const stars = ratingContainer.querySelectorAll('.star-input');
+            
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Set subject grade
+        function setSubjectGrade(subjectId, grade) {
+            const gradeSelector = document.querySelector(`[data-subject="${subjectId}"] .grade-selector`);
+            const options = gradeSelector.querySelectorAll('.grade-option');
+            
+            options.forEach(option => {
+                option.classList.remove('selected');
+                if (option.textContent === grade) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+
+        // Calculate attendance percentage
+        function calculateAttendance() {
+            const present = parseInt(document.getElementById('daysPresent').value) || 0;
+            const total = parseInt(document.getElementById('totalDays').value) || 1;
+            const percentage = Math.round((present / total) * 100);
+            document.getElementById('attendancePercentage').value = `${percentage}%`;
+        }
+
+        // Save assessment data
+        function saveAssessmentData() {
+            const studentId = document.getElementById('assessmentStudent').value;
+            const term = document.getElementById('assessmentTerm').value;
+            
+            if (!studentId || !term) {
+                alert('❌ Please select a student and term.');
+                return;
+            }
+
+            const recordId = `${studentId}_${term.replace(' ', '')}_2024-2025`;
+            const subjects = window.db.getCollection('subjects');
+            
+            // Collect assessment data
+            const assessmentData = {
+                studentId: studentId,
+                term: term,
+                academicYear: '2024-2025',
+                subjects: {},
+                attendance: {
+                    daysPresent: parseInt(document.getElementById('daysPresent').value) || 0,
+                    totalDays: parseInt(document.getElementById('totalDays').value) || 95,
+                    percentage: 0
+                },
+                teacherComments: document.getElementById('generalComments').value || '',
+                overallGrade: 'Developing',
+                dateCreated: new Date().toISOString(),
+                lastModified: new Date().toISOString()
+            };
+
+            // Calculate attendance percentage
+            assessmentData.attendance.percentage = Math.round(
+                (assessmentData.attendance.daysPresent / assessmentData.attendance.totalDays) * 100
+            );
+
+            // Collect subject data
+            Object.keys(subjects).forEach(subjectId => {
+                const subject = subjects[subjectId];
+                
+                // Get selected grade
+                const selectedGrade = document.querySelector(`[data-subject="${subjectId}"] .grade-option.selected`);
+                const grade = selectedGrade ? selectedGrade.textContent : 'Developing';
+                
+                // Get skills ratings
+                const skills = {};
+                subject.skills.forEach(skill => {
+                    const ratingContainer = document.querySelector(`[data-skill="${skill}"][data-subject="${subjectId}"]`);
+                    const activeStars = ratingContainer.querySelectorAll('.star-input.active');
+                    skills[skill] = activeStars.length;
+                });
+                
+                // Get teacher notes
+                const notes = document.getElementById(`notes_${subjectId}`).value || '';
+                
+                assessmentData.subjects[subjectId] = {
+                    name: subject.name,
+                    grade: grade,
+                    skills: skills,
+                    teacherNotes: notes
+                };
+            });
+
+            // Calculate overall grade based on subject grades
+            const grades = Object.values(assessmentData.subjects).map(s => s.grade);
+            const excellentCount = grades.filter(g => g === 'Excellent').length;
+            const goodCount = grades.filter(g => g === 'Good').length;
+            
+            if (excellentCount >= grades.length / 2) {
+                assessmentData.overallGrade = 'Excellent';
+            } else if (goodCount >= grades.length / 2) {
+                assessmentData.overallGrade = 'Good';
+            } else if (excellentCount + goodCount >= grades.length / 2) {
+                assessmentData.overallGrade = 'Satisfactory';
+            } else {
+                assessmentData.overallGrade = 'Developing';
+            }
+
+            // Save to database
+            const result = window.db.save('academic_records', recordId, assessmentData);
+            
+            if (result.success) {
+                alert('✅ Assessment saved successfully!');
+                closeAssessmentModal();
+                loadStudentsForTeacher();
+                updateStatistics();
+            } else {
+                alert('❌ Failed to save assessment: ' + result.error);
+            }
+        }
+
+        // View student report
+        function viewStudentReport(studentId) {
+            // Redirect to reports page with student selected
+            window.open(`../super-admin/student-reports.html?student=${studentId}`, '_blank');
+        }
+
+        // Show reports view
+        function showReportsView() {
+            window.open('../super-admin/student-reports.html', '_blank');
+        }
+
+        // Show bulk assessment (future feature)
+        function showBulkAssessment() {
+            alert('🚧 Bulk Assessment feature coming soon!\n\nThis will allow you to assess multiple students for the same term efficiently.');
+        }
+
+        // Export assessments (future feature)
+        function exportAssessments() {
+            alert('🚧 Export feature coming soon!\n\nThis will allow you to download assessment reports as PDF or Excel files.');
+        }
+
+        // ===== SESSION MANAGEMENT FUNCTIONS =====
+
+        // Load teacher session data
+        function loadTeacherSession() {
+            const savedSession = localStorage.getItem('teacher_session');
+            if (savedSession) {
+                const session = JSON.parse(savedSession);
+                sessionData.teacherName = session.teacherName || 'Ms. Teacher';
+                sessionData.teacherClass = session.teacherClass || 'Grade 2';
+                sessionData.loginTime = new Date(session.loginTime) || new Date();
+            }
+            
+            // Update UI with session data
+            updateTeacherProfileDisplay();
+            
+            // Save current session
+            saveTeacherSession();
+        }
+
+        // Save teacher session data
+        function saveTeacherSession() {
+            localStorage.setItem('teacher_session', JSON.stringify({
+                teacherName: sessionData.teacherName,
+                teacherClass: sessionData.teacherClass,
+                loginTime: sessionData.loginTime.toISOString(),
+                lastActivity: sessionData.lastActivity.toISOString()
+            }));
+        }
+
+        // Update teacher profile display
+        function updateTeacherProfileDisplay() {
+            const avatar = document.querySelector('.teacher-avatar');
+            const nameElement = document.querySelector('.teacher-info p:first-of-type');
+            const classElement = document.querySelector('.teacher-info p:last-of-type');
+            
+            // Update avatar with initials
+            const initials = sessionData.teacherName.split(' ').map(n => n.charAt(0)).join('').toUpperCase();
+            avatar.textContent = initials;
+            
+            // Update name and class
+            nameElement.textContent = sessionData.teacherName;
+            classElement.textContent = `${sessionData.teacherClass} Educator`;
+        }
+
+        // Start session timer
+        function startSessionTimer() {
+            setInterval(updateSessionInfo, 60000); // Update every minute
+            updateSessionInfo(); // Initial update
+        }
+
+        // Update session information
+        function updateSessionInfo() {
+            const loginTime = document.getElementById('loginTime');
+            const sessionDuration = document.getElementById('sessionDuration');
+            const lastActivity = document.getElementById('lastActivity');
+            
+            if (loginTime) {
+                loginTime.textContent = sessionData.loginTime.toLocaleString();
+            }
+            
+            if (sessionDuration) {
+                const duration = Math.floor((new Date() - sessionData.loginTime) / 1000 / 60);
+                sessionDuration.textContent = `${duration} minutes`;
+            }
+            
+            if (lastActivity) {
+                lastActivity.textContent = sessionData.lastActivity.toLocaleString();
+            }
+        }
+
+        // Update last activity timestamp
+        function updateLastActivity() {
+            sessionData.lastActivity = new Date();
+            saveTeacherSession();
+        }
+
+        // ===== LOGOUT FUNCTIONS =====
+
+        // Show logout confirmation
+        function confirmLogout() {
+            const modal = document.getElementById('logoutModal');
+            modal.style.display = 'flex';
+        }
+
+        // Close logout modal
+        function closeLogoutModal() {
+            const modal = document.getElementById('logoutModal');
+            modal.style.display = 'none';
+        }
+
+        // Perform actual logout
+        function performLogout() {
+            // Check for unsaved changes
+            const assessmentModal = document.getElementById('assessmentModal');
+            if (assessmentModal.style.display === 'flex') {
+                if (!confirm('⚠️ You have an open assessment form. Are you sure you want to logout without saving?')) {
+                    closeLogoutModal();
+                    return;
+                }
+            }
+
+            // Clear session data
+            localStorage.removeItem('teacher_session');
+            
+            // Show logout message
+            alert('👋 Successfully logged out!\n\nThank you for using the assessment system.');
+            
+            // Redirect to login or close window
+            if (window.opener) {
+                window.close(); // Close if opened in new tab
+            } else {
+                window.location.href = '../index.html'; // Redirect to main page
+            }
+        }
+
+        // ===== SETTINGS FUNCTIONS =====
+
+        // Show teacher settings
+        function showTeacherSettings() {
+            const modal = document.getElementById('settingsModal');
+            modal.style.display = 'flex';
+            
+            // Populate current settings
+            document.getElementById('teacherName').value = sessionData.teacherName;
+            document.getElementById('teacherClass').value = sessionData.teacherClass;
+            document.getElementById('defaultTerm').value = currentTerm;
+            
+            // Update session info
+            updateSessionInfo();
+        }
+
+        // Close settings modal
+        function closeSettingsModal() {
+            const modal = document.getElementById('settingsModal');
+            modal.style.display = 'none';
+        }
+
+        // Save teacher settings
+        function saveTeacherSettings() {
+            const newName = document.getElementById('teacherName').value.trim();
+            const newClass = document.getElementById('teacherClass').value;
+            const newTerm = document.getElementById('defaultTerm').value;
+            const newDays = document.getElementById('defaultDays').value;
+            
+            if (!newName) {
+                alert('❌ Please enter a valid teacher name.');
+                return;
+            }
+            
+            // Update session data
+            sessionData.teacherName = newName;
+            sessionData.teacherClass = newClass;
+            currentTerm = newTerm;
+            
+            // Update UI
+            updateTeacherProfileDisplay();
+            document.getElementById('currentTerm').textContent = currentTerm;
+            document.getElementById('termFilter').value = currentTerm;
+            document.getElementById('totalDays').value = newDays;
+            
+            // Save session
+            saveTeacherSession();
+            
+            // Close modal
+            closeSettingsModal();
+            
+            // Refresh data with new settings
+            filterStudents();
+            updateStatistics();
+            
+            alert('✅ Settings saved successfully!');
+        }
+
+        // ===== WINDOW EVENT HANDLERS =====
+
+        // Handle window close/refresh
+        window.addEventListener('beforeunload', function(e) {
+            // Check for unsaved changes
+            const assessmentModal = document.getElementById('assessmentModal');
+            if (assessmentModal.style.display === 'flex') {
+                e.preventDefault();
+                e.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+                return e.returnValue;
+            }
+            
+            // Save session data before leaving
+            updateLastActivity();
+        });
+
+        // Handle ESC key for modals
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // Close any open modals
+                closeAssessmentModal();
+                closeLogoutModal();
+                closeSettingsModal();
+            }
+        });
+    </script>
+</body>
+</html>

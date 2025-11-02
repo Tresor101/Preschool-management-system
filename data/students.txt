@@ -1,9 +1,0 @@
-# BANGU PRESCHOOL - STUDENT RECORDS
-# =====================================
-# This file contains all registered student information
-# Format: Student ID | First Name | Last Name | Date of Birth | Gender | Class | Parent Name | Parent Email | Parent Phone | Address | Medical Info | Registration Date
-# Example: STU172530001 | John | Doe | 2020-05-15 | Male | Pre-School | Jane Doe | jane.doe@email.com | +1234567890 | 123 Main St, City | No allergies | 2025-11-01
-
-# =====================================
-# STUDENT REGISTRATIONS
-# =====================================
