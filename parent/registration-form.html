@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Registration Form</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+  <style>
+    :root {
+      --bg-a: #eef2ff;
+      --bg-b: #f5f3ff;
+      --bg-c: #ecfeff;
+      --header-a: #0d6efd;
+      --header-b: #7c3aed;
+      --header-c: #ec4899;
+      --text-dark: #1e293b;
+      --muted: #64748b;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.18), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(217, 70, 239, 0.16), transparent 30%),
+        radial-gradient(circle at 30% 95%, rgba(34, 197, 94, 0.14), transparent 32%),
+        linear-gradient(135deg, var(--bg-a) 0%, var(--bg-b) 45%, var(--bg-c) 100%);
+      min-height: 100vh;
+      color: var(--text-dark);
+    }
+
+    .registration-card {
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 1.1rem;
+      overflow: hidden;
+      box-shadow: 0 18px 42px rgba(30, 41, 59, 0.12);
+      backdrop-filter: blur(2px);
+    }
+
+    .registration-header {
+      background: linear-gradient(120deg, var(--header-a), var(--header-b) 58%, var(--header-c));
+      color: #fff;
+      padding: 1.35rem 1.6rem;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .registration-header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.11), transparent 35%, rgba(255, 255, 255, 0.08));
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .registration-header h1 {
+      font-size: 1.42rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .registration-header p {
+      margin: 0.35rem 0 0;
+      opacity: 0.97;
+      font-size: 0.95rem;
+    }
+
+    .form-section {
+      border: 1px solid #dbe3ef;
+      border-left-width: 5px;
+      border-radius: 0.9rem;
+      padding: 1.05rem 1rem;
+      background: linear-gradient(180deg, #ffffff, #fafcff);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .form-section:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+    }
+
+    .form-section:nth-of-type(1) {
+      border-left-color: #3b82f6;
+    }
+
+    .form-section:nth-of-type(2) {
+      border-left-color: #14b8a6;
+    }
+
+    .form-section:nth-of-type(3) {
+      border-left-color: #8b5cf6;
+    }
+
+    .form-section:nth-of-type(4) {
+      border-left-color: #f59e0b;
+    }
+
+    .form-section:nth-of-type(5) {
+      border-left-color: #ef4444;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.55rem;
+      border-bottom: 1px dashed #cbd5e1;
+    }
+
+    .form-label {
+      color: #334155;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .form-control,
+    .form-select {
+      border-radius: 0.65rem;
+      border-color: #cbd5e1;
+      background-color: #f8fbff;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.18);
+      background-color: #fff;
+    }
+
+    #studentId {
+      background-color: #eef2ff;
+      font-weight: 600;
+    }
+
+    #admissionNo {
+      background-color: #eef2ff;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #2563eb, #7c3aed);
+      border: none;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: linear-gradient(120deg, #1d4ed8, #6d28d9);
+    }
+
+    #formMessage {
+      border-radius: 0.7rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-4 py-lg-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 col-xl-9">
+        <div class="card shadow registration-card">
+          <div class="registration-header">
+            <h1>Student Registration</h1>
+            <p>Provide student, contact, guardian, academic, and emergency details.</p>
+          </div>
+          <div class="card-body p-3 p-md-4 p-lg-5">
+
+            <form id="registrationForm" novalidate>
+              <div class="d-grid gap-3">
+                <section class="form-section">
+                  <h2 class="section-title">1) Student Basic Information</h2>
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="studentId" class="form-label">Student ID (Auto-generated)</label>
+                      <input id="studentId" name="studentId" type="text" class="form-control" readonly aria-readonly="true" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="firstName" class="form-label">First Name</label>
+                      <input id="firstName" name="firstName" type="text" class="form-control" required autocomplete="given-name" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="middleName" class="form-label">Middle Name (Optional)</label>
+                      <input id="middleName" name="middleName" type="text" class="form-control" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="lastName" class="form-label">Last Name</label>
+                      <input id="lastName" name="lastName" type="text" class="form-control" required autocomplete="family-name" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="gender" class="form-label">Gender</label>
+                      <select id="gender" name="gender" class="form-select" required>
+                        <option value="" selected disabled>Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="dob" class="form-label">Date of Birth</label>
+                      <input id="dob" name="dob" type="date" class="form-control" required />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="placeOfBirth" class="form-label">Place of Birth</label>
+                      <input id="placeOfBirth" name="placeOfBirth" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-12">
+                      <label for="nationality" class="form-label">Nationality</label>
+                      <input id="nationality" name="nationality" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-12">
+                      <label for="photo" class="form-label">Photo (Upload Field)</label>
+                      <input id="photo" name="photo" type="file" class="form-control" accept="image/*" required />
+                    </div>
+                  </div>
+                </section>
+
+                <section class="form-section">
+                  <h2 class="section-title">2) Contact Information</h2>
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="homeAddress" class="form-label">Home Address</label>
+                      <input id="homeAddress" name="homeAddress" type="text" class="form-control" required autocomplete="address-line1" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="city" class="form-label">City / Commune</label>
+                      <input id="city" name="city" type="text" class="form-control" required autocomplete="address-level2" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="province" class="form-label">Province</label>
+                      <input id="province" name="province" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="country" class="form-label">Country</label>
+                      <input id="country" name="country" type="text" class="form-control" required autocomplete="country-name" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="studentEmail" class="form-label">Student Email (Optional)</label>
+                      <input id="studentEmail" name="studentEmail" type="email" class="form-control" autocomplete="email" />
+                    </div>
+                  </div>
+                </section>
+
+                <section class="form-section">
+                  <h2 class="section-title">3) Parent / Guardian Information</h2>
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="guardianName" class="form-label">Parent/Guardian Full Name</label>
+                      <input id="guardianName" name="guardianName" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="relationship" class="form-label">Relationship to Student</label>
+                      <input id="relationship" name="relationship" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="guardianPhone" class="form-label">Phone Number</label>
+                      <input id="guardianPhone" name="guardianPhone" type="tel" class="form-control" pattern="[0-9+\-() ]{7,}" placeholder="e.g. +1 (555) 123-4567" required autocomplete="tel" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="guardianEmail" class="form-label">Email Address</label>
+                      <input id="guardianEmail" name="guardianEmail" type="email" class="form-control" required autocomplete="email" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="guardianOccupation" class="form-label">Occupation</label>
+                      <input id="guardianOccupation" name="guardianOccupation" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-12">
+                      <label for="guardianAddress" class="form-label">Address (if different from student)</label>
+                      <input id="guardianAddress" name="guardianAddress" type="text" class="form-control" />
+                    </div>
+                  </div>
+                </section>
+
+                <section class="form-section">
+                  <h2 class="section-title">4) Academic Information</h2>
+                  <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                      <label for="admissionNo" class="form-label">Admission Number</label>
+                      <input id="admissionNo" name="admissionNo" type="text" class="form-control" readonly aria-readonly="true" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="admissionDate" class="form-label">Admission Date</label>
+                      <input id="admissionDate" name="admissionDate" type="date" class="form-control" required />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="academicYear" class="form-label">Academic Year</label>
+                      <input id="academicYear" name="academicYear" type="text" class="form-control" placeholder="e.g. 2025-2026" required />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="grade" class="form-label">Class / Grade</label>
+                      <input id="grade" name="grade" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="section" class="form-label">Section (if applicable)</label>
+                      <input id="section" name="section" type="text" class="form-control" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="previousSchool" class="form-label">Previous School</label>
+                      <input id="previousSchool" name="previousSchool" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-12">
+                      <label for="lastGradeCompleted" class="form-label">Last Grade Completed</label>
+                      <input id="lastGradeCompleted" name="lastGradeCompleted" type="text" class="form-control" required />
+                    </div>
+                  </div>
+                </section>
+
+                <section class="form-section">
+                  <h2 class="section-title">5) Emergency Information</h2>
+                  <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                      <label for="emergencyName" class="form-label">Emergency Contact Name</label>
+                      <input id="emergencyName" name="emergencyName" type="text" class="form-control" required />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="emergencyPhone" class="form-label">Emergency Contact Phone</label>
+                      <input id="emergencyPhone" name="emergencyPhone" type="tel" class="form-control" pattern="[0-9+\-() ]{7,}" placeholder="e.g. +1 (555) 123-4567" required />
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="medicalConditions" class="form-label">Medical Conditions (Optional)</label>
+                      <textarea id="medicalConditions" name="medicalConditions" class="form-control" rows="2"></textarea>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <label for="allergies" class="form-label">Allergies (Optional)</label>
+                      <textarea id="allergies" name="allergies" class="form-control" rows="2"></textarea>
+                    </div>
+                  </div>
+                </section>
+
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-danger btn-lg">Submit Registration</button>
+                </div>
+              </div>
+
+              <div id="formMessage" class="alert mt-3 d-none" role="alert" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+    const formMessage = document.getElementById("formMessage");
+    const studentIdField = document.getElementById("studentId");
+    const admissionNoField = document.getElementById("admissionNo");
+    const dobField = document.getElementById("dob");
+    const requiredControls = form.querySelectorAll("input[required], select[required]");
+    const allControls = form.querySelectorAll("input, select, textarea");
+
+    function generateStudentId() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      const randomPart = Math.floor(1000 + Math.random() * 9000);
+      return `STU-${year}${month}${day}-${randomPart}`;
+    }
+
+    function syncStudentIdentifiers() {
+      const generatedId = generateStudentId();
+      studentIdField.value = generatedId;
+      admissionNoField.value = generatedId;
+    }
+
+    function formatDateForInput(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function setDobAllowedRange() {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const minDob = new Date(today);
+      minDob.setFullYear(minDob.getFullYear() - 23);
+
+      const maxDob = new Date(today);
+      maxDob.setFullYear(maxDob.getFullYear() - 2);
+
+      dobField.min = formatDateForInput(minDob);
+      dobField.max = formatDateForInput(maxDob);
+    }
+
+    function getFieldLabel(control) {
+      const label = form.querySelector(`label[for="${control.id}"]`);
+      return label ? label.textContent.replace("(Optional)", "").trim() : "This field";
+    }
+
+    function ensureInvalidFeedback(control) {
+      const container = control.closest(".form-check") || control.parentElement;
+      const existing = container.querySelector(".invalid-feedback[data-for='" + control.id + "']");
+      if (existing) {
+        return existing;
+      }
+
+      const feedback = document.createElement("div");
+      feedback.className = "invalid-feedback";
+      feedback.dataset.for = control.id;
+      feedback.textContent = `${getFieldLabel(control)} is required.`;
+      container.appendChild(feedback);
+      return feedback;
+    }
+
+    function setFieldInvalid(control, message) {
+      const feedback = ensureInvalidFeedback(control);
+      control.setCustomValidity(message);
+      feedback.textContent = message;
+      control.classList.add("is-invalid");
+    }
+
+    function clearFieldValidation(control) {
+      control.setCustomValidity("");
+      control.classList.remove("is-invalid");
+    }
+
+    requiredControls.forEach((control) => {
+      ensureInvalidFeedback(control);
+      control.addEventListener("input", () => {
+        clearFieldValidation(control);
+      });
+      control.addEventListener("change", () => {
+        clearFieldValidation(control);
+      });
+    });
+
+    syncStudentIdentifiers();
+    setDobAllowedRange();
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      formMessage.className = "alert mt-3 d-none";
+      formMessage.textContent = "";
+      allControls.forEach((control) => clearFieldValidation(control));
+
+      if (admissionNoField.value !== studentIdField.value) {
+        admissionNoField.value = studentIdField.value;
+      }
+
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        formMessage.classList.remove("d-none");
+        formMessage.classList.add("alert-danger");
+        formMessage.textContent = "Please fix the highlighted fields and try again.";
+        return;
+      }
+
+      const dobValue = dobField.value;
+      const [dobYear, dobMonth, dobDay] = dobValue.split("-").map(Number);
+
+      const dobDate = new Date(dobYear, dobMonth - 1, dobDay);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const oldestAllowedDob = new Date(today);
+      oldestAllowedDob.setFullYear(oldestAllowedDob.getFullYear() - 23);
+
+      const youngestAllowedDob = new Date(today);
+      youngestAllowedDob.setFullYear(youngestAllowedDob.getFullYear() - 2);
+
+      if (dobDate < oldestAllowedDob || dobDate > youngestAllowedDob) {
+        setFieldInvalid(dobField, "Student age must be between 2 and 23 years.");
+        form.classList.add("was-validated");
+        formMessage.classList.remove("d-none");
+        formMessage.classList.add("alert-danger");
+        formMessage.textContent = "Student age must be between 2 and 23 years.";
+        return;
+      }
+
+      formMessage.classList.remove("d-none");
+      formMessage.classList.add("alert-success");
+      formMessage.textContent = "Student registration submitted successfully.";
+      form.reset();
+      form.classList.remove("was-validated");
+      allControls.forEach((control) => clearFieldValidation(control));
+      syncStudentIdentifiers();
+    });
+  </script>
+</body>
+</html>
